@@ -1,0 +1,33 @@
+# ── Keep ──
+# code (*.py), results/, requirements*.txt, README.md, REPORT.md, prompts/, data/
+
+# ── Ignore everything else ──
+*
+
+# ── Un-ignore allowed paths ──
+!*.py
+!results/
+!requirements*.txt
+!README.md
+!REPORT.md
+!prompts/
+!data/
+!.gitignore
+
+# ── Python artifacts (inside kept dirs) ──
+__pycache__/
+*.pyc
+*.pyo
+
+# ── OS / editor junk (inside kept dirs) ──
+.DS_Store
+Thumbs.db
+
+# ── Large generated assets (still ignore inside results/) ──
+results/*.png
+results/*.jsonl
+results/*.txt
+
+# ── Keep report files (inside results/) ──
+!results/*report*.txt
+!results/*report*.md
