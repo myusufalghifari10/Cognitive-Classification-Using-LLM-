@@ -1,6 +1,6 @@
 # Cognitive Classification Using LLM
 
-Benchmark 8 model LLM (Qwen, KAT-Coder, Gemma, GLM, Nanbeige, Qwythos) untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot).
+Benchmark 9 model LLM (Qwen, KAT-Coder, Gemma, GLM, Nanbeige, Qwythos, Fable) untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot).
 
 Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM generik sebagai baseline**, dan menjadi fondasi untuk *Prescriptive Learning Analytics dengan Agentic AI*.
 
@@ -17,6 +17,7 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 | **Qwen3.6-35B-A3B-Fable** | 35B A3B | 0.9250 | 0.9063 | 0.9233 | 65.9s |
 | **Gemma4-26B-A4B-IT** | 26B A4B | 0.9000 | 0.8557 | 0.9036 | 54.0s |
 | **Qwen3.6-35B-A3B-DSV4Pro** | 35B A3B | 0.8750 | 0.8434 | 0.8804 | 33.2s |
+| **Qwen3.5-9B-Fable** | 9B | 0.8833 | 0.8288 | 0.8843 | 36.7s |
 | **Nanbeige4.2** | 4B | 0.8000 | 0.7577 | 0.8108 | 62.6s |
 | **Qwythos** | 9B | 0.7667 | 0.7458 | 0.7896 | 68.2s |
 | **GLM-4.7-Flash** | 30B A3B | 0.7750 | 0.7154 | 0.7870 | 91.4s |
@@ -27,6 +28,7 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 |---|---|---|---|---|---|
 | **Qwen3.6-35B-A3B-Fable** | 35B A3B | **0.7750** | **0.7094** | 0.7784 | 25.6s |
 | **Qwen3.6-35B-A3B** | 35B A3B | 0.7667 | 0.7062 | 0.7684 | 41.3s |
+| **Qwen3.5-9B-Fable** | 9B | 0.7583 | 0.6794 | 0.7638 | 37.5s |
 | **KAT-Coder2.5** | 35B A3B | 0.7417 | 0.6788 | 0.7521 | 10.0s |
 
 > Lihat `REPORT.md` untuk analisis lengkap. Semua run pakai `seed=42`, prompt v8 decontaminated (tidak ada teks test-set di prompt).
@@ -59,7 +61,7 @@ Cognitive-Classification-Using-LLM/
 ├── results/                       # output evaluasi per model per prompt
 ├── eval.py                        # script evaluasi utama
 ├── requirements.txt               # dependensi Python
-└── REPORT.md                      # ringkasan benchmark 8 model
+└── REPORT.md                      # ringkasan benchmark 9 model
 ```
 
 ---

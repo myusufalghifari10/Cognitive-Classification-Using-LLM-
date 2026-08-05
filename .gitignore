@@ -31,3 +31,5 @@ results/*.txt
 # ── Keep report files (inside results/) ──
 !results/*report*.txt
 !results/*report*.md
+
+Report.pdf
