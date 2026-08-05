@@ -144,8 +144,6 @@ Progress disimpan per-sampel di `_ckpt_{variant}.jsonl`. Gunakan **tanpa `--fres
 ### Response format auto-detection
 `probe_format()` mencoba `json_schema` → `json_object` → `none` (plain text), pilih yang menghasilkan parse-able output.
 
-### Gate tools (`gate_v7.py`, `gate_mini.py`)
-Validasi aturan prompt sebelum full run: uji subset sampel (9 error + tetangga pola) untuk memastikan perubahan prompt tidak menimbulkan regresi.
 
 ---
 
