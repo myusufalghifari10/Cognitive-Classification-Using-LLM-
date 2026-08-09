@@ -1,0 +1,24 @@
+Prompt variant : zero-shot
+Model          : /home/yusuf/Yusuf/Model/KAT-Coder/KAT-Coder-V2.5-Dev-APEX-I-Quality.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 4096 (budget cap 8192)
+Sampel         : 120 (parse_fail=1, truncated_retry=0)
+Total waktu    : 1195.7s (10.0s/sampel)
+Accuracy (valid):   0.7479
+Accuracy (strict):  0.7417  [parse-fail=salah]
+Macro-F1:           0.6788
+Weighted-F1:        0.7521
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     0.8788    1.0000    0.9355        29
+        Pemantik Diskusi     0.8333    0.8333    0.8333        18
+              Eksplorasi     0.5294    0.4737    0.5000        19
+               Integrasi     0.8250    0.6875    0.7500        48
+                Resolusi     0.2727    0.6000    0.3750         5
+
+                accuracy                         0.7479       119
+               macro avg     0.6679    0.7189    0.6788       119
+            weighted avg     0.7690    0.7479    0.7521       119

@@ -1,0 +1,527 @@
+text,label
+"saya akan mencoba membuktikan aksioma ke 2.
+aksioma ke-2 berbentuk u + v = v + u
+u = (u1, u2, u3, u4, u5) dan v = (v1, v2, v3, v4, v5)
+(u1 + u2 + u3 + u4 + u5) + (v1 + v2 + v3 + v4 + v5) = (v1 + v2 + v3 + v4 + v5) + (u1 + u2 + u3 + u4 + u5) 
+jika diterapkan persamaan di atas, yakni 21 + 3x - 2 x3 + x5 maka dapat dibuktikan sebagai berikut:
+u = {21, 3, 0, - 2, 0, 1} dan v = {5, 2, 1, 0, 1, -1}
+(21 + 3x - 2 x3 + x5) + (5 + 2x + x2 + x4 + -x5) = (5 + 2x + x2 + x4 + -x5) + (21 + 3x - 2 x3 + x5)
+maka, aksioma ke-2 terbukti.
+",C3
+"ayoo, lakukan pembuktian pada polinomial. kalian bisa. seperti yang telah kalian lakukan hanya sekarang diterapkan pada polinomial. ",C0
+"berikutnya, saya ingin mencoba untuk membuktikan aksioma ke-7, yaitu k(u+v) = ku + kv dimana u dan v adalah bagian dari himpunan p5. di bawah ini adalah pembuktiannya: 
+
+",C3
+"kali ini saya akan mencoba membuktikan aksioma ke-4 pada polinomial dengan himpunan polinomial p5.
+aksioma ke-4
+membuktikan bahwa terdapat 0 dalam v, yang disebut dengan vektor 0 sebagai identitas penjumlahan sehingga 0 + u = u + 0 = u. untuk setiap u dalam v, di mana v merupakan himpunan polinomial p5.
+u =  u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5
+0 = 0 + 0x + 0x2 + 0x3 + 0x4 + 0x5
+karena penjumlahannya bersifat komutatif, maka 0 + u = u + 0. 
+0 + u = u + 0 = (u0 + 0) + (u1 + 0)x + (u2 + 0)x2 + (u3 + 0)x3 + (u4 + 0)x4 + (u5 + 0)x5 = u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5 = u
+sehingga aksioma ke-4 terbukti.
+",C3
+"saya ingin menambahkan pembuktian pada aksioma 10 yaitu 
+aksioma ke-10
+membuktikan bahwa 1u = u, yaitu 1 sebagai identitas perkalian.
+u =  u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5 
+1u = 1(u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5) = (1.u0) + (1.u1x) + (1.u2x2) + (1.u3x3) + (1.u4x4) + (1.u5x5) = u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5 = u
+sehingga aksioma ke-10 terbukti.
+",C3
+"pada kesempatan ini, saya ingin membuktikan aksioma ke-8, yaitu (k + m)u = ku + mu pada polinomial.
+- pembuktian aksioma ke-8 (menunjukkan (k + m)u = ku + mu):
+• k dan m merupakan konstanta
+• u =  u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5, dengan u0, u1, u2, u3, u4, dan u5 juga merupakan konstanta
+• (k + m)u = (k + m)(u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5)
+• (k + m)u = ku0 + mu0 + ku1x + mu1x + ku2x2 + mu2x2 + ku3x3 + mu3x3 + ku4x4 + mu4x4 + ku5x5 + mu5x5
+• (k + m)u = ku0 + ku1x + ku2x2 + ku3x3 + ku4x4 + ku5x5 + mu0 + mu1x + mu2x2 + mu3x3 + mu4x4 + mu5x5
+• (k + m)u = k(u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5) + m(u0 + u1x + u2x2 +u3x3 +u4x4 +u5x5)
+• (k + m)u = ku + mu
+dari penjabaran di atas, kita mendapatkan (k + m)u = ku + mu sehingga aksioma ke-8 terbukti.
+",C3
+"izinkan saya mengoreksi jawaban saya yang saya berikan di atas mengenai aksioma bernomor 2.
+ 
+
+karena fungsi penjumlahan pada operasi apapun bersifat komutatif, hasilnya pun akan tetap sama saja bila nantinya dibalik-balik.
+",C3
+"saya ingin menambahkan saja pembuktian terhadap aksioma yang masih belum dibuktikan. saya akan membuktikan aksioma nomor 9, yaitu k(mu) = (km)u",C2
+"saya ingin menambahkan pembuktian terhadap aksioma yang masih belum dibuktikan. saya akan membuktikan aksioma nomor 3 , yaitu u+(v+w) = (u+v)+w
+ 
+maka terbukti karena sifat dari aksioma penjumlahan tersebut bersifat asosiatif. sehingga aksioma 3 terbukti .
+",C2
+saya akan mencoba mengoreksi pembuktian umum yang saya buat di atas agar dapat membuktikan pada polinomial dengan mengikuti petunjuk yang sudah diberikan.,C2
+"saya ingin mencoba membuktikan aksioma nomor 3 yaa…
+  
+dapat dibuktikan hasil terbukti sesuai dikarenakan iya bersifat penjumlahan, dapat disimpulkan penjumlahan dengan menggunakan sifat asosiatif, contoh mudahnya: 
+4 + ( 1 + 2 ) = 4 + 3 = 7 
+( 4 + 1 ) + 2 = 5 + 2 = 7
+dapat disimpulkan aksioma ruang vektor dengan p^5 terbukti, hingga dapat disimpulkan juga bahwa r5 merupakan vektor.
+berikut pembuktian dari saya terkait salah satu aksioma ruang vektor.",C2
+"sebelumnya, saya berterima kasih kepada bu kasiyah atas pertanyaan pemicu dan juga penjelasan yang disampaikan pada sesi sinkronus yang membuka wawasan saya mengenai materi ruang vektor umum dan kepada teman-teman kelompok bersyukur atas diskusinya yang juga memberi saya pengetahuan baru.",C0
+saya memahami vektor dengan definisi dasar berupa besaran yang memiliki panjang dan arah. namun setelah mengikuti diskusi dan sesi sinkronus pagi ini saya menemukan definisi baru yang lebih canggih mengenai vektor yaitu adalah elemen ruang vektor yang memenuhi 10 aksioma. adapun pengertian dari ruang vektor adalah himpunan tidak kosong yang didefinisikan dengan operasi biner berupa penjumlahan dan perkalian skalar yang memenuhi 10 aksioma. 10 aksioma tersebut sudah dijabarkan di atas dan juga sudah dibuktikan penerapannya pada himpunan polinomial dengan degree paling banyak 5 oleh kelompok kami sebagai contoh ruang vektor.,C3
+adapun hal yang cukup mengganggu saya adalah apakah definisi vektor berupa 'besaran yang memiliki panjang dan arah' sudah tidak berlaku pada ruang vektor umum?,C1
+saya ingin mengucapkan terima kasih banyak kepada ibu kasiyah yang telah membuka forum diskusi untuk membantu teman-teman bersyukur untuk berpikir terkait tentang vektor. dengan diadakannya fgd ini saya dapat memahami diskusi dari teman-teman terkait soal dari ibu kasiyah. ,C0
+"setelah saya berdiskusi dengan teman-teman bersyukur dan memahami materi kuliah pagi ini yang dijelaskan dengan ibu kasiyah, menurut saya vektor itu adalah sebuah himpunan yang memiliki ruang vektor apabila aksioma-aksioma untuk ruang vektor semuanya terbukti. ",C3
+"nah, saya mempunyai pertanyaan yang membuat saya penasaran dan bingung. setelah saya memahami diskusi teman-teman bersyukur dan mempelajari materi pagi ini. apakah pembuktian dengan penjumlahan dan perkalian skalar saja dapat membuktikan 10 aksioma yang ada pada ruang vektor? ",C1
+pemahaman saya terhadap pertanyaan ini adalah pembuktian dengan penjumlahan dan perkalian skalar dapat membuktikan itu merupakan ruang vektor dan memenuhi 10 aksioma untuk pembuktian ruang vektor. ,C2
+"pada kesempatan ini, saya ingin memberikan perubahan pemahaman saya tentang vektor dan hal lainnya
+awalnya, saya mengetahui bahwa vektor adalah suatu besaran yang memiliki nilai dan arah. akan tetapi, setelah mengikuti kelas sinkronus hari ini, saya mendapatkan pemahaman baru bahwa vektor adalah elemen dari ruang vektor yang memenuhi 10 aksioma ruang vektor.
+",C3
+"salah satu pertanyaan yang cukup mengganggu dan membingungkan saya, apakah ada ruang vektor r0 ? ",C1
+"pada awalnya, tentunya pemahaman saya tentang vektor masihlah sangat sederhana. namun, setelah berdiskusi pada forum dan juga mendengar penjelasannya di kelas tadi, pemahaman saya terhadap vektor pun cukup berubah. proses untuk memahami hal tersebut tidaklah mudah untuk saya karena saya tidak pernah mengira bahwa vektor bisa menjadi lebih rumit  . akan tetapi, penjelasan bu kasiyah di kelas tadi tentang konsep-konsep ruang vektor serta vektor sangat membantu saya untuk memahami “konsep baru” dari vektor.",C2
+"saya jadi paham bahwa ruang vektor berisi himpunan vektor yang tidak kosong, serta kita dapat melihat bilangan real sebagai vektor maupun juga skalar. lalu juga sesuatu dapat dibilang sebagai ruang vektor bila 10 aksioma terpenuhi.",C3
+saya juga semakin mendapatkan wawasan yang luas setelah mendengar dan melihat contoh-contoh ruang vektor beserta vektornya masing-masing. wah sungguh seru sekali deh pokoknya! ,C0
+saya sangat bingung maksud dari pertanyaan bu kasiyah. bagaimana suatu polinomial dapat kita anggap vektor? bukannya polinomial tidak berarah? bukannya pengertian vektor itu punya arah dan kalau punya arah biasanya ditunjukkan dengan panah?,C1
+"kini, saya mengetahui bahwa vektor bukan seperti itu, vektor jauh lebih abstrak dari yang dulu saya pelajari dan untuk menentukan suatu bentuk vektor atau bukan harus dibuktikan melalui aksioma-aksioma vaktor.
+yang saya rasakan dalam proses belajar ini adalah pembelajaran ini sangat kolaboratif dan kita dapat saling melengkapi pemahaman dengan teman sekelompok sangat seru karena menjadi mendapat pemahaman baru. 
+",C3
+"kelompok kami menyimpulkan hasil  diskusi kami bahwa sebuah vektor bukan hanya besaran yang memiliki arah, seperti contohnya vektor dapat dibuat di bidang dimensi lebih dari tiga. selain itu pada ruang vektor terdapat 10 aksioma baru yang saya pelajari. aksioma tersebut juga terbukti benar.",C4
+saya masih penasaran bagaimana suatu vektor pada ruang lebih dari 3 dimensi dapat divisualisasikan? atau kita hanya bisa menghitungnya saja dan tidak dapat divisualisasikan? ,C1
+"kalian diberi himpunan semua fungsi terdeferensial pada interval [-1, 4]. kalian tahu bahwa y = 2x + cos x- 5 merupakan fungsi kontinu di interval tersebut. bagaimanakah kalian memahami dan menjelaskan fungsi tersebut sebagai vektor?",C1
+"sebelum kita memulai diskusi, mungkin saya ingin memberikan bagaimana bentuk grafiknya sendiri, supaya tau terlebih dahulu bagaimana bentuk dari fungsi y = 2x + cos x- 5 dengan interval [-1, 4].
+
+berikut ini gambar grafik dari aplikasi desmos:
+",C2
+"terima kasih ramdhan atas gambaran dari fungsi y = 2x + cos x- 5 dengan interval [-1, 4]  ",C0
+"sepertinya grafik yang saya kirimkan salah   . harusnya interval dalam x, bukan dalam y. seharusnya gambar grafiknya seperti ini:
+
+",C2
+"seperti yang dijelaskan pada website yang saya berikan pada diskusi pendahuluan, kita bisa membuktikan suatu vektor dengan 10 aksioma.",C2
+"menurut teman-teman alinlintar, apakah ada solusi lain? kalo ada bisaa yuu reply disiniiii. segera yaa teman-temann, supaya kitaa bisaa memulai diskusi kitaa. 😄",C1
+"saya sempat memikirkan bagaimana caranya membuktikan fungsi tersebut sebagai vektor dengan definisi sederhana vektor, yaitu suatu besaran yang memiliki satuan dan arah, tetapi untuk kasus ini dimana seperti gambar yang telah diberikan oleh ramdhan sebelumnya, sepertinya definisi sederhana tersebut tidak cukup untuk membuktikan bahwa fungsi ini adalah sebuah vektor.",C2
+apakah teman-teman ada tanggapan lain? ,C1
+"betul sekali. saya juga mempunyai tanggapan yang sama. ada 10 aksioma yang jika dipenuhi oleh tiap objek u,v,w dan skalar k,m pada suatu ruang v, maka v adalah ruang vektor dan objeknya adalah vektor. maka, sepertinya, cara yang paling tepat untuk menyatakan fungsi  y = 2x + cos x- 5 sebagai vektor pada  interval [-1, 4] sebagai ruang vektornya adalah dengan menggunakan 10 aksioma tersebut.",C2
+"sama seperti halnya ramdhan, farel, dan bintang, berdasarkan beberapa sumber yang saya baca di internet, saya menemukan  bahwa pembuktian apakah sebuah himpunan merupakan ruang vektor dapat dilakukan dengan menggunakan 10 aksioma ruang vektor. fungsi yang diberikan untuk dibuktikan sendiri , yaitu y = 2x + cos x- 5,  merupakan fungsi yang memetakan komponen bilangan riil ke bilangan riil juga sehingga hasil pemetaannya akan membentuk sebuah himpunan. ",C2
+"jika kita mengasumsikan v merupakan himpunan bilangan real tak kosong serta u,v dan w merupakan vektor, maka menurut ke-10 aksioma ruang vektor akan berlaku:
+1. jika u dan v adalah subset dari v, maka u+v juga berada di v (sifat tertutup).
+2. u+v=v+u (simetri/ komutatif).
+3. u+(v+w)=(u+v)+w. (asosiatif)
+4. terdapat vektor 0  sedemikian sehingga 0+u=u+0=u. (identitas)
+5. untuk setiap u∈v, terdapat objek −u di v, sedemikian sehingga u+(−u)=(−u)+u=0. (memiliki invers penjumlahan)
+6. jika k adalah sebarang skalar dan u adalah sebarang objek di v, maka ku juga berada di v. (sifat tertutup)
+7. k(u+v)=ku+kv (distributif)
+8. (k+m)u=ku+mu (distributif)
+9. k(mu)=(km)u (asosiatif perkalian)
+10. 1u=u 
+",C2
+"setelah membaca diskusi teman-teman saya di atas, saya menjadi semakin tidak sabar untuk berdiskusi bersama ",C0
+"kemarin kita semua telah sepakat bahwa dalam menjelaskan serta juga membuktikan apakah sebuah fungsi termasuk kedalam sebuah vektor kita dapat menggunakan ke-10 aksioma ruang vektor, yaitu :
+1. jika u dan v adalah subset dari v, maka u+v juga berada di v (sifat tertutup).
+2. u+v=v+u (simetri /komutatif).
+3. u+(v+w)=(u+v)+w. (asosiatif)
+4. terdapat vektor 0  sedemikian sehingga 0+u=u+0=u. (identitas)
+5. untuk setiap u∈v, terdapat objek −u di v, sedemikian sehingga u+(−u)=(−u)+u=0. (memiliki invers penjumlahan)
+6. jika k adalah sebarang skalar dan u adalah sebarang objek di v, maka ku juga berada di v. (sifat tertutup)
+7. k(u+v)=ku+kv (distributif)
+8. (k+m)u=ku+mu (distributif)
+9. k(mu)=(km)u (asosiatif perkalian), dan
+10. 1.u=u 
+",C2
+"sudah gasabar kan untuk membuktikan pertanyaan pemicu utama kita?? yukk, kita buktikan sama sama",C1
+wooow banget....kelompok ini yang sudah paling dekat ke jawaban pemicu. horeeeeeeee. sukaaaa. ayo teruskan diskusinya.,C0
+"disini saya ingin mencoba membuktikan aksioma ke-4
+
+4. terdapat vektor 0 sedemikian sehingga 0+u=u+0=u. (identitas)
+vektor 0 = (0,0)
+dengan menggunakan soal yang diberikan, misalkan u merupakan salah satu titik pada fungsi y = 2x + cos x - 5, atau u = (x1, y1) dengan y1 =  2x1 + cos x1 - 5.
+
+buktikan 0+u=u+0
+0+u = (0,0) + (x1, y1) = (0+x1,0+y1) = (x1+0, y1,0) = (x1,y1) + (0,0) = u+0
+(terbukti)
+
+buktikan 0+u=u
+u = (0,0) + (x1, y1) = (0+x1,0+y1) = (x1, y1)  = u
+(terbukti)
+
+dengan begitu, terbukti untuk aksioma ke-4.
+",C3
+"ramdhan, kembali ke himpunannya, yaitu himpunan semua fungsi kontinu, bukan r2",C2
+"disini saya mencoba memperbaiki jawaban pembuktian saya.
+
+misalkan fungsinya itu f(x) = 2x + cos x - 5
+ 
+pembuktian
+• f + 0 = 0 + f
+f + 0 = f(x) + 0 = 0 + f(x) = 0 + f
+ 
+• f + 0 = f
+f + 0 = f(x) + 0 = f(x) = f
+ 
+atau jika dalam fungsinya
+(2x + cos x - 5) + 0 = 0 + (2x + cos x - 5) = (2x + cos x - 5)
+
+
+dengan begitu, terbukti untuk aksioma ke-4.
+",C3
+"yeeessss, ramdhan",C0
+"saya untuk mencoba membuktikan aksioma ke-10 untuk ruang vektor.
+pertama-tama saya ingin berterima kasih ke pada indra yang telah menginisiasi dan ramdhan yang telah membuktikan aksioma ke-4.
+selanjutnya kita misalkan terdapat u, yaitu sebuah titik fungsi pada fungsi y = 2x + cos x - 5. di mana u = (x1,y1) dengan y1 =  2x1 + cos x1 - 5.
+mari buktikan 1.u=u:
+1.u=1(x1.,y1)=x1^1,y1^1=(x1,y1)=u
+karena 1.u=u, maka fungsi tersebut mungkin saja adalah sebuah vektor dengan dibuktikan menggunakan aksioma ke-10. namun untuk dapat terbukti, perlu memenuhi delapan aksioma lainnya.
+",C3
+"sekarang, saya ingin mencoba membuktikan aksioma ke-2, yaitu u+v=v+u (simetri /komutatif).
+misal u dan v adalah titik-titik dalam fungsi 2x + cos x - 5, dimana u = (x1, y1) dan v = (x2,y2);
+maka u + v = (x1, y1) + (x2, y2)
+                   = (x1 + x2, y1 + y2)
+dan karena x1 + x2 = x2 + x1 dan y1 + y2 = y2 + y1
+                   = (x2 + x1, y2 + y1)
+                   = (x2, y2) + (x1, y1)
+                   = v + u
+terbukti bahwa aksioma 2 berlaku di fungsi 2x + cos x - 5.
+",C3
+"saya ingin mencoba membuktikan aksioma ke-3, yaitu u+(v+w)=(u+v)+w (asosiatif).
+misal u = (x1, y1), v = (x2, y2), dan w = (x3, y3), adalah  titik-titik dalam fungsi f(x) = 2x + cos x - 5;
+membuktikan ruas kiri:
+u+(v+w) 
+= (x1, y1) + [(x2, y2) + (x3, y3)]
+= (x1, y1) + (x2 + x3, y2 + y3)
+= (x1 + x2 + x3, y1 + y2 + y3)
+= (x1 + x2, y1 + y2) + (x3, y3)
+= [(x1, y1) + (x2, y2)] + (x3, y3)
+= (u+v)+w
+jadi, terbukti untuk aksioma ke-3 yaitu u+(v+w)=(u+v)+w (asosiatif).
+",C3
+"farel irsyad, kembali ke himpunan awal yang diberikan di pemicu, yaa bukan ,r2. ",C2
+"saya ingin mencoba membuktikan kembali aksioma ke 2.
+misal f(x) = u = 2x cos x - 5 dan
+         f(a) = v = 2a cos a - 5.
+maka u + v = (2x + cos x - 5) + (2a + cos a - 5).
+karena (2x + cos x - 5) + (2a + cos a - 5) = (2a + cos a - 5) + (2x + cos x - 5)
+           => u + v = v + u
+maka terbukti bahwa aksioma kedua berlaku pada fungsi f(x) = 2x + cos x - 5.
+",C3
+"saya ingin mencoba memperbaiki jawaban pembuktian saya.
+misalkan fungsinya itu f(x) = 2x + cos x - 5
+pembuktian aksioma ke 3:
+misal
+u = f(x1) = 2(x1) + cos(x1) - 5
+v = f(x2) = 2(x2) + cos(x2) - 5
+w = f(x3) = 2(x3) + cos(x3) - 5
+hitung apakah u+(v+w)=(u+v)+w
+• u+(v+w)
+= 2(x1) + cos(x1) - 5 + [(2(x2) + cos(x2) - 5) + (2(x3) + cos(x3) - 5)]
+= 2(x1) + cos(x1) - 5 + [2(x2 + x3) + cos(x2) + cos(x3) - 10]
+= 2(x1 + x2 + x3) + cos(x1) + cos(x2) + cos(x3) - 15
+ 
+• (u+v)+w
+= [(2(x1) + cos(x1) - 5) + (2(x2) + cos(x2) - 5)] + 2(x3) + cos(x3) - 5
+= [2(x1 + x2) + cos(x1) + cos(x2) -10] + 2(x3) + cos(x3) - 5
+= 2(x1 + x2 + x3) + cos(x1) + cos(x2) + cos(x3) - 15
+ maka,
+u+(v+w) = (u+v)+w
+2(x1 + x2 + x3) + cos(x1) + cos(x2) + cos(x3) - 15 = 2(x1 + x2 + x3) + cos(x1) + cos(x2) + cos(x3) - 15 (terbukti)
+dari hasil perhitungan u+(v+w) dan (u+v)+w, terbukti bahwa aksioma ke-3, yaitu u+(v+w)=(u+v)+w berlaku pada fungsi f(x) = 2x + cos x - 5.
+",C3
+"saya juga ingin ikut mencoba membuktikan aksioma ke-5 yaitu :
+untuk setiap u∈v, terdapat objek −u di v, sedemikian sehingga u+(−u)=(−u)+u=0. (memiliki invers penjumlahan)
+misalkan,
+f(x) = u = 2x + cos x - 5; maka -u  = -(2x + cos x - 5) = -2x - cos x + 5
+sehingga, 
+>> u + - u = 0
+>> 2x + cos x - 5 + (-2x -cos x + 5) = 0
+>> 0 = 0 (terbukti)
+oleh karena itu, pertanyaan bahwa ""jika u adalah elemen dari v, maka terdapat objek -u di v sedemikian sehingga u + -u = 0"" terbukti benar  
+",C3
+"coba tunjukkan berlaku umum, untuk setiap fungsi (f(x)) ada negatifnya yaitu -f(x).  bagaimana jika dijumlahkan?",C1
+"pada postingan ini, saya akan membuktikan aksioma ke -7, yaitu k(u+v)=ku+kv (distributif).
+misal u dan v adalah sembarang titik pada y = 2x + cos x - 5, u = (x1,y1) dan v = (x2,y2) dan k merupakan bilangan skalar.
+k(u+v) = k((x1,y1) + (x2,y2))
+           = k((x1+x2), (y1+y2))
+           = k(x1+x2), k(y1+y2)
+           = (k(x1) + k(x2)), (k(y1) + k(y2))
+           = (k(x1), k(y1)) + (k(x2), k(y2))
+           = k(x1,y1) + k(x2,y2)
+           = ku + kv
+terbukti bahwa k(u+v) = ku + kv
+jadi, aksiom ke-7 telah terbukti  
+",C3
+"pada postingan ini, saya akan kembali membuktikan aksioma ke -7 dengan merujuk ke fungsi y = 2x1 + cos x1 - 5. 
+pada aksioma 7, saya akan membuktikan k(u+v)=ku+kv, untuk k skalar dan u,v∈v  (distributif).
+ 
+misalkan u = 2x1+ cos x1 - 5 dan v = 2x2 + cos x2 - 5 dan k merupakan bilangan skalar.
+k (u+v) = k ((2x1 + cosx1 - 5) + (2x2 + cosx2 -5))
+            = k(2x1 + cosx1 - 5) + k(2x2 + cosx2 -5)
+            = ku + kv
+ 
+maka, terbukti bahwa k(u+v) = ku + kv
+",C3
+"saya juga ingin mencoba membuktikan apakah v (himpunan semua fungsi terdeferensial pada interval [-1, 4]) merupakan ruang vektor berdasarkan aksioma pertama.
+1. jika u dan v adalah subset dari v, maka u+v juga berada di v (sifat tertutup).
+misal u : y = f(x), v : y = g(x) merupakan subset dari v sesuai definisi yang ingin dibuktikan, f(x) dan g(x) terdiferensial pada range x = [-1, 4], akan dibuktikan w : f(x) + g(x) juga terdiferensial.
+ 
+
+",C3
+bagaimana dengan perkalian fungsi dengan skalar?,C1
+"karena ibu menanyakan tentang perkalian skalar, kebetulan saya barusan membuat post yang membuktikan sifat tertutup pada perkalian skalar (aksioma 6)
+oya sedikit koreksi untuk pembuktian aksioma 1, pada screen shoot tertulis untuk setiap c pada [-1, 4], seharusnya ""x"" buka ""c"". 
+",C3
+terima kasih bu kasiyah atas tanggapannya ,C0
+"terimakasih teman-teman semua atas pembuktian 7 aksioma sebelum ini. disini saya ingin mencoba membuktikan aksioma ke-8
+8. (k+m)u=ku+mu (distributif)
+saya akan membuktikan ekuvalensi atas persamaan berikut (k + m)u = ku + lu. dengan ∀u ϵ v, serta k dan m merupakan elemen bilangan riil (k, m ϵ ℝ).
+misalkan: f(x) = 2x + cos x - 5
+ 
+(k+m)f = (k+m)f(x)
+           = (kf(x) + mf(x))
+           = (kf(x)) + (mf(x))
+           = (kf) + (mf)
+dengan begitu, terbukti (k + m)u = ku + lu,dengan ∀u ϵ v, serta k dan m merupakan elemen bilangan riil (k, m ϵ ℝ). dan aksioma ke-8 terbukti.
+",C3
+makassssih ramdhan... ayo lanjutkan. sudah dekat tujuan. semangaaaat,C0
+"kali ini saya akan mencoba membuktikan ruang vektor v berdasarkan aksioma 1.
+1. jika k adalah sebarang skalar dan u adalah sebarang objek di v, maka ku juga berada di v. (sifat tertutup)
+misal u : y = f(x) merupakan subset dari v sesuai definisi yang ingin dibuktikan, f(x) terdiferensial pada range x = [-1, 4], jika k adalah suatu skalar, akan dibuktikan w : k.f(x) juga terdiferensial.
+
+",C3
+"thanks markus untuk penjelasannya. saya sangat paham ketika pertama membaca karena penjelasannya sangat mudah dicerna dan tepat. kita jadi semakin paham bahwa jika f(x) terdiferensial maka untuk kf(x), k adalah skalar, juga akan terdiferensial karena k yang berupa bil. real dikalikan dengan turunan f(x) yang juga bil.real pasti akan menghasilkan bilangan real. saya juga jadi kilas balik saat belajar diferensial di sma. ",C3
+"mohon izin untuk membuktikan aksioma ruang vektor nomor 9 yang belum sempat dibahas  
+untuk sembarang skalar k dan m serta juga sembarang u, dimana u merupakan himpunan bilangan riil (u elemen dari v), maka tentukan bahwa k(m.u)=(k.m)u berlaku!!
+pertama, kita asumsukan u adalah hasil pemetaan bilangan riil dari interval [-1,4] dari fungsi f(x) = 2x + cos x - 5
+maka, f(x) = u = 2x + cos x - 5
+>> k. (m. u) = (k.m).u
+>> k (m . (2x + cos x - 5)) = (k.m). (2x + cos x - 5)
+>> k (2mx + m.cosx - 5m) = 2kmx + km cos x - 5km
+>> 2kmx + km. cos x -5km = 2kmx + km. cos x -5km (terubukti!!)
+karena ruas kiri = ruas kanan, kita dapat menyatakan bahwa p[embuktian aksioma ke-9 ini berhasil!! sehingga, fungsi f(x) = 2x + cos x - 5 dari interval [-1,5] memenuhi syarat aksioma ke-9.
+",C3
+"saya sudah membaca penjelasan yang diberikan dan saya sependapat dengan penjelasannya. pada penjelasan, sangat terlihat bahwa bahwa sifat asosiatif mendominasi pembuktian dari langkah pertama hingga akhir sehingga didapatkan untuk u∈v dan k,m skalar, k(mu) = (km)u. jadi, menurut saya, penjelasan yang diberikan sudah tepat dan tidak ada kekeliruan. ",C3
+"alhamdulillah kita semua telah berdiskusi dengan baik pada fgd kali ini. sepertinyaa kita semuaa telah membuktikan kesepuluh aksioma dengan baik  . 
+
+dengan begitu, hasil diskusi kelompok kita dapat menyimpulkan bahwa himpunan semua fungsi terdeferensial pada interval [-1, 4] termasuk ruang vektor. dengan hal itu, dapat disimpulkan juga bahwa fungsi y = 2x + cos x- 5 adalah suatu vektor karena merupakan salah satu contoh fungsi kontinu pada himpunan semua fungsi terdeferensial pada interval [-1, 4].
+",C4
+"pandangan saya terhadap vektor telah berubah setelah mengikuti diskusi dan perkuliahan pada minggu ini dan sebelumnya. sebelumnya saya hanya memahami vektor sebagai satuan besaran yang memiliki arah. namun, setelah saya pahami lebih lanjut di perkuliahan kali ini, saya mendapatkan banyak pengetahuan baru. seperti ruang vektor sebagai himpunan tak kosong yang berlaku operasi penjumlahan dan perkalian dan untuk membuktikannya kita bisa menggukan pembuktian 10 aksioma ruang vektor dan vektor itu sendiri adalah elemen yang ada di dalam ruang vektor.",C3
+"saya lebih memahami apa yang harus dilakukan dan mendapatkan bahwa vektor bukan hanya sebuah besaran yang berarah, melainkan juga suatu sub-himpunan dari ruang vektor, dimana menentukan ruang vektor sendiri dibisa dibuktikan dengan sepuluh aksioma yang telah dibahas pada diskusi kali ini.  ",C3
+perasaan saya senang karena dapat mengerti materi pekan ini  . semoga kelompok alinlintar dapat terus berdiskusi dengan baik dan mengerti materi kedepannyaa ,C0
+"pada postingan ini, saya ingin menyampaikan beberapa upgrade pemahaman tentang vektor. jadi, pada awal pembelejaran, saat diinstruksikan menulis refleksi awal perkuliahan, saya menulis bahwa vektor adalah besaran yang punya arah dan nilai. saya tahu pemahaman ini tidak salah. namun, setelah terjadi kegiatan diskusi fgd dan mengikuti materi di kelas, saya jadi dapat mendefinisikan vektor dalam definisi yang lebih mendalam, yaitu vektor adalah elemen dari ruang vektor yang operasi penjumlahan, perkalian dengan skalarnya didefinisikan sedemikian hingga 10 aksioma terpenuhi. sedangkan, ruang vektor sendiri adalah himpunan dari bilangan real atau vektor-vektor tadi yang memenuhi 10 aksioma.",C3
+"setelah saya mendengarkan penjelasan bu kasiyah di kelas sinkronus hari ini, pemahaman saya sekarang mengenai vektor saya rasa jauh lebih luas dibandingkan sebelumnya. kemarin, saya masih bingung dengan perbedaan serta korelasi antara vektor dengan ruang vektor, dan saya juga belum bisa memandang suatu elemen pada r, misalnya 5 saja, sebagai sebuah vektor. sekarang, saya merasa saya lebih memahami apa itu vektor dan ruang vektor, dan saya juga lebih mengerti relevansi sepuluh aksioma yang telah kita buktikan sebelumnya terhadap apakah suatu fungsi itu vektor atau bukan, padahal sebelumnya jujur saya belum terlalu mengerti secara utuh mengapa sepuluh aksioma tersebut dapat kita pakai untuk membuktikan apakah suatu fungsi itu vektor atau bukan.",C3
+"saya ingin menyampaiakan perubahan pemahaman yang sama miliki tentang vektor  
+sebelum mempelajari materi ruang vektor di kelas aljabar linear, pemahaman yang saya miliki tentang vektor masihlah sangat terbatas. saya hanya terpaku dengan definisi vektor yaitu besaran yang memiliki nilia dan arah. pendefinisian tersebut tentunya tidak cukup untuk membuat saya yakin, apakah (misalnya) (2,3,4,1,56,4) adalah vektor? atau  apakah fungsi kontinu 2x + 5 sinx + 6 adalah ruang vektor? dll.
+namun, dengan pemahaman yang saya dapatkan setelah diskusi dan juga mendengarkan pemaparan materi di kelas, pemahaman saya menjadi semakin baik. saya menjadi tau, bahwa vektor tidak hanya didefinisikan sebagai besaran yang memiliki nilai dan arah, tetapi lebih dari itu. vektor bisa didefinisikan sebagai bagian dari ruang vektor, yang mana ruang vektor sendiri merupakan himpunan bilangan- bilangan riil yang bersifat tertutup dan bisa dijumlahkan/ dikalikan dengan skalar sehingga memenuhi ke 10 aksioma ruang vektor
+selain itu, pemahaman saya tentang vektor dan ruang vektor juga menjadi lebih baik. saya bisa memahami bahwa ruang vektor adalah himpunan vektor, sementara vektor adalah bagian dari himpunan tersebut.
+",C3
+"setelah mengikuti kelas alin sesi sebelum istirahat bersama bu kasiyah, saya mendapat banyak contoh-contoh baru mengenai ruang vektor, dan cara membuktikannya dengan lebih jelas. pemahaman saya bertambah ketika mengetahui bahwa bilangan real yang selama ini kita gunakan untuk perkalian vektor pada suatu ruang vektor, ternyata bilangan real juga merupakan vektor, walaupun hal ini mudah dibuktikan namun sebelumnya saya tidak menyadari hal itu, karena saya berpikir bilangan real hanya digunakan ketika kita membutuhkan skalar saja.",C3
+"saya ingin berbagi tentang perubahan pemahaman yang terjadi setelah saya melakukan focus group discussion bersama teman. teman.
+sebelumnya, saya hanya mengetahui bahwa vektor adalah besaran yang mempunyai besar dan arah. sekarang, saya mengetahui bahwa vektor adalah elemen yang terdapat pada ruang vektor. untuk mengetahui apakah fungsi/himpunan/matriks adalah vektor dapat dibuktikan dengan 10 aksioma ruang vektor. ruang vektor sendiri adalah himpunan tidak kosong yang berlaku operasi penjumlahan dan operasi perkalian.
+berikut adalah perubahan pengetahuan yang saya rasakan. proses belajar menjadi lebih mudah karena dilakukan diskusi dengan teman-teman.
+",C3
+"berikut ini pemicu yang menarik untuk kalian diskusikan: kalian diberi himpunan semua barisan tak hingga. bagaimanakah memahami dan menjelaskan barisan -1, -2, 4, 8, -1, … sebagai vektor?",C1
+"hallloo, apakah ada kendala? ",C1
+silahkan segera dimulai. ,C0
+"berdasarkan yang saya dapat dalam kelas aljabar linier pada minggu ke-4 kemarin, salah satu sifat dari vektor adalah jumlahan dan perkalian vektor dengan skalar bersifat tertutup. sifat tertutup memiliki karakteristik : 
+1. hasilnya ada, terdefinisi, dan tunggal 
+2. hasilnya berasal dari himpunan yang sama (contohnya apabila penjumlahan vektor, maka hasilnya vektor pula, apabila penjumlahan bilangan bulat maka hasilnya bilangan bulat pula, dan sebagainya)
+sekarang, kita mempunyai barisan tak hingga -1, -2, 4, 8, -1, ... . saya akan memberi nama himpunan ini sebagai a, sehingga a = -1, -2, 4, 8, -1, ... . selanjutnya, saya akan menjumlahkan himpunan tak hingga a dengan himpunan tak hingga yang saya buat sendiri yaitu b = 9, -1, 2, 3, 4, ... .
+saya akan coba menjumlahkan keduanya :
+a + b = (-1 + 9), (-2-1), (4+2), (8+3), (-1+4), ...
+a + b = 8 , -3, 6, 11, 3, ...
+dapat kita lihat, bahwa jika kita menjumlahkan baris tak hingga, maka hasilnya ada dan hasilnya merupakan baris tak hingga juga. sehingga, penjumlahan baris tak hingga bersifat tertutup.
+sekarang, saya ingin mencoba mengalikan a dengan bilangan skalar k = 2.
+2a = 2(-1), 2(-2), 2(4), 2(8), 2(-1), ...
+2a = -2, -4, 8, 16, -2, ...
+ternyata, hasil perkalian barisan tak hingga dengan skalar juga ada dan merupakan baris tak hingga juga. sehingga, perkalian baris tak hingga dengan skalar bersifat tertutup.
+",C2
+excellent start alifiyah ,C0
+"saya sangat setuju dengan jawaban tersebut dan izin menambahkan beberapa hal yaa,
+ 
+kalian diberi himpunan semua barisan tak hingga. bagaimanakah memahami dan menjelaskan barisan -1, -2, 4, 8, -1, … sebagai vektor?
+setelah melakukan eksplorasi, google sana google sini dan membaca dari beberapa sumber, saya mendapatkan suatu hal “menarik” yang menurut saya dapat menjawab pertanyaan tersebut.
+pada pertemuan sesi sinkronus aljabar linear pada minggu keempat kemarin, kita sudah dikenalkan dengan bentuk seperti ini, (r2,  +, .),  (rn, +, .), (pn, +, .) atau (c[a,b], +, .). setelah melakukan eksplorasi saya mendapatkan hal menarik berkaitan dengan hal tersebut, ternyata bentuk seperti itu dapat disebut sebagai field.
+secara umum, field dapat didefinisikan sebagai berikut:
+suatu himpunan f yang padanya didefinisikan jumlah (+) dan operasi kali (.) disebut sebagai field, dapat dinotasikan sebagai <f, +, .> atau (f, +, .) jika memenuhi sifat-sifat berikut, yakni untuk semua a, b, c anggota dari f berlaku:
+ 
+dengan demikian, suatu himpunan barisan tak hingga dapat dikatakan sebagai field atau (stak_hingga, +, .) jika memenuhi sembilan syarat tersebut.
+",C2
+"seperti yang saya sampaikan pada forum diskusi pendahuluan, suatu himpunan v di mana terdapat 2 operasi yang terdefinisi, yaitu penjumlahan (+) dan perkalian dengan scalar (.) dapat dikatakan sebagai ruang vektor atas field f jika memenuhi 10 aksioma berikut:
+untuk setiap u, v, w pada v dan semua scalar k dan m, v dapat dikatakan sebagai ruang vektor dan semua objek yang ada di dalam v dapat dikatakan sebagai vektor, jika memenuhi:
+ 
+jadi, untuk dapat memahami dan menjelaskan barisan -1, 2, 4, 8, -1, … sebagai vektor kita harus terlebih dahulu membuktikan bahwa barisan tak hingga merupakan sebuah ruang vektor dan harus memenuhi 10 aksioma tersebut. secara umum, himpunan semua barisan tak hingga yang merupakan anggota field f, jika merupakan ruang vektor, operasinya dapat didefinisikan sebagai berikut:
+(sn) + (tn) = (sn + tn) dan a(sn) = (asn).
+",C2
+"pada kesempatan ini, saya ingin membuktikan aksioma nomor 5.
+untuk setiap u anggota v, terdapat -u pada v, sedemikian sehingga u + (-u) = 0.
+bukti:
+misalkan a, b, c, d, … elemen bilangan riil, kemudian misalkan suatu barisan tak hingga a, b, c, d, … adalah u. oleh karena a, b, c, d, … adalah elemen bilangan riil, maka akan selalu ada -a, -b, -c, -d, … yang juga terdefinisi pada bilangan riil. perhatikan bahwa -a, -b, -c, -d, … adalah negatif dari vektor u. misalkan saja barisan tak hingga tesebut sebagai -u. kemudian jumlahkan kedua vektor u dan -u, diperoleh:
+u = a, b, c, d, …
+-u = -a, -b, -c, -d, …
+karena tiap elemen pada -u akan saling meniadakan tiap elemen u. maka vektor hasil penjumlahannya pasti (0, 0, 0, 0, …). ingat definisi dari vektor nol, vektor nol adalah vektor yang panjangnya nol serta semua komponennya nol. karena panjang vektor hasil penjumlahan tersebut adalah nol dan semua komponennya juga nol, maka dapat disimpulkan bahwa vektor hasil penjumlahan tersebut adalah vektor nol.
+sehingga terbukti bahwa untuk setiap u anggota v, terdapat -u pada v, sedemikian sehingga u + (-u) = 0.
+",C3
+"mungkin, teman-teman lain bisa membantu membuktikan aksioma-aksioma lainnya atau menentukan counter example jika tidak memenuhi salah satu aksioma, atau teman-teman lain ada pendapat lain?",C1
+"wah jadi seperti itu ya, tadi saya juga beranggapan hal yang sama bahwa himpunan tersebut masih belum bisa dikatakan sebagai vektor tapi itu hanya dari spekulasi saya yang berdasarkan dari definisi vektor, tetapi ini merupakan jawaban yang sangat lengkap.",C2
+"saya ingin mencoba membuktikan nomor 2 :
+2. u + v = v + u atau biasa kita sebut sebagai sifat komutatif pada penjumlahan.
+• misalkan kita punya sebuah barisan tak hingga u = u1 , u2 , u3 , u4 , .... dan barisan tak hingga v = v1 , v2 , v3 , v4 , ...
+• mari kita cari nilai u + v 
+o u + v = (u1 + v1), (u2 + v2), (u3 + v3), (u4 + v4), ....
+• mari kita cari nilai v + u 
+o v + u = (v1 + u1), (v2 + u2), (v3 + u3), (v4 + u4), ....
+sesuai sifat jumlahan bilangan bulat, nilai dari (u1 + v1) akan sama dengan (v1 + u1), dan begitu seterusnya hingga suku ke tak hingga. sehingga, setiap elemen dari u + v akan sama dengan setiap elemen dari v + u. dengan demikian, kita bisa tahu bahwa u + v = v + u. 
+",C3
+"apakah teman-teman yang lain ada yang bisa membantu membuktikan untuk aksoma 3, 4, 7, 8, 9, dan 10?",C1
+"saya ingin mencoba pembuktian nomor 7 :
+k(u+v) = ku + kv
+misal kita mempunyai barisan tak hingga u = u1,u2,u3, .... dan barisan tak hingga v = v1, v2, v3, ..... lalu kita misalkan k = 0. kita tahu bahwa setiap bilangan yang dikalikan dengan 0 akan menghasilkan 0. maka 0 (u+v) = 0k + 0v, dan bisa kita lihat bahwa 0 = 0. dengan demikian, kita bisa tahu bahwa k(u+v) = ku + kv.
+",C3
+terima kasih rizky dan alifiyah atas pencarian yang dilakukan. ,C0
+"apakah teman-teman yang lain ada yang bisa membantu membuktikan untuk aksoma 3, 4, 8, 9, dan 10?",C1
+"baik disini saya ingin mencoba membuktikan aksioma 4
+aksioma 4 : terdapat sebuah objek 0 di v yang bernama zero vector. sehingga u + 0 = 0 + u = u untuk semua vektor di v
+pertama untuk u + 0 = 0 + u , pada jawaban sebelumnya alifiyah telah membuktikan bahwa barisan bilangan tak hingga memenuhi u + v = v + u, dengan begitu, disini tinggal membuktikan terdapat 0 sehingga u + 0 = u
+misal kita mempunyai barisan tak hingga u = u1, u2, u3, ... dimana u1, u2, u3 merupakan bilangan riil.
+sebagaimana yang sudah kita ketahui sejak saat tk ataupun sd ataupun sebelum itu  , bahwa bilangan riil apapun jika ditambah nol akan menghasilkan bilangan itu sendiri. maka jika kita membuat sebuah vektor nol 0 = 0,0,0 ...
+kita mendapatkan penjumlahannya
+u + 0 = u1+0, u2+0, u3+0, ...
+        = u1, u2, u3, ...
+        = u
+dengan begitu terbukti terdapat vektor 0 sehingga u + 0 = u. dan kita mendapatkan vektor nol di himpunan ini yaitu 0,0,0 ...
+",C3
+"ayoo teman-teman kita buktikan semua aksioma agar dapat menjelaskan bahwa barisan barisan -1, -2, 4, 8, -1, … merupakan vektor  !",C1
+"saya ingin melanjutkan dari ucapan terima kasih saya dengan mencoba membantu membuktikan nomer 3
+3. u +(v+w) = (u+v)+w merupakan sifat asosiatif dalam penjumlahan.
+misalkan kita mempunyai barisan tak hingga u = u1,u2,u3,u4,... barisan tak hingga v = v1,v2,v3,v4,... dan barisan tak hingga w = w1,w2,w3,w4,...
+lalu kita coba mencari u +(v+w):
+u +(v+w) = u1+(v1+w1), u2+(v2+w2), u3+(v3+w3), u4+(v4+w4),...
+selanjutnya mencoba mencari (u+v)+w:
+(u+v)+w = (u1+v1)+w1, (u2+v2)+w2, (u3+v3)+w3, (u4+v4)+w4,...
+dapat dilihat nilai dari u1+(v1+w1) akan sama dengan (u1+v1)+w1, dan akan terus seperti itu untuk suku bilangan selanjutnya hingga suku tak hingga.
+jadi dapat diambil kesimpulan setiap suku dari  u +(v+w) akan sama dengan setiap suku dari (u+v)+w dengan demikian u +(v+w) = (u+v)+w.
+",C3
+"apakah teman-teman yang lain ada yang bisa membantu membuktikan 8,9 dan 10?",C1
+"kali ini, saya akan mencoba untuk membuktikan aksioma nomor 8,
+ 
+untuk setiap vektor u pada v serta skalar k dan m, maka berlaku
+(k+m)u = ku + mu
+misalkan {an} adalah barisan tak hingga {a1, a2, a3, a4, …} maka (k+m)u = (k+m){an}
+(k+m){an} = {(k+m)an}.
+kemudian karena {an} = {a1, a2, a3, … }, maka  {(k+m)an} = {(k+m)a1, (k+m)a2, (k+m)a3, …}
+karena a1, a2, a3, … serta k dan m adalah bilangan riil, maka pasti berlaku sifat distributif, sehingga {(k+m)a1, (k+m)a2, (k+m)a3, …} = {(ka1+ma1), (ka2+ma2), (ka3+ma3), …}. perhatikan bahwa barisan tersebut dapat dipecah menjadi penjumlahan 2 barisan sebagai berikut:
+{ka1, ka2, ka3, …} + {ma1, ma2, ma3, …}
+karena semua elemen pada barisan tak hingga sebelah kiri merupakan hasil perkalian dengan skalar k, maka kita bisa mengeluarkan skalar k tersebut, sehingga diperoleh barisan sebagai berikut:
+k{a1, a2, a3, …}
+demikian juga dengan barisan tak hingga sebelah kanan,
+m{a2, a2, a3, …}
+ingat pernyataan awal yang mengatakan bahwa {a1, a2, a3, … } = {an} = u. maka, kedua barisan dapat diubah menjadi:
+k{a1, a2, a3, …} = k{an} = ku
+m{a1, a2, a3, …} = m{an} = mu
+oleh karena itu, {ka1, ka2, ka3, …} + {ma1, ma2, ma3, …} = ku + mu
+maka terbukti bahwa untuk setiap vektor u pada v serta skalar k dan m, maka berlaku
+(k+m)u = ku + mu.
+",C3
+"kali ini, saya akan mencoba untuk membuktikan aksioma nomor 10,
+ 
+10. 1u = u
+    misalkan,  u = u1, u2, u3, u4, ...., ....
+     lalu kita substitusikan nilai  u nya....
+    1u = 1(u1, u2, u3, ... )
+         = (u1, u2, u3, u4,.....)
+         = u
+maka, terbukti 1u = u dan akan terus seperti itu untuk suku bilangan selanjutnya hingga suku tak hingga
+ 
+",C3
+"nah disini saya ingin mencoba untuk membantu membuktikan aksioma nomor 9.
+pada aksioma 9 ini dimana k(mu) = (km)(u) berkaitan dengan sifat asosiatif pada perkalian.
+misal {un} merupakan barisan tak hingga {u1, u2, u3,..} maka
+k(m{un}) = (km{un})
+karena {un} berisi barisan tak hingga {u1,u2,u3..} maka
+k{mu1, mu2, mu3,...} = {kmu1, kmu2, kmu3,...} karena persamaan sebelah kanan dapat dianggap sebagai satu skalar.
+persamaan kiri merupakan skalar dikalikan dengan objek maka
+{kmu1, kmu2, kmu3,...} = {kmu1, kmu2, kmu3,...}
+oleh karena itu aksioma 9 terpenuhi dan berlaku k(mu) = (km)(u)
+",C3
+"izinkan saya untuk menjawab pertanyaan yang dilontarkan oleh alifiyah yakni
+apakah ini cukup untuk kita membuat kesimpulan bahwa barisan tak hingga bisa dipandang sebagai vektor? 
+kita sebaiknya kembali ke definisi dari apa itu vektor. vektor secara singkat adalah suatu besaran yang memiliki arah. nah, untuk melanjutkan opini saya, himpunan tak hingga memiliki arah yang tidak diketahui. jadi, menurut saya sendiri, himpunan tersebut masih belom bisa dikatakan sebagai vektor.
+",C2
+"jadi, kita perlu berpikir lebih mendalam lagi sesuai arahan ricky: apa yang membuat sesuatu itu dikatakan vektor?",C1
+"hmm, karena kita sulit untuk mengetahui arah dari himpunan tak hingga, sepertinya kita tidak bisa menggunakan acuan dia memiliki arah atau tidak. sebagai gantinya, mungkin kita bisa menggunakan pembuktian dari 10 aksioma yang telah diberikan oleh rizky. ",C2
+iya saya setuju dengan alifiyah bahwa kita dapat membuktikan pembuktian 10 aksioma dari rizky sehingga kita dapat memandang barisan tersebut sebagai vektor. ,C2
+". izinkan saya menambahkan,
+sesuai definisinya, suatu ruang vektor v berdimensi hingga, jika v ruang vektor {0} atau v mempunyai basis berhingga. maka jika diluar dari definisi, bisa kita sebut vektor  berdimensi tak hingga.
+kita bisa mendefinisikan basis sebagai himpunan vektor, yang dalam sebuah kombinasi linear dapat merepresentasikan setiap vektor dalam suatu ruang vektor. misal v adalah sembarang ruang vektor dan b = {a1,a2,a3,... an} sebuah himpunan berhingga vektor v, maka b adalah basis untuk vektor ruang v, jika: 
+1. b bebas linier
+2. b membangun v
+oleh karena itu saya sependapat dengan alifiyah dan teman teman yang lain bahwa suatu barisan tak hingga -1, -2, 4, 8, -1, ...  dapat dikatakan sebagai vektor, yaitu vektor dengan dimensi tak hingga, karena kita tidak dapat menentukan basisnya. 
+",C3
+apakah menurut teman teman pembuktian ini  cukup untuk kita membuat kesimpulan bahwa barisan tak hingga bisa dipandang sebagai vektor? ,C1
+"izinkan saya untuk menjawab pertanyaan yang tertera diatas bu.
+ 
+memahami { -1, -2, 4, 8, -1} sebagai vektor
+vektor di r5 yaitu { -1, -2, 4, 8, -1} karena ( -1, -2, 4, 8, -1) merupakan himpunan semua polinomial derajat 5 atau kurang dengan koefisien bilangan real:
+   p(x) =  a0 + a1x + a3x2
+maka:
+cp(x) = ca2 + ca1x + ca2x2
+jadi, jelas , p2 merupakan ruang vektor dan hal ini dapat diperluas untuk pn dengan n≠ 0.
+",C3
+"saya jadi penasaran, apakah dengan menggunakan 10 aksioma yang diberikan rizky sebelumnya kita juga bisa membuktikan { -1, -2, 4, 8, -1} sebagai vektor? ",C1
+"saya izin mencoba untuk menjawab pertanyaan tersebut,
+ 
+apakah dengan menggunakan 10 aksioma yang diberikan sebelumnya kita juga bisa membuktikan { -1, -2, 4, 8, -1} sebagai vektor?
+berdasarkan jawaban saya sebelumnya, untuk setiap u, v, w pada v dan semua skalar k dan m, v dapat dikatakan sebagai ruang vektor dan semua objek yang ada di dalam v dapat dikatakan sebagai vektor, jika memenuhi semua aksioma tersebut.
+perhatikan bahwa {-1,2,4,8,-1} adalah himpunan berhingga yang memiliki panjang atau jumlah elemen 5. kemudian mengutip pernyataan dari jawaban yang disampaikan oleh tantra sebelumnya, sesuai definisinya, suatu ruang vektor v berdimensi hingga, jika v ruang vektor {0} atau v mempunyai basis berhingga. karena panjang dari himpunan tersebut adalah 5, maka dapat dikatakan bahwa ""calon vektor"" atau himpunan {-1,-2,4,8,-1} tersebut mempunyai basis 5, dengan kata lain, v atau ruang vektor dari himpunan tersebut adalah riil pangkat 5 atau ruang vektor basis 5 (r5).
+sama seperti jawaban saya sebelumnya, untuk dapat membuktikan bahwa {-1,-2,4,8,-1} kita harus membuktikan terlebih dahulu apakah ruang vektornya, yaitu r5 adalah ruang vektor atau bukan, kita harus memeriksa terlebih dahulu apakah r5 memenuhi semua aksioma syarat ruang vektor tersebut. 
+jadi, menurut saya dengan menggunakan semua aksioma tersebut, membuktikan apakah r5 merupakan ruang vektor atau bukan, kita dapat menentukan apakah {-1,-2,4,8,-1} adalah vektor atau bukan. kemudian karena--kalau saya tidak salah--r5 memenuhi semua aksioma tersebut, maka terbukti bahwa {-1,-2,4,8,-1} adalah sebuah vektor.
+",C3
+saya setuju juga dengan apa yang telah dipaparkan oleh rizky. saya juga ingin menambahkan bahwa aksioma- aksioma yang dihasilkan berasal dari sifat-sifat vektor r2dan r3 sehingga aksioma tersebut dapat juga diimplementasi sebagai landasan untuk menentukan apakah sebuah himpunan berhingga merupakan sebuah vektor.,C3
+baca kembali pemicu awal yaa. apa himpunannya?,C1
+"siap ibu, terima kasih untuk reminder-nya. ",C0
+semangaaat alifiyah,C0
+halo apa khabar? bagaimana tugasnya? belum selesai yaa?,C1
+"sehubungan dengan sudah terbuktinya 10 aksioma pada suatu ruang vektor v yang merupakan barisan tak hingga, maka kami sepakat untuk menyimpulkan hasil diskusi ini,
+ 
+untuk dapat memahami dan menjelaskan barisan -1, -2, 4, 8, -1, … sebagai vektor, kita perlu memastikan terlebih dahulu bahwa ruang vektor dari barisan tersebut, yaitu barisan tak hingga, adalah ruang vektor atau bukan.
+sebuah himpunan objek-objek v yang dilengkapi dengan operasi penjumlahan (+) dan operasi perkalian dengan skalar dapat disebut sebagai ruang vektor dan semua objek di dalam v disebut sebagai vektor, apabila memenuhi 10 aksioma yang sudah kita buktikan bersama, untuk lebih mudah mengingatnya, kita dapat merangkumnya menjadi 6 aksioma/sifat berikut:
+1. tertutup (closure)
+maksudnya, semua operasi penjumlahan dan perkalian skalar selalu menghasilkan vektor di dalam v atau vektor yang merupakan anggota dari v. dengan kata lain, untuk semua u, v anggota v dan skalar k, maka berlaku
+-  u + v elemen v
+-  ku elemen v
+2. komutatif
+dengan kata lain berlaku, untuk semua u, v elemen v, maka u + v = v + u
+3. asosiatif
+untuk semua u, v, w elemen v, maka u + (v + w) = (u + v) + w
+4. identitas
+untuk setiap u elemen v, terdapat elemen identitas vektor (0) dan skalar 1,  sedemikian sehingga
+- u + 0 = 0 + u = u
+- 1 u = u
+5. balikan (inverse) atau negative
+untuk setiap u elemen v, terdapat -u yang juga elemen v, sedemikian sehingga
+u + (-u) =(-u) + u = 0
+6. distributif
+untuk semua u, v, w elemen v, dan k, m skalar, maka berlaku
+- k(u + v) = ku + kv
+- (k+m)w = kw + mw
+- k(mu) = (km)u
+berhubung kami secara bersama-sama sudah berhasil membuktikan semua aksioma tersebut berlaku untuk barisan tak hingga, maka secara tidak langsung kami juga sudah berhasil membuktikan bahwa barisan tak hingga merupakan suatu ruang vektor. hal tersebut mengimplikasikan bahwa semua vektor yang merupakan elemen dari barisan tak hingga, termasuk barisan -1, -2, 4, 8, -1, … adalah sebuah vektor. karena terbukti bahwa barisan tak hingga adalah suatu ruang vektor, maka pada barisan -1, -2, 4, 8, -1, … juga pasti berlaku semua sifat yang saya sebutkan sebelumnya, yaitu tertutup (closure), komutatif, asosiatif, identitas, balikan atau inverse, dan distributif, yang mana juga berlaku untuk semua barisan yang merupakan anggota dari barisan tak hingga lainnya. dengan kata lain, untuk setiap barisan yang merupakan elemen dari barisan tak hingga pasti akan memenuhi semua aksioma tersebut, kemudian karena semua operasi yang dilakukan pada aksioma tersebut adalah operasi-operasi (aljabar) pada vektor dan semua barisan yang merupakan elemen dari barisan tak hingga, termasuk -1, -2, 4, 8, -1, … pasti memenuhi semua aksioma tersebut, maka dapat dipastikan dan disimpulkan bahwa semua barisan yang merupakan elemen dari barisan tak hingga, termasuk -1, -2, 4, 8, -1, … merupakan suatu vektor.
+",C4
+"sebelumnya, kita menganggap bahwa vektor merupakan besaran yang memiliki nilai dan arah. namun, setelah diskusi serta kelas pagi, kita dapat mengganti pemahaman kita mengenai vektor, dimana vektor merupakan anggota dari himpunan ruang vektor, yang mana agar himpunan tersebut menjadi ruang vektor, himpunan tersebut haruslah memenuhi 10 aksioma ruang vektor.",C3
+"izinkan saya menambahkan forum diskusi fgd dengan apa yang saya rasakan tentang proses belajar saya dan perubahan pemahaman tentang vektor.
+yang saya rasakan saat proses belajar ini sangatlah 'baru' atau 'fresh' karena ini melakukan tugas kelompok diskusi aktif melalui forum beda yang biasanya dilakukan secara offline. 
+pemahaman saya tentang vektor berubah ternyata tidak hanya sebuah besaran yang memiliki arah, vektor juga merupakan suatu elemen himpunan ruang vektor yang memenuhi 10 aksioma yang sudah kita bahas di forum diskusi ini
+",C3
+"pada kesempatan ini saya ingin memaparkan perubahan pemahaman tentang vektor. vektor tidak hanya didefinsikan sebagai besaran yang memiliki arah, tetapi juga elemen dari ruang vektor yang telah dibuktikan dengan 10 aksioma.selain itu, saya juga lebih memahami perbedaan dari ruang vektor dan vektor. ruang vektor lebih ke himpunan dari elemen himpunan yang merupakan vektor. pada vektor, juga bisa dikatakan skalar tergantung lingkungan dia berada.",C3
+"dari kuliah hari ini dan hasil diskusi bersama teman-teman semua,  vektor sebagai suatu besaran yang mempunyai nilai dan arah. setelah mengikuti diskusi dan kelas, saya jadi tahu bahwa vektor tidaklah sesempit itu. vektor merupakan elemen sebuah himpunan yang merupakan ruang vektor, di mana ruang vektor merupakan himpunan yang memenuhi 10 aksioma terhadap penjumlahan dan perkalian dengan skalar. kesepuluh aksioma tersebut adalah :
+1. tertutup terhadap penjumlahan
+2. komutatif terhadap penjumlahan
+3. asosiatif terhadap penjumlahan
+4. ada elemen 0 sebagai identitas terhadap penjumlahan
+5. ada elemen -a sehingga a + (-a) = (-a) + a = 0
+6. tertutup terhadap perkalian dengan skalar
+7. bersifat distributif k(u+v) = ku + kv
+8. bersifat distributif (k+l)u = ku + lu
+9. asosiatif terhadap perkalian dengan skalar
+10. terdapat elemen 1 sebagai identitas terhadap perkalian
+ 
+berkaitan dengan pemicu yang diberikan bu kasiyah, kita semua telah bersama-sama membuktikan bahwa himpunan semua barisan tak hingga memenuhi kesepuluh aksioma, sehingga kita tahu bahwa himpunan semua barisan tak hingga merupakan ruang vektor dan  -1, -2, 4, 8, -1, …  merupakan vektor, seperti yang disimpulkan oleh rizky. ",C4
+"izinkan saya untuk menjelaskan perubahan pemahaman yang saya dapatkan mengenai vektor
+perubahan pemahaman saya tentang vektor yaitu pada awalnya saya hanya mendefinisikan vektor sebagai besaran yang tidak hanya memiliki nilai tetapi juga memiliki arah, tetapi sekarang saya dapat mengupgrade mendefinisikan vektor sebagai elemen dari ruang vektor yang dimana ruang vektor merupakan himpunan tidak kosong yang harus memenuhi 10 aksioma pada ruang vektor.
+",C3
+"berikut adalah hasil rangkuman dari diskusi kami yaitu vektor adalah suatu elemen dari himpunan yang merupakan ruang vektor, di mana pada ruang vektor tersebut terdefinisi operasi biner penjumlahan dan perkalian, serta memenuhi 10 aksioma ruang vektor. selain itu, kami memahami bisa saja ada suatu objek yang bukan merupakan vektor di suatu ruang vektor dapat menjadi vektor di ruang vektor lainnya, contohnya fungsi f(x) = |x|. fungsi tersebut bukan merupakan vektor jika kita memandang ruang vektornya adalah himpunan fungsi yang terdiferensial di [-1,1] atau d[-1,1], tetapi fungsi tersebut adalah vektor jika memandang ruang vektornya adalah himpunan fungsi kontinu pada [-1,1] atau c[-1,1].
+",C4
+"izinkan saya menambahkan forum diskusi fgd dari diskusi yang telah dilakukan di kelas pagi hari bersama bu kasiyah 
+ 
+saya mendapatkan pemahaman baru tentang vektor ternyata tidak halnya vektor itu hanya suatu besaran yang memiliki arah, vektor juga merupakan suatu anggota elemen ruang vektor yang harus memenuhi 10 aksioma ruang vektor.
+",C3
+"izinkan saya menyampaikan pemahaman saya tentang vektor,
+saya baru mengetahui bahwa untuk menentukan sebuah vektor, perlu dibuktikan 10 aksioma. jika dia memenhuni 10 aksioma tersebut, barulah dia bisa disebut sebagai vektor. saya juga banyak mendapat pengetahuan baru mengenai pengertian dari istilah istilah yang baru saya dengar, seperti ruang, sub ruang,  dan lain sebagainya. 
+",C3

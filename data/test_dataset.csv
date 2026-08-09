@@ -1,0 +1,422 @@
+text,label
+"berikut ini adalah jawaban saya atas pertanyaan untuk mencapai level resolusi pada diskusi ini.
+1. sebutkan vektor lain di c[1, 5]  (ayooo masing-masing memberi satu contoh, minimal)
+seperti yang telah saya buktikan sebelumnya melalui syarat-syarat untuk mencapai suatu himpunan disebut sebagai ruang vektor, berarti c[1, 5] merupakan ruang vektor yang berarti himpunan vektor yang anggotanya berisi fungsi yang terdefinisi dan kontinu pada selang [1, 5]. saya memberikan contoh sederhana lainnya :d, yaitu y = x + 1.
+2. apakah c[0, 1] juga ruang vektor?
+dari pembuktian saya sebelumnya, dapat dilihat bahwa c[a, b] merupakan ruang vektor jika terbukti memenuhi setiap syarat yang ada. seperti yang david katakan, bahwa setiap aksioma yang menjadi syarat berlaku pada semua bilangan riil. sehingga c[a, b] merupakan ruang vektor untuk a dan b bilangan riil. oleh karena itu c[0, 1] juga merupakan ruang vektor.
+",C3
+"saya ingin coba menjawab pertanyaan  yang diajukan bu kasiyah 
+1. menurut saya c[1,5] adalah himpunan semua fungsi bernilai nyata yang kontinu di selang tertutup [1,5] (hal ini sudah terbukti dengan runut menggunakan 10 aksioma). untuk vektornya, saya bisa ambil contoh y = 2x 
+2. c[0,1] tentu merupakan ruang vektor juga, hal ini dikarenakan c[a,b] adalah himpunan yang bernilai nyata kontinu pada selang tertutup [a,b]. dan tentunya pembuktian ini bisa juga menggunakan 10 aksioma, seperti yang ditunjukkan andini. 
+",C3
+"saya ingin mencoba menjawab pertanyaan ibu sesuai dengan apa yang sudah saya pelajari 😊
+1. sebutkan vektor lain di c[1, 5]  (ayooo masing-masing memberi satu contoh, minimal)
+untuk vektor lainnya saya mengambil sampel sederhana yaitu y = 9x 😊
+2. apakah c[0, 1] juga ruang vektor?
+menurut saya setelah saya membaca pembuktian andini dan penjelasan david, c[0, 1]  merupakan ruang vektor. ditinjau dari syarat yang berlaku, c[a,b] merupakan ruang vektor. berdasarkan apa yang sudah david katakan, perkalian skalar serta penjumlahan terdefinisi untuk setiap bilangan riil, sifat-sifatnya yang sudah disebutkan oleh teman saya juga berlaku untuk setiap bilangan riil. maka dapat disimpulkan bahwa c[0,1] merupakan ruang vektor 😊
+",C3
+"saya izin ikut menjawab pertanyaan untuk memperdalam pendalaman yang diberikan oleh bu kasiyah.
+1.seperti yang dijelaskan oleh teman-teman sebelumnya c[1, 5] merupakan himpunan semua fungsi kontinu pada interval [1, 5]. dengan demikian, contoh vektor lain yang akan saya berikan adalah y = x – 3.
+2. dengan pembuktian dari andini serta penjelasan teman-teman sebelumnya sepertinya cukup membuktikan bahwa c[0, 1] merupakan ruang vektor juga. karena dilihat dari pembuktian yang diberikan oleh andini tadi, dapat disimpulkan bahwa c[a, b]  merupakan ruang vektor dimana a dan b adalah bilangan riil.
+",C3
+"izinkan saya untuk mencoba menjawab pertanyaan yang diberikan oleh bu kasiyah.
+1. sebutkan vektor lain di c[1, 5]  (ayooo masing-masing memberi satu contoh, minimal)
+seperti yang telah dijelaskan teman-teman sebelumnya, c[1, 5] merupakan himpunan semua fungsi yang terdefinisi dan kontinu pada selang [1, 5]. untuk contoh lainnya saya mengambil contoh sederhana yaitu y = 10x.
+2. apakah c[0, 1] juga ruang vektor?
+dari pembuktian yang telah diberikan andin sebelumnya, dapat dilihat bahwa c[a,b] merupakan ruang vektor jika terbukti memenuhi setiap syarat yang ada. seperti yang teman-teman telah katakan, perkalian skalar serta penjumlahan terdefinisi untuk setiap bilangan riil. selain itu, sifat-sifat yang telah disebutkan sebelumnya juga berlaku untuk setiap bilangan riil. maka dari itu, dapat disimpulkan bahwa c[0,1] juga merupakan ruang vektor.
+",C3
+"terima kasih bu kasiyah, kakak-kakak asdos dan teman-teman sekalian yang sangat membantu saya dalam mempelajari diskusi kali ini. sampai jumpa besok semuaa!   ",C0
+"kali ini izinkan saya untuk menjawab pertanyaan yang telah bu kasiyah berikan.
+1. sebutkan vektor lain di c[1, 5]  (ayooo masing-masing memberi satu contoh, minimal)
+sebagaimana yang telah didiskusikan oleh teman-teman saya di atas dan yang telah disampaikan oleh bu kasiyah, karena c[1,5] merupakan semua fungsi kontiniu yang terdifinisi pada selang 1<= x <=5 atau dalam hal ini merupakan vektor ruang, maka contoh vektor lainnya, yaitu y = 8x.
+2. apakah c[0, 1] juga ruang vektor?
+berdasarkan pembuktian yang telah dilakukan oleh andini sebelumnya berdarakan aksioma yang telah saya paparkan, maka untuk setiap object pada c[a,b] dimana a dan b merupakan bilangan rill serta terdapat perkalian skalar yang menghasilkan suatu bilangan rill, maka dapat disimpulkan c[0,1] juga termasuk ruang vektor.
+",C3
+"sebelumnya, saya sangat berterima kasih kepada bu kasiyah dan teman-teman semua atas berbagai jawaban dan hint yang diberikan. ",C0
+"saya ingin membantu menjawab pertanyaan dari amanda pada penjelasan syarat ruang vektor yang diberikan oleh atha. saya rasa bahwa yang dimaksud oleh atha adalah “n“ dan “u” merupakan variabel yang sama. maka dari itu syarat pada nomor 2 adalah u + v = v + u yang merupakan sifat komutatif dan syarat pada nomor 3 adalah u +( v + w ) = ( v + u ) + w yang merupakan sifat asosiatif. maka dari itu, saya sangat setuju dengan asumsi pada pembuktian yang diberikan oleh andin. semoga hal ini juga dapat membantu menjawab pertanyaan yang diberikan oleh amanda.",C3
+saya sendiri masih mencoba mencerna apa yang telah teman-teman dan bu kasiyah jelaskan karena jujur bagi saya diskusi kali ini sulit serta memusingkan untuk dapat saya pahami dengan baik. ,C1
+"mohon bantuan dan bimbingannya yaa teman-teman semuaa. terima kasih bu kasiyah, kakak-kakak asdos, dan teman-teman sekalian. ",C0
+"halo semuanya, saya ingin membagikan video yang membantu saya membayangkan segala macam hal sebagai vektor:
+
+youtube video
+",C2
+"wah, terima kasih david. sangat membantu videonya bagi saya yang masih sering bingung membayangkan tentang vektor 😁",C0
+terima kasih banyak david atas sharing videonyaaa. semoga video ini juga bisa membantu saya dalam membayangkan serta memahami segala hal tentang vektor 🙏🏻😁,C0
+"wahh, terima kasih banyak david!  semoga video ini dapat membantu saya serta teman-teman lainnya untuk dapat lebih memahami dan membayangkan vektor.  ",C0
+"akhirnya saya memahami apa yang dimakasud dengan ruang vektor, himpunan atau ruang vektor, cara membuktikan suatu vektor yang harus memenuhi 10 aksioma, skalar vektor, dan pembuktian-pembutianny. hal yang buat saya terkejut adalah, ternyata aradigma vektor yang telah saya pelajari sedari sma sangat berbeda sekali dengan yang ada di aljabar linear ini, sangat terkejut ketika melihat suatu matrik dapat disebut dengan vektor juga. dari diskusi seminggu belakangan ini dan kelas pada rabu hari ini, saya dapat menyimpulkan bahwa vektor adalah elemen daari suatu himpunan atau ruang vektor yang memenuhi 10 aksioma penjumlahan dan perkalian pada setiap elemennya",C3
+"saya ingin menyampaikan pemahaman saya tentang ruang vektor yang saya dapatkan pada kelas sinkronus tadi.
+minggu lalu, kita mendefinisikan vektor sebagai ""besaran yang memiliki besar dan arah"". definisi tersebut mungkin berguna untuk ruang vektor r2 dan r3, tetapi akan membatasi kita saat ingin membahas vektor yang lebih rumit.
+definisi vektor baru yang perlu kita tanamkan pada otak adalah ""vektor adalah elemen pada ruang vektor, yaitu himpunan tidak kosong yang memiliki definisi untuk penjumlahan dan perkalian dengan skalar serta memenuhi 10 aksioma vektor"". dengan definisi seperti itu, kita bisa membayangkan dan mendefinisikan banyaaaak sekali hal sebagai vektor, seperti fungsi, matriks, bahkan mungkin kita ingin membuat ruang vektor baru!
+",C3
+kami menyimpulkan bahwa ruang vektor itu adalah himpunan dari vektor yang tidak kosong dan memenuhi 10 aksioma syarat ruang vektor. sedangkan vektor itu sendiri adalah anggota dari ruang vektor yang telah kita definisikan.,C4
+"semenjak diberi pemahaman ruang vektor di kelas alin pagi ini, saya menjadi mengerti bahwa ruang vektor itu luas cakupannya, tidak seperti pas zaman sma yang diberi tahu kalau vektor terbatas pada 3 dimensi. ",C2
+"dari yang saya dapatkan, vektor adalah elemen pada ruang vektor. ruang vektor sendiri adalah himpunan tidak kosong yang terdefinisi untuk penjumlahan dan perkalian dengan skalar serta memenuhi 10 aksioma vektor. pemahaman baru ini cukup berbeda dengan pemahaman saya akan vektor sebelumnya yang hanya merupakan besaran yang memiliki besar dan arah.
+pada awalnya, proses pembelajaran saya lumayan banyak dipenuhi dengan kebingunan dan penasaran. dimulai dari fgd yang penuh dengan banyak pemahaman baru dan membuat bertanya-tanya hingga kelas sinkronus pagi ini yang melengkapi kekosongan pemahaman yang saya miliki.
+",C3
+"berdasarkan hasil diskusi kelompok kami, secara pengertian garis besar, ruang vektor adalah struktur yang diwujudkan oleh sekumpulan vektor, objeknya dikalikan atau ditambah dengan suatu bilangan yang disebut dengan skalar. skalar tersebut bil.riil. sebuah ruang vektor bisa dikatan ruang vektor jika operasi perjumlahan dan perkalian memenuhi 10 aksioma. ",C4
+"pertama-tama perubahan pemahaman saya tentang vektor adalah yang pada awalnya saya mengenal vektor sebagai besaran yang memiliki nilai dan arah, sekarang saya jadi mengenal vektor sebagai elemen ruang vektor, dimana syarat ruang vektor ini adalah harus memenuhi 10 aksioma (seperti yang diberikan oleh andini pada diskusi kemarin). kemudian yang saya rasakan dari proses belajar ini adalah saya sadar bahwa saya sedikit kesulitan untuk memulai belajar sendiri. karena ketika kemarin ingin mengisi forum pemicu, ternyata saya harus melihat penjelasan dari teman-teman terlebih dahulu baru bisa mulai memahami materinya. lalu untuk materi yang masih belum terlalu saya pahami adalah mengenai ruang vektor d[a, b].",C3
+"berikut ini pemicu yang kalian tunggu: kalian diberi himpunan semua fungsi terdeferensial pada interval [1, 5]. kalian tahu bahwa y = cos x + x2 + 1 adalah fungsi terdeferensial pada interval tersebut. bagaimanakanh memahami dan menjelaskan fungsi tersebut sebagai vektor?",C1
+"saya mau berpendapat atas pemicu utama yang diberikan bu kasiyah.
+ada beberapa hal yang kita ketahui dari pertanyaan tersebut dan dari yang dipelajari sebelumnya:
+- fungsi tersebut terdiferensial, berarti fungsi tersebut kontinu (tidak ""bolong"") setidaknya pada interval yang ditentukan.
+- jika disubstitusikan nilai x, maka kita mendapat nilai y dan bisa membentuk banyak tuple (x, y) yang merupakan bagian dari r2.
+- tuple-tuple pada r2 merupakan kumpulan vektor pada dimensi dua.
+berdasarkan ketiga hal di atas, menurut saya, kita bisa menyimpulkan bahwa fungsi y = cos x + x2 + 1 merupakan semacam ""ruang"" yang menaungi vektor-vektor berupa nilai-nilainya (setidaknya pada interval yang diberikan). nilai-nilai tersebut merupakan bagian dari r2.
+",C2
+bagaimana menurut teman-teman yang lain?  ,C1
+"menurut berbagai sumber yang saya baca di internet, sebuah ruang vektor harus memenuhi 10 aksioma untuk bisa dikatakan sebagai ruang vektor. yang dimana, salah satu aksiomanya adalah jika v merupakan sebuah ruang vektor dan jika u dan v adalah objek di v, maka u+v juga berada di v.",C2
+"berdasarkan penjelasan luthfi, u dan v pada v (fungsi y = cos x + x2 + 1) merupakan sebuah tuple (x,y) dimana x berada pada interval [1,5]. jika kita memasukan nilai x = 4, maka kita akan mendapatkan y = 16.346 dan jika kita memasukan nilai x = 5, maka kita akan mendapatkan y = 26.283.  
+misal u = (4, 16.346) dan v = (5, 26.283). maka nilai u + v  = (9, 42.629). sedangkan, jika kita memasukan nilai x = 9 pada fungsi, kita akan mendapatkan y = 81.088.  artinya, u + v = (9, 42.629) tidak terdapat pada v (fungsi y = cos x + x2 + 1). 
+karena salah satu aksioma ruang vektor tidak terpenuhi pada fungsi y = cos x + x2 + 1, maka fungsi y = cos x + x2 + 1 tidak dapat dikatakan sebagai ruang vektor. 
+",C3
+"seperti yang sudah kita pelajari sebelumnya, vektor adalah sebuah besaran yang memiliki nilai dan arah. selain itu, sebuah vektor pastilah merupakan anggota dari sebuah ruang vektor. sebagai contoh, titik (2, 0, -3, 9, -11) yang menjadi bahan diskusi kita pada forum pendahuluan kemarin merupakan sebuah vektor karena ia memiliki nilai dan arah serta ia merupakan anggota dari sebuah ruang vektor, yaitu r5. ",C2
+"seperti yang telah disebutkan oleh bu kasiyah, y = cos x + x2 + 1 merupakan anggota dari himpunan semua fungsi terdeferensial pada interval [1, 5] dan seperti yang telah saya sebutkan pada paragraf sebelumnya, untuk membuktikan y = cos x + x2 + 1 merupakan sebuah vektor, kita dapat membuktikannya dengan menunjukkan bahwa fungsi y = cos x + x2 + 1  merupakan anggota dari sebuah ruang vektor. dengan demikian, kita harus membuktikan bahwa himpunan semua fungsi terdeferensial pada interval [1, 5] merupakan sebuah ruang vektor.",C2
+"berikut adalah definisi dari ruang vektor berdasarkan sumber yang saya ambil dari internet,
+diberikan v himpunan tidak kosong. pada v didefinisikan jumlahan dan perkalian dengan skalar. v adalah ruang vektor atas r (himpunan bilangan nyata) jika dan hanya jika dipenuhi dan untuk setiap vektor u, v, w dalam v dan sembarang bilangan real (skalar) k, m berlaku: 
+1. jika u dan v adalah objek di v, maka u+v juga berada di v. (v tertutup terhadap jumlahan)
+2. u + v = v + u
+3. u + (v + w) = (u + v) + w
+4. terdapat objek 0 pada v, yang disebut vektor nol, sehingga 0 + u = u + 0 = u untuk semua u pada v
+5. untuk setiap u pada v, terdapat negatif –u pada v sehingga u + (-u) = (-u) + u = 0
+6. jika k skalar dan u elemen di v, maka ku terdapat pada v
+7. k(u + v) = ku + kv
+8. (k + m)u = ku + mu
+9. k(mu) = (km)u
+10. 1u = u
+",C2
+"pada kesempatan kali ini, saya ingin membuktikan aksioma atau poin 1, yaitu jika u dan v adalah objek di v, maka u+v juga berada di v. (v tertutup terhadap jumlahan).
+ 
+v atau ruang vektor pada soal kali ini adalah himpunan semua fungsi terdeferensial pada interval [1, 5]. jika u dan v adalah objek di v, maka, masing-masing u dan v pada v adalah fungsi yang terdeferensial pada interval [1,5]. misal, u = f(x) dan v = g(x). maka,  u+v  = (f+g)(x) = f(x) + g(x) dimana, f(x) + g(x) merupakan fungsi yang pasti terdeferensial pada interval [1,5].
+karena f(x) + g(x) merupakan fungsi yang pasti terdeferensial pada interval [1,5], maka f(x) + g(x) merupakan anggota himpunan semua fungsi terdeferensial pada interval [1, 5] dan u+v merupakan anggota v. dengan demikian, terbukti bahwa aksioma 1 berlaku pada v adalah himpunan semua fungsi terdeferensial pada interval [1, 5] 
+",C3
+bagaimana tanggapan yang lain? ,C1
+"pada kesempatan kali ini, saya ingin membuktikan aksioma atau poin 2
+
+2. u + v = v + u
+
+asumsikan bahwa u dan v adalah objek vektor pada ruang vektor v, yang tersusun atas himpunan semua fungsi terdeferensial pada interval [1, 5]. berdasarkan sifat-sifat aritmetika vektor yang telah diajarkan di kelas, jumlahan dua vektor bersifar komutatif. karena hasil dari u + v adalah jumlahan dua vektor, maka sifat komutatif berlaku. dengan demikian, u + v = v + u. terlampir gambar grafik sebagai penjelasan lanjutan dari konsep sifat komutatif pada jumlahan dua vektor.
+",C3
+"saya ingin membuktikan aksioma pada poin 3, yaitu:
+
+3. u + (v + w) = (u + v) + w
+
+asumsikan bahwa u, v, dan w adalah objek vektor pada ruang vektor v, yang tersusun atas himpunan semua fungsi terdeferensial pada interval [1, 5]. berdasarkan sifat-sifat aritmetika vektor, jumlahan vektor bersifat asosiatif. karena hasil dari u + (v + w) adalah jumlahan vektor, maka sifat asosiatif berlaku. dengan demikian, u + (v + w) = (u + v) + w. terlampir gambar grafik sebagai penjelasan lanjutan dari konsep sifat asosiatif pada jumlahan vektor.",C3
+"saya ingin membuktikan lebih dalam bahwa himpunan semua fungsi terdeferensial pada interval [1, 5] merupakan ruang vektor. 😅🙏 saya akan mencoba untuk menjelaskan kembali untuk poin-poin yang telah saya jelaskan sebelumnya. 😁
+2. u + v = v + u
+asumsikan bahwa u dan v adalah objek vektor pada ruang vektor v, yang tersusun atas himpunan semua fungsi terdeferensial pada interval [1, 5]. misalkan u = f(x) dan v = g(x), maka u+v = (f+g)(x) = f(x) + g(x). dengan adanya sifat komutatif pada operasi fungsi polinomial untuk f(x) dan g(x), maka f(x) + g(x) = g(x) + f(x) berlaku, dimana u = f(x) dan v = g(x). dengan demikian, terbukti bahwa aksioma 2 berlaku pada v yang merupakan himpunan semua fungsi terdeferensial pada interval [1, 5].",C3
+"berikut adalah penjelasan pada pembuktian aksioma 3 
+3. u + (v + w) = (u + v) + w
+asumsikan bahwa u, v, dan w adalah objek vektor pada ruang vektor v, yang tersusun atas himpunan semua fungsi terdeferensial pada interval [1, 5]. misalkan u = f(x), v = g(x), w = h(x), maka u + (v + w) = f(x) + (g(x) + h(x)) dan (u + v) + w = (f(x) + g(x)) + h(x). dengan adanya sifat asosiatif pada operasi fungsi polinomial untuk f(x), g(x), dan h(x), maka f(x) + (g(x) + h(x)) = (f(x) + g(x)) + h(x) berlaku, dimana u = f(x), v = g(x), dan w = h(x). dengan demikian, terbukti bahwa aksioma 3 berlaku pada v yang merupakan himpunan semua fungsi terdeferensial pada interval [1, 5].
+",C3
+"saya akan mencoba membuktikan aksioma 4
+4. terdapat objek 0 pada v, yang disebut vektor nol, sehingga 0 + u = u + 0 = u untuk semua u pada v
+v adalah ruang vektor yang merupakan himpunan semua fungsi terdeferensial pada interval [1,5].
+asumsikan bahwa u merupakan objek vektor pada v. misalkan u = f(x), diketahui bahwa vektor nol adalah vektor yang semua komponennya nol dan juga merupakan elemen identitas terhadap penjumlahan. maka, 0 + f(x) = f(x) + 0 = f(x) berlaku, dimana f(x) merupakan fungsi terdeferensial pada interval [1,5].
+dengan demikian, terbukti bahwa aksioma 4 berlaku pada v yang merupakan himpunan semua fungsi terdeferensial pada interval [1,5].
+",C3
+"saya akan mencoba membuktikan aksioma 5. untuk setiap u pada v, terdapat negatif –u pada v sehingga u + (-u) = (-u) + u = 0
+asumsikan bahwa u dan -u merupakan objek vektor pada v. misalkan u = f(x) dan -u = -(f(x)), diketahui bahwa jumlahan vektor dengan negatifnya menghasilkan vektor 0. maka, f(x) + (-f(x)) = (-f(x)) + f(x) = 0 berlaku, dimana f(x) dan -f(x) merupakan sebuah fungsi terdeferensial pada interval [1,5].
+dengan demikian, terbukti bahwa aksioma 5 berlaku pada v, dimana v merupakan himpunan semua fungsi terdefernsial pada interval [1,5].
+",C3
+terima kasih,C0
+"izinkan saya untuk membuktikan aksioma nomor 6.
+ 
+aksioma 6: jika k skalar dan u elemen di v, maka ku terdapat pada (elemen di) v.
+misalkan u = f(x), dimana f(x) merupakan fungsi yang terdeferensial pada interval [1, 5] dan terdapat skalar k, maka ku = kf(x) dimana kf(x) juga merupakan fungsi yang terdeferensial pada interval [1, 5]. sehingga terbukti aksioma 6 dimana jika k merupakan skalar dan u merupakan elemen di v maka ku merupakan elemen di v juga.
+contoh:
+y = x2 + cos x + 1 adalah fungsi terdeferensial pada interval [1, 5].
+kira ubah menjadi:
+u = t2 + cos t + 1
+lalu kita kalikan dengan skalar k:
+ku = kt2 + k cos t + k
+karena y = cos x + x2 + 1 kontinu dan terdeferensial pada interval [1, 5], maka vektor u = t2 + cos t + 1 adalah kontinu dan terdeferensial pada interval [1, 5]. akibatnya vektor ku = kt2 + k cos t + k kontinu dan terdeferensial pada interval [1, 5], sehingga ku terdapat pada ruang vektor v.
+maka, aksioma 6 terbukti!
+",C3
+"saya ingin membuktikan aksioma 9
+aksioma ke-9 ""k(mu) = (km)u"":
+k(mu) = (km)u dengan k dan m skalar dan u sebuah vektor. dalam kasus ini, u adalah sebuah fungsi yang terdiferensiasi pada interval [1, 5]. perkalian skalar dengan fungsi menghasilkan sebuah fungsi yang setiap koefisiennya dikalikan dengan skalar tersebut. misalnya untuk y = cos x + x2 + 1, jika dikalikan dengan 5 maka 5y = 5cos x + 5x2 + 5. dengan menerapkan logika tersebut, maka 
+• k(my) = k(m(cos x + x2 + 1)) = kmcos x + kmx2 + km, dan
+• (km)y = (km)(cos x + x2 + 1) = kmcos x + kmx2 + km, sehingga
+• k(my) = (km)y
+karena perkalian bersifat asosiatif (k(mu) = (km)u), maka hal tersebut tidak hanya berlaku pada fungsi y, tetapi kepada semua fungsi. sehingga terbukti bahwa k(mu) = (km)u.  
+",C3
+"saya ingin membuktikan aksioma ke-10 yaitu ""1u = u"":
+1 adalah elemen identitas terhadap perkalian. apapun jika dikalikan dengan 1 maka hasilnya adalah dirinya sendiri, begitu juga dengan vektor dan fungsi. maka dapat disimpulkan bahwa 1u = u.   berikut screenshot slide dari scele untuk menguatkan argumen saya karena sejujurnya saya bingung bagaimana cara membuktikannya 😅.
+",C3
+semangat,C0
+"untuk membuktikan 1u = u, dengan u sebuah fungsi, mari kita misalkan lagi u sebagai fungsi u = y = cos x + x2 + 1. maka 1u = 1(cos x + x2 + 1) = 1(cos x) + 1(x2) + 1(1).
+karena 1 adalah elemen identitas terhadap perkalian, maka 1(cos x) = cos x, 1(x2) = x2, dan 1(1) = 1.
+sehingga, 1u = 1(cos x) + 1(x2) + 1(1) = cos x + x2 + 1 = u.
+jika diamati, hal tersebut berlaku untuk semua fungsi, termasuk fungsi-fungsi yang terdiferensiasi pada interval [1, 5], sehingga aksioma ke-10 tersebut terbukti benar  
+",C3
+"pada kesempatan ini, saya akan membuktikan aksioma poin ke 7
+7. k(u + v) = ku + kv
+asumsikan u dan v sebagai objek vektor pada ruang vektor v dan k sebagai sembarang bilangan real (skalar). misal u = f(x) dan v = g(x) yang merupakan fungsi terdiferensial pada interval [1,5]. maka pada persamaan:
+k(u+v) = k((f + g)x)
+= k.(f(x) + g(x))   [sifat distributif]
+= k.f(x) + k.g(x) 
+= ku + kv
+dengan demikian menggunakan sifat distributif, terbukti bahwa aksioma ke 7 berlaku pada v sebagai himpunan fungsi yang terdiferensial pada interval [1,5].
+",C3
+"saya ingin membuktikan aksioma ke 8, yaitu (k + m)u = ku + mu
+asumsikan k dan m sebagai sembarang bilangan real (skalar) dan u sebagai objek vektor pada ruang vektor v. misal u = f(x) yang merupakan fungsi terdiferensial pada interval [1,5]. maka pada persamaan:
+(k + m)u = (k + m).f(x)   [sifat distributif]
+= k.f(x) + m.f(x)   
+= ku + mu
+dengan demikian menggunakan sifat distributif, terbukti bahwa aksioma ke 8 berlaku pada v sebagai himpunan fungsi yang terdiferensial pada interval [1,5].
+",C3
+"devin, coba perbaiki notasinyanya, bedakan skala dengan vektor. ",C0
+"izinkan saya revisi pembuktian saya ya bu kasiyah dan teman-teman,
+7. k(u + v) = ku + kv
+asumsikan u dan v sebagai objek vektor pada ruang vektor v dan k sebagai sembarang bilangan real (skalar). misal u = f(x) dan v = g(x) yang merupakan fungsi terdiferensial pada interval [1,5]. maka pada persamaan:
+k(u + v) = k((f + g)x)
+= k.(f(x) + g(x))   [sifat distributif]
+= k.f(x) + k.g(x) 
+= ku + kv
+dengan demikian menggunakan sifat distributif, terbukti bahwa aksioma ke 7 berlaku pada v sebagai himpunan fungsi yang terdiferensial pada interval [1,5].
+",C3
+"saya ingin menambahkan pembuktian aksioma ke 8 yaitu  (k + m)u = ku + mu
+asumsikan k dan m sebagai sembarang bilangan real (skalar) dan u sebagai objek vektor pada ruang vektor v. misal u = f(x) yang merupakan fungsi terdiferensial pada interval [1,5]. maka pada persamaan:
+(k + m)u = (k + m).f(x)   [sifat distributif]
+= k.f(x) + m.f(x)   
+= ku + mu
+dengan demikian menggunakan sifat distributif, terbukti bahwa aksioma ke 8 berlaku pada v sebagai himpunan fungsi yang terdiferensial pada interval [1,5].
+",C3
+ayooo lanjut,C0
+"nampaknya sepuluh aksioma ruang vektor sudah bisa dibuktikan oleh teman-teman sekalian. oleh karena itu, kita bisa menyimpulkan bahwa himpunan semua fungsi terdeferensial pada interval [1, 5] merupakan sebuah ruang vektor. konsekuensi logisnya, fungsi y = cos x + x2 + 1 adalah vektor karena merupakan anggota dari ruang vektor tersebut.",C4
+"bagus sekali, luthfi. terimakasih banyak. ",C0
+"izinkan saya untuk menyampaikan perubahan pemahaman saya mengenai vektor.
+ 
+sebelum pelaksanaan diskusi dan kelas sinkronus tentang ruang vektor umum, saya mendefinisikan vektor sebagai besaran yang memiliki nilai dan arah. akan tetapi, berkat teman-teman auxilium   dan bu kasiyah, sekarang saya memiliki pemahaman yang berbeda. 
+sekarang, saya mendefinisikan vektor sebagai sebuah elemen dari ruang vektor. dimana ruang vektor merupakan himpunan tidak kosong yang memenuhi 10 aksioma ruang vektor.
+",C3
+"kemudian, saya masih memiliki pertanyaan yang mengganjal di pikiran saya.  yaitu, bagaimana cara menentukan panjang(nilai) dan arah vektor secara umum? seperti untuk fungsi dan barisan.",C1
+"pertama, saya ingin menyampaikan pemahaman baru saya terhadap vektor  . setelah apa yang saya tangkap dari forum diskusi ini dan kelas sinkronus pagi ini, saya jadi tahu bahwa vektor dapat berupa apa saja, asalkan dia merupakan anggota dari sebuah ruang vektor, di mana ruang vektor adalah sebuah himpunan yang memenuhi 10 aksioma ruang vektor.",C3
+"kedua, yang membingungkan saya adalah jika barisan tak hingga bilangan real adalah vektor, maka arah dan besarannya bagaimana? ",C1
+"awalnya, saya merasa agak kurang paham mengenai vektor dan ruang vektor, walaupun saya telah melakukan fgd dengan teman-teman auxilium sekalian. 😅 namun setelah mengalami adrenalin (karena ada kemungkinan untuk ditunjuk! 😰), saya mencoba untuk fokus dalam memahami konsep vektor dan ruang vektor. setelah saya memerhatikan materi di kelas dan mendengar jawaban dari teman-teman di kelas, saya merasa paham bahwa ruang vektor adalah himpunan yang tidak kosong, memenuhi 10 aksioma ruang vektor, dan tersusun dari elemen-elemen vektor. 😄 bu kasiyah menggunakan contoh domisili sebagai analogi untuk kedua hal tersebut. saya rasa hal tersebut merupakan hal yang intuitif dan sangat membantu saya dalam memahami ruang vektor dan vektor. 😊 selain itu, saya juga baru tahu bahwa sebuah elemen vektor dapat bersifat skalar! 😱 bu kasiyah juga menggunakan contoh ricky sebagai mahasiswa fasilkom ui dan ketua rt sebagai analogi untuk hal tersebut. 😄",C3
+namun saya masih agak bingung dalam menunjukkan pembuktian 10 aksioma ruang vektor,C1
+"izinkan saya untuk menyampaikan pemahaman saya tentang vektor.
+pada kuliah hari ini, saya mendapatkan pengertian baru tentang vektor, yaitu suatu elemen dari himpunan, dimana himpunan tersebut merupakan ruang vektor. setiap elemen yang memenuhi ruang vektor disebut sebagai vektor dan suatu himpunan dikatakan ruang vektor apabila memenuhi 10 aksioma ruang vektor. salah satu contoh ruang vektor adalah himpunan matriks 3x3.
+",C3
+"dari situ, saya bisa simpulkan bahwa  dengan mendefinisikan penjumlahan dan perkalian skalar pada elemen suatu himpunan sehingga membuktikan 10 aksioma ruang vektor, himpunan tersebut dapat dikatakan sebagai ruang vektor beserta elemen-elemennya sebagai vektor pada ruang tersebut. sejauh ini, saya sudah mengetahui beberapa contoh bentuk ruang vektor seperti himpunan bilangan riil berdimensi n, himpunan polinomial dengan degree n, himpunan fungsi kontinu pada suatu interval [a,b], himpunan fungsi terdiferensial pada suatu interval [a,b], himpunan matriks berukuran mxn, dan himpunan suatu baris tak hingga. dengan demikian, saya sudah paham dalam mendefinisikan vektor sebagai elemen pada himpunan tak kosong dan memenuhi 10 aksioma ruang vektor yang disebut ruang vektor.",C4
+"meskipun awal-awal perkuliahan ini kita hanya melakukan review, tapi kadang saya masih agak ragu saat menjawab pertanyaan-pertanyaan. pada awalnya saat ditanya definisi vektor, telah terjadi perbedaan jawaban definisi vektor, yang awalnya 'vektor adalah ukuran yang memiliki besaran dan arah', jawaban-jawaban menjadi mengarah kepada 10 aksioma, lalu kita membahas ruang vektor, vektor, 10 aksioma ruang vektor dengan analogi-analogi yang menarik.",C3
+berikut pemicunya: kalian diberi himpunan semua matriks persegi 3x3. misalkan e adalah matriks elementer yang diperoleh dari i dengan menukar baris 2 dan 3. bagaimanakah kalian memahami dan menjelaskan matriks tersebut sebagai vektor?,C1
+"saya izin untuk menjawab pertanyaan pemicu yang telah diberikan oleh bu kasiyah 
+terdapat matriks e yang merupakan matriks elementer diperoleh dari matriks identitas dengan menukar baris 2 dan 3. kemudian matriks elementer tersebut akan direpresentasikan dalam bentuk vektor.
+saya mendapatkan cara untuk merepresentasikan matriks tersebut ke dalam bentuk vektor eigen. vektor eigen merupakan vektor kolom bukan nol dan jika dikalikan dengan suatu matriks berukuran nxn maka dihasilkan vektor lain yang memiliki nilai kelipatan dari vektor eigen itu sendiri.
+berikut di bawah, saya lampirkan hasil pekerjaan saya. 
+sumber:
+• edumath. 2018. 13. nilai eigen dan vektor eigen. diakses pada 24 september 2021, dari https://www.youtube.com/watch?v=nwwaoy5bdxs
+• channel, newfaqih. 2020. cara menentukan vektor eigen matriks 3 x 3 dengan mudah. diakses pada 24 september 2021, dari https://www.youtube.com/watch?v=xe5yer0jwfq&list=plxox6jvfiv38ft7vlyymqn0dyzpbppedq&index=5
+• risalandi.com. 2020. definisi, pembuktian, dan soal -nilai eigen dan vektor eigen. diakses pada 24 september 2021, dari https://risalandi.com/nilai-eigen-dan-vektor-eigen/
+
+",C2
+" setelah membaca apalagi melihat contoh pekerjaan yang diberikan adeline, sepertinya saya mulai mendapat gambaran ehehe.kemudian setelah mulai sedikit memahami vektor eigen yg disampaikan adeline, apakah artinya dengan mencari nilai eigen misal a sama dengan mencari penyelsaian suatu persamaan det(a-λi) = 0 yaa",C2
+"saya izin menanggapi pertanyaan caryn di atas.
+terkait pertanyaan caryn, yaitu apakah mencari nilai eigen matriks a sama dengan mencari penyelesaian suatu persamaan det(a - λi) = 0, jawabannya ya.
+dari persamaan det(a - λi) = 0 kita dapatkan nilai-nilai λ. nilai-nilai λ tersebut merupakan skalar ∈ r yang memenuhi persamaan dan disebut dengan nilai eigen.  
+sekian dari saya, mohon maaf dan koreksinya apabila terdapat kesalahan. terima kasih.
+",C2
+selamat malam bu kasiyah dan tentunya teman-teman seperjuanganku di kelompok 7!! semoga semua dalam keadaan baik dan tentunya sehatt,C0
+". saya juga izin turut berpendapat terkait pertanyaan pemicu di atas ini yaa ehehe.
+
+ketika terdapat himpunan matriks 3x3, dan misal e adalah matriks elementernya yang dapat diperoleh dari i dengan menukar baris 2 dan 3 maka menurut saya dapat diartikan bahwa matriks elementernya merupakan transformasi linear yang memetakan vektor basis standar r^3 (i,j,k) vektor dalam ruang ke lokasi yang baru.
+",C2
+mungkin jika teman-teman ingin turut menambahkan untuk memperjelas pendapat saya boleeh bangett!! karena saya sendiri pun tidak yakiin dan sangat terbukaa dengan pendapat teman-temaann ehehe.,C1
+saya setuju dengan pendapat mereka bahwa matriks elementer yang diperoleh dari matriks identitas dengan menukar baris 2 dan 3 tersebut dapat direpresentasikan dalam bentuk vektor eigen.,C2
+ayo semangaaat. kalian pasti bisa. ,C0
+"izinkan saya untuk mencoba menjelaskan dan menambahkan terkait bagaimana memandang sebuah matriks menjadi sebuah vektor.
+saya ambil matriks 3x3 sebagai contoh. matriks 3x3 tersebut dapat dipandang sebagai vektor ruang apabila memenuhi sepuluh aksioma yang tertera berikut:
+1. jika u, v ∈ v maka (u + v) ∈ v
+2. u + v = v + u
+3. u + ( v + w ) = ( u + v ) + w
+4. ada vektor nol 0 ∈ v sedemikian sehingga 0 + u = u + 0 = u
+5. untuk tiap u ∈ v, ada vektor –u ∈ v yang dinamakan negatif u sedemikian sehingga u + (– u) = (– u) + u = 0
+6. jika k adalah skalar dan u ∈ v, maka ku ∈ v
+7. k (u + v) = ku + kv
+8. (k+m)u = ku + mu
+9. k(mu) = (km) u
+10. 1u = u
+dengan demikian, matriks adalah sebuah vektor apabila sepuluh aksioma terpenuhi. 
+",C2
+"sebelumnya, terima kasih bu kasiyah telah meluruskan kesalahpahaman saya ",C0
+"menurut pendapat saya, suatu himpunan tak kosong v yang berisi matriks berordo m x n dengan operasi standar (penjumlahan matriks dan perkalian matriks dengan skalar), jika setiap matriks ∈ v tersebut memenuhi 10 aksioma (seperti yang telah disebutkan isabelle di atas), maka v dapat dikatakan sebagai ruang vektor.
+
+kita juga bisa memandang suatu matriks a sebagai matriks yang mempunyai vektor-vektor baris dan kolom.
+
+misalkan a adalah matriks berordo m x n dengan a adalah sebagai berikut.
+
+maka vektor-vektor baris dari a adalah
+
+sedangkan vektor-vektor kolom dari a adalah
+
+jika a adalah sebuah matriks persegi, maka vektor-vektor baris dan kolom dari a bebas linear.
+",C2
+"menurut saya, sebuah transformasi linear dapat memetakan vektor dimensi berapapun ke dalam lokasi baru dalam ruang yang sama. sehingga, jika dikatakan ada sebuah matriks e, yang dimana matriks tersebut berordo 3x3, maka pertukaran baris dalam matriks tersebut dapat dikatakan bahwa matriks tersebut merupakan transformasi linear-nya.",C2
+saya belum begitu paham dengan vektor eigen,C1
+"izinkan saya untuk turut serta memberikan pendapat saya terkait pertanyaan pemicu yang diberikan.
+diberikan matriks e adalah matriks elementer yang diperoleh dari i dengan menukar baris 2 dan 3. kemudian diberikan suatu problem, bagaimana memandang sebuah matriks sebagai sebuah vektor?
+kasus seperti ini dapat kita sebut sebagai vektorisasi. vektorisasi matriks adalah suatu transformasi linear yang mengubah suatu matriks menjadi sebuah vektor kolom. hal ini dikerjakan dengan melakukan stacking nilai elemen pada suatu matriks berordo m x n. vektorisasi menghasilkan suatu isomorphism atas suatu matriks dan vektor menjadi sebuah ruang vektor. vektorisasi dinotasikan dengan suatu rumus umum:
+
+vec(x) = [x1,1, ..., xm,1, x1,2, ... xm,2, ..., x1,n, ..., xm,n]t
+
+dalam hal ini, xi,j merepresentasikan elemen-elemen matriks dan t merepresentasikan transpose.
+
+dari uraian di atas, saya akan memberi contoh memandang matriks sebagai suatu vektor..clownclownclown
+
+kita dapat memandang matriks e sbb.
+
+e = |  1  0  0  |
+
+       |  0  0  1  |
+
+       |  0  1  0  |
+
+vektorisasi dari matriks tersebut adalah sbb.
+
+vec(e) = |  1  0  0  0  0  1  0  1  0  |t
+
+vec(e) = |  1  |
+
+               |  0  |
+
+               |  0  |
+
+               |  0  |
+
+               |  0  |
+
+               |  1  |
+
+               |  0  |
+
+               |  1  |
+
+               |  0  |
+
+",C3
+sekarang bagaimana memandang matriks sebagai vektor tanpa mengubah ke rn?,C1
+ingat apa itu ruang vektor? ,C1
+apakah himpunan semua matriks berordo tertentu merupakan ruang vektor?,C1
+"saya izin menjawab pertanyaan dari bu kasiyah tentang bagaimana cara memandang matriks sebagai vektor.
+sebelumnya, kita mengetahui bahwa vektor dapat dianggap sebagai 1xn matriks atau nx1 matriks karena merupakan antara baris atau kolom dari suatu matriks.
+menurut saya, matriks dapat dipandang sebagai himpunan atau kumpulan dari vektor. misal untuk matriks e tersebut, kita tentukan vektor kolom dengan dimensi 3x1 dan kita anggap a = [a11 a12 a13], b = [a12 a22 a32], c = [a13 a23 a33]
+e = |  1  0  0  |
+       |  0  0  1  |
+       |  0  1  0  |
+maka, bisa ditentukan:
+a = [1 0 0]
+b = [0 0 1]
+c = [0 1 0]
+dari sini kita bisa menentukan bahwa matriks merupakan himpunan atau kumpulan dari vektor karena sekarang e dapat dipandang sebagai: e = [a b c]
+",C3
+cara pandang yang logis ryan. you are such a critical thinker ,C0
+"selamat malam bu kasiyah dan teman-teman 
+sebelumnya saya ingin mengucapkan terimakasih kepada caryn, tyas, isabelle, raihan, bisma, dan ryan karena telah membagikan pengetahuannya. setelah teman-teman menuliskan idenya, saya mendapat pengetahuan yang baru. terimakasih juga kepada bu kasiyah karena telah mengoreksi jawaban kami
+",C0
+"setelah membaca 10 aksioma dari isabelle dan ide dari ryan yaitu matriks dapat dilihat sebagai kumpulan dari vektor, saya ingin melengkapi jawaban teman-teman sekalian.
+
+awalnya diberikan matriks e ordo 3x3, kemudian saya misalkan elemen pada matriks e menjadi sebuah variabel e1 hingga e9(untuk pembuktian). saya mengambil sembarang vektor u, v, dan w pada r^3 dan mencoba membuktikan dengan 10 aksioma ruang vektor.
+saya menuliskan pembuktian vektor e dengan warna hitam sedangkan pembuktian nilai vektor e dengan warna biru (jika terlihat). dengan terbuktinya 10 aksioma maka matriks e dapat dikatakan sebagai sebuah vektor. berikut dibawah saya lampirkan fotonya.
+
+",C3
+"melihat penjabaran yang diberikan oleh adeline, saya menjadi lebih yakin dengan pembuktian bahwa suatu matriks dapat dipandang sebagai sebuah vektor apabila memenuhi ke-10 aksioma vektor yang sebelumnya telah ditambahkan oleh isabelle. 
+selain itu, setelah membaca reply dari teman-teman sekalian, saya memahami bahwa ternyata terdapat 2 cara berbeda dalam merepresentasikan suatu matriks ke dalam sebuah vektor, yaitu dengan pemanfaatan 10 aksioma vektor dan nilai serta vektor eigen. sekarang saya jadi penasaran nihh, kira-kira ada cara lain tidak ya untuk merepresentasikan matriks ke dalam suatu vektor??   saya akan coba untuk eksplor lebih jauh lagii..   
+",C3
+"selamat pagi adeline, bu kasiyah, dan teman-teman semua.  
+wah terima kasih adeline, telah membagikan hasil pekerjaanmu untuk dipelajari kita semua. ",C0
+"saya juga ingin sedikit menambahkan mengenai 10 aksioma tersebut. aksioma-aksioma tersebut diperoleh dengan abstraksi sifat-sifat paling penting dari vektor di r^n. jadi secara otomatis, vektor-vektor di r^n memenuhi aksioma tersebut. dengan demikian, 10 aksioma ini penting sekali ya untuk menentukan apakah sebuah objek dapat dipandang sebagai sebuah vektor atau tidak.
+kemudian setelah saya membaca pendapat dari teman-teman semua, saya menyadari bahwa memandang matriks sebagai vektor, ada yang mengubah representasi matriksnya dan ada juga yang tidak. dan mungkin ada cara-cara lain untuk merepresentasikan matriks ke dalam suatu vektor seperti yang bisma katakan. 
+",C3
+"terima kasih teman-teman semua telah membagikan pendapat dan pengetahuannya. saya senang sekali berdiskusi bersama kalian. dengan berbagai pendapat yang berbeda tersebut, pengetahuan saya mengenai matriks dan vektor semakin bertambah. ",C0
+sekarang pengertian saya pada vektor bukan lagi besaran yang memiliki nilai dan arah saja ehehe. vektor merupakan elemen dari himpunan elemen dimana himpunan elemen ini dapat kita katakan sebagai ruang vektor yang memenuhi 10 aksioma. ,C3
+"sebelumnya terimakasih banyak kepada bu kasiyah tentunya dan teman-teman semua karena proses diskusi yang ada di kelas , membuat saya memahami vektor secara lebih luas",C0
+"selama di kelas hari ini saya banyak mengucap dalam hati ""wow"" dan ""ohhh"" ehehe, seruuu sekalii",C0
+"saya ingin sharing sedikit mengenai pemahaman saya setelah mengikuti kelas pada pagi hari ini,
+pada pertemuan sync hari ini, saya kembali mendalami hal-hal seputar vektor. beberapa hal saya temukan unik,   dan beberapa hal pula saya temukan sedikit sulit untuk dicerna.  hal yang paling mencengangkan bagi saya adalah elemen tak hingga dapat menjadi vektor. selain itu, ternyata suatu bilangan riil juga dapat didefinisikan sebagai skalar dan/atau vektor. 
+",C3
+"terima kasih sebelumnya untuk semua teman-teman yang sudah membantu menuangkan pikiran dan pemahamannya kedalam forum ini. karena jujur, saya merasa sangat terbantu dengan adanya diskusi ini   saya bisa memahami dan melengkapi pemahaman saya yang masih minim, serta menambah pengetahuan saya mengenai materi ini. ",C0
+"sebelum saya mengakhiri, saya hanya ingin mengucapkan semangat terus kepada teman-teman kelompok jarak, semoga kita semua bisa mendapatkan output yang terbaik dan sesuai dengan ekspektasi kita semua. ",C0
+"pemahaman saya mengenai vektor juga ada yang berubah. sebelum mengikuti perkuliahan pada hari ini, saya hanya menganggap vektor yaitu besaran yang memiliki nilai dan arah. setelah mengikuti perkuliahan, persepsi saya mengenai vektor berubah. ternyata selain memiliki nilai dan arah, vektor merupakan semua elemen yang ada di ruang vektor yang memenuhi 10 aksioma. 
+yang dimaksud ruang vektor tersebut, sama saja dengan himpunan tak kosong atas r yang elemennya merupakan vektor-vektor tersebut. seperti misalnya, ruang vektor matriks berordo 3x3, artinya semua matriks 3x3 merupakan vektornya karena termasuk dalam elemen ruang vektor tersebut.
+kemudian, salah satu hal menarik bagi saya, yaitu bilangan riil ternyata bisa dipandang sebagai vektor maupun skalar tergantung konteksnya.   dalam konteks ruang vektor r, elemen r merupakan sebuah vektor. sedangkan dalam konteks perkalian vektor dengan skalar, bilangan riil merupakan skalar.
+",C3
+"saya dapat memahami lebih dalam mengenai vektor dan ruang vektor. vektor merupakan elemen dari ruang vektor yang memenuhi 10 aksioma. salah satu contoh ruang vektor adalah himpunan bilangan real, sehingga contoh vektor dari ruang vektor tersebut adalah bilangan real tersebut. ",C3
+perkuliahan hari ini cukup menyenangkan karena saya belajar dan mengoreksi beberapa kesalahpahaman saya mengenai materi ini.,C0
+"selamat pagi bu kasiyah, kakak asdos, dan teman-teman 
+setelah mendengar penjelasan dari bu kasiyah, saya mendapat hal baru mengenai vektor.
+",C0
+"sekarang saya sudah mengerti konteks dari pertanyaannya, yaitu berhubungan dengan 10 aksioma ruang vektor.
+seterusnya, dari diskusi yang telah dilakukan bersama teman-teman dan sesi sinkronus yang telah berlangsung. saya rasa sudah cukup menjawab dan sudah membuat saya cukup mengerti dan dapat membenarkan pemahaman-pemahaman yang salah sebelumnya, seperti ruang vektor dan vektor yang ternyata berbeda, kemudian apa itu 10 aksioma, vektor dan skalar, dll.
+",C3
+tetap semangat semuanya.  ,C0
+"berdasarkan hasil diskusi kelompok , kami dapat menyimpulkan bahwa vektor sebagai himpunan tidak kosong yang padanya didefinisikan jumlahan dan perkalian dengan skalar serta memenuhi 10 aksioma ruang vektor. himpunan bilangan nyata r, himpunan matriks berordo nxn, himpunan matriks diagonal berordo nxn, himpunan semua fungsi bernilai nyata dan kontinu pada selang tertutup [a,b], himpunan semua fungsi terdiferensial pada selang tertutup [a,b], himpunan semua suku banyak dengan maksimal derajat yang telah ditentukan merupakan ruang vektor dan elemen dari himpunannya merupakan sebuah vektor.",C4
+kalian diberi himpunan p5 himpunan semua polynomial dengan degree paling banyak 5. bagaimana memahami dan menjelaskan 21 + 3x - 2 x3 + x5 sebagai vektor?,C1
+apakah ada kendala? ,C1
+silahkan segera dimulai. ,C0
+"dari apa yang saya ketahui,karena vektor merupakan suatu bidang geometri, hal ini berarti sebuah vektor dapat digambarkan pada sebuah bidang(dimensi dua) atau bahkan sebuah ruang (dimensi tiga atau lebih). apabila vektor berada pada sebuah bidang, maka dapat dinyatakan dalam dua sumbu kordinat yaitu sumbu-x dan sumbu-y, sedangkan pada ruang maka dapat dinyatakan melalui sumbu tambahan seperti z dan lainnya.",C2
+"sebelum saya mencoba untuk menjawab pertanyaan pemicu diatas, saya ingin memberikan sedikit pengertian dari ruang vektor. ruang vektor merupakan himpunan objek-objek yang dilengkap dengan operasi penjumlahan objek-objek dan perkalian objek dengan skalar.
+selanjutnya pada pertanyaan pemicu diberikan sebuah himpinan polinomial dengan degree paling banyak 5. mengacu pada syarat dari sebuah ruang vektor maka himpunan polinom untuk setiap x di dalam selang(-infinite,infinite) dapat dikatakan sebagai sebuah ruang vektor polinom.
+sehingga apabila diberikan pertanyaan bagaimana saya memahami dan menjelaskan fungsi polinomial tersebut sebagai vektor maka yang saya pikirkan adalah melihat himpunan tersebut dari segi ruang vektor karena di dalam sebuah fungsi polinom terdapat operasi penjumlahan dan perkalian skalar sesuai dengan syarat dari sebuah ruang vektor.
+",C2
+bagaimana menurut teman-teman yang lain mungkin ada yang dapat memberikan pengetahuan lebih mengenai pandangannya terhadap sebuah fungsi polinomial yang kita tinjau sebagai vektor? ,C1
+"saya sudah setuju dengan jawaban-jawaban dari kevin, charles, ardel, dan pramudya. namun, saya ingin menambahkan pembuktian mengenai aksioma ruang vektor umum yang telah dipaparkan oleh charles, ardel, dan pramudya.
+terdapat elemen identitas penjumlahan, yaitu 0
+pada aksioma ini memiliki padanan ""terdapat"" sehingga untuk membuktikannya kita bisa melakukan pemilihan sebagai langkah-langkah dari pembuktian. melanjutkan yang sudah dikerjakan oleh ardel dan pramudya, saya akan menggunakan:
+u = c1v1, c2v2, c3v3, c4v4, c5v5
+pertama, saya akan memilih 0 anggota dari r5 yang dapat dituliskan sebagai: (0v1, 0v2, 0v3, 0v4, 0v5). untuk membuktikan aksioma ini maka kita harus menunjukkan bahwa u + 0 = 0 + u = u. dengan sifat penjumlahan komutatif pada ruang vektor umum yang telah dibuktikan oleh pramudya sebelumnya maka u + 0 = 0 + u. sehingga:
+u + 0 = 0 + u = (c1 + 0)v1 + (c2 + 0)v2 + (c3 + 0)v3 + (c4 + 0)v4 + (c5 + 0)v5 = c1v1 + c2v2 + c3v3 + c4v4 + c5v5 = u
+dari penjabaran di atas telah terbukti bahwa u + 0 = 0 + u = u, sehingga terbukti bahwa terdapat elemen identitas penjumlahan, yaitu 0.
+terdapat elemen identitas perkalian, yaitu 1
+untuk membuktikan aksioma ini, diperlukan pembuktian bahwa 1 . u = u. dalam hal ini, 1 merupakan nilai skalar sehingga:
+1 . u = (c1.1)v1 + (c2.1)v2 + (c3.1)v3 + (c4.1)v4 + (c5.1)v5 = c1v1 + c2v2 + c3v3 + c4v4 + c5v5 = u
+dari penjabaran di atas telah terbukti bahwa 1 . u = u, sehingga terbukti bahwa terdapat elemen identitas perkalian, yaitu 1.
+",C3
+"untuk memandang ruang vektor, terdapat beberapa aksioma yang perlu kita buktikan sebelumnya, yaitu:
+• penjumlahannya bersifat tertutup (hasil penjumlahan pasti anggota himpunan juga)
+• penjumlahannya bersifat distributif
+• penjumlahannya bersifat komutatif
+• terdapat elemen identitas penjumlahan, yaitu 0
+• terdapat inverse/kebalikan dari vektor v yang membuat v + (-v) = 0
+• dapat dilakukan perkalian dengan skalar
+• terdapat elemen identitas perkalian, yaitu 1
+",C2
+"setelah mencoba mencari sana-sini tentang pertanyaan pemicu utama ini adalah menurut saya vektor sudah bukan lagi suatu panah atau suatu hal yang pasti bisa dibayangkan, tetapi melihat vektor perlu lebih dari sisi matematisnya.",C2
+"saya akan mencoba untuk menyampaikan pemahaman saya mengenai pertanyaan ini.
+memandang suatu polinomial sebagai vektor sangatlah asing bagi saya. sebelumnya, saya pikir vektor selalu dapat dibuat dalam bentuk representasi geometrisnya, misalkan sebagai panah. namun, ternyata vektor cukup abstrak untuk dibayangkan dan memandang vektor tidak sesederhana itu. ",C2
+"saya mencoba membuktikan r5 apakah penjumlahan vektor bersifat tertutup. ruang vektor dapat dibuktikan apabila penjumlahan maupun perkalian skalar bersifat tertutup. 
+
+dapat disimpulkan setelah kita membuktikan penjumlahan vektor dengan skalar dan perkalian skalar, masih merupakan fungsi polinomial (p5). oleh karena itu, dapat disimpulkan bahwa r5 memiliki sifat tertutup. 
+berikut pembuktian saya terkait aksioma pada ruang vektor",C3
+adakah yang ingin menambahkan terkait ruang vektor?,C1
+excellent start kevin  telah mengarahkan langsung ke 'jantung'nya yaitu ruang vektor. ,C0
+"pada kesempatan ini, saya ingin memberikan beberapa pembuktian tambahan yang sebelumnya telah dibuktikan oleh ardelia tentang aksioma ruang vektor.
+u = c1v1, c2v2, c3v3, c4v4, c5v5
+v = k1v1, k2v2, k3v3, k4v5, k5v5
+penjumlahannya bersifat komutatif (menunjukkan u + v = v + u):
+• u + v = (c1 + k1)v1 + (c2 + k2)v2 + (c3 + k3)v3 + (c4 + k4)v4 + (c5 + k5)v5
+• dengan sifat komutatif penjumlahan bilangan, kita mendapatkan c1 + k1 = k1 + c1; c2 + k2 = k2 + c2; c3 + k3 = k3 + c3; c4 + k4 = k4 + c4; c5 + k5 = k5 + c5
+• dengan kata lain, u + v = (k1 + c1)v1 + (k2 + c2)v2 + (k3 + c3)v3 + (k4 + c4)v4 + (k5 + c5)v5
+• u + v = v + u
+• maka dari itu, terbukti bahwa penjumlahannya bersifat komutatif
+penjumlahannya bersifat distributif (menunjukkan (p+q)u = pu + qu)
+• (p+q)u = (p+q)(c1v1, c2v2, c3v3, c4v4, c5v5)
+• (p+q)u = (pc1v1 + qc1v1, pc2v2 + qc2v2, pc3v3 + qc3v3, pc4v4 + qc4v4, pc5v5 + qc5v5)
+• (p+q)u = (pc1v1, pc2v2, pc3v3, pc4v4, pc5v5) + (qc1v1, qc2v2, qc3v3, qc4v4, qc5v5)
+• (p+q)u = p(c1v1, c2v2, c3v3, c4v4, c5v5) + q(c1v1, c2v2, c3v3, c4v4, c5v5)
+• (p+q)u = pu + qu
+• maka dari itu, terbukti bahwa penjumlahannya bersifat distributif
+",C3
+"setelah saya membaca diskusi teman-teman, pemahaman saya sudah cukup bertambah tentang ruang vektor. beberapa aksioma yang diberikan oleh charles sudah dijelaskan oleh ardelia dan pramudya. sebelumnya, saya mohon maaf karena tidak bisa memberikan penjelasan yang detail untuk aksioma lainnya :”d. namun, akan saya lampirkan aksioma-aksioma lainnya yang dimiliki oleh rvu yang saya temukan. ",C3
+"selain itu, saya memiliki pertanyaan, apakah dengan terbuktinya aksioma-aksioma yang dijelaskan oleh teman-teman sebelumnya (dengan contoh r5) bisa menunjukkan bahwa r5 termasuk ke dalam ruang vektor umum? ",C1
+semangaaat,C0
+saya akan mencoba untuk membuktikan aksioma nomor 5. berikut terlampir pembuktiannya,C3
+good jobs charles; dibuktikan secara umum kemudian  memberi contoh,C0
+"saya akan mencoba melanjutkan diskusi ini dengan membuktikan aksioma terdapat elemen identitas penjumlahan, yaitu 0 dan terdapat elemen identitas perkalian, yaitu 1. pada jawaban saya sebelumnya di atas, saya telah mencoba membuktikan kedua aksioma tersebut pada himpunan semua polinomial dengan degree paling banyak 5 yang direpresentasikan dengan u = c1v1, c2v2, c3v3, c4v4, c5v5. kali ini, saya akan mencoba membuktikan kedua aksioma tersebut dengan menggunakan persamaan yang diberikan, yaitu 21 + 3x - 2x3 + x5.
+terdapat elemen identitas penjumlahan, yaitu 0
+untuk membuktikan aksioma ini, perlu ditunjukkan bahwa (21 + 3x - 2x3 + x5) + (0x0 + 0x1 + 0x2 + 0x3 + 0x4 + 0x5) = (21 + 3x - 2x3 + x5).
+dengan operasi penjumlahan didapatkan: (21 + 0)x0 + (3 + 0)x1 + (0 + 0)x2 + (-2 + 0)x3 + (0 + 0)x4 + (1 + 0)x5 = (21 + 3x - 2x3 + x5). karena persamaan ditambahkan dengan 0 menghasilkan dirinya sendiri, maka 0 merupakan identitas penjumlahan dari persamaan 21 + 3x - 2x3 + x5. sehingga aksioma terbukti.
+terdapat elemen identitas perkalian, yaitu 1
+untuk membuktikan aksioma ini, perlu ditunjukkan bahwa 1 . (21 + 3x - 2x3 + x5) = (21 + 3x - 2x3 + x5) dengan 1 merupakan nilai skalar.
+dengan operasi perkalian skalar didapatkan: 1 . (21 + 3x - 2x3 + x5) = (1 . 21) + (1 . 3x) - (1 . 2x3) + (1. x5) = (21 + 3x - 2x3 + x5). karena persamaan dikalikan skalar dengan 1 menghasilkan dirinya sendiri, maka 1 merupakan identitas perkalian dari 21 + 3x - 2x3 + x5. sehingga aksioma terbukti.
+",C3

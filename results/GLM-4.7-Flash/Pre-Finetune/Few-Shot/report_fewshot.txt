@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /home/yusuf/Yusuf/Model/GLM/GLM-4.7-Flash-APEX-I-Quality.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 25000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 10973.0s (91.4s/sampel)
+Accuracy (valid):   0.7750
+Accuracy (strict):  0.7750  [parse-fail=salah]
+Macro-F1:           0.7154
+Weighted-F1:        0.7870
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.7586    0.8627        29
+        Pemantik Diskusi     1.0000    1.0000    1.0000        18
+              Eksplorasi     0.4390    0.9000    0.5902        20
+               Integrasi     0.8947    0.7083    0.7907        48
+                Resolusi     1.0000    0.2000    0.3333         5
+
+                accuracy                         0.7750       120
+               macro avg     0.8668    0.7134    0.7154       120
+            weighted avg     0.8644    0.7750    0.7870       120

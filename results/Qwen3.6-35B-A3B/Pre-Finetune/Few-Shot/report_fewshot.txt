@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /home/yusuf/Yusuf/Model/Qwen/Qwen3.6-35B-A3B-apex-iquality.gguf
+n_ctx          : 262144
+response_format: none
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 4096 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 5446.6s (45.4s/sampel)
+Accuracy (valid):   0.9417
+Accuracy (strict):  0.9417  [parse-fail=salah]
+Macro-F1:           0.9290
+Weighted-F1:        0.9417
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     0.9643    0.9310    0.9474        29
+        Pemantik Diskusi     1.0000    0.9444    0.9714        18
+              Eksplorasi     0.8571    0.9000    0.8780        20
+               Integrasi     0.9400    0.9792    0.9592        48
+                Resolusi     1.0000    0.8000    0.8889         5
+
+                accuracy                         0.9417       120
+               macro avg     0.9523    0.9109    0.9290       120
+            weighted avg     0.9436    0.9417    0.9417       120

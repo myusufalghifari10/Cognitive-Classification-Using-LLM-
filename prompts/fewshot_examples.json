@@ -1,0 +1,70 @@
+{
+  "_comment": "Sumber contoh few-shot untuk prompt system_few_shot.md. Semua diambil dari training_dataset.csv (BUKAN test set) untuk menghindari data leakage. Disimpan untuk reproducibility.",
+  "_source_repo": "../cognitive-classification/training_dataset.csv",
+  "_v2_note": "Prompt v2 (post-eval 120 sampel): menambah blok PEMBEDA C2 vs C3 + 3 contoh baru (C1 short-trigger, C2 definisi-contoh, C3 refleksi-perubahan-pemahaman) untuk menutup error cluster dominan (C3<->C2).",
+  "_v3_note": "Prompt v3: tambah blok PEMBEDA C0 vs C1 + PEMBEDA C1 vs C2 (jadi 4 PEMBEDA lengkap antar level). Contoh direorganisasi jadi skema kontras 2-arah: tiap kelas punya contoh jelas + contoh 'mirip tetangga tapi tetap kelasnya'. Total 13 contoh (2 C0, 3 C1, 3 C2, 3 C3, 2 C4). Drop 3 contoh redundan (aksioma keenam, 2x simpulan C4).",
+  "examples": [
+    {
+      "label": "C0",
+      "text": "haloo selamat malam bu kasiyah dan teman-teman semua. terima kasih sebelumnya kepada bu kasiyah yang telah memberikan pemicu yang menarik kepada kami.",
+      "rationale": "Sapaan + terima kasih, tanpa substansi kognitif."
+    },
+    {
+      "label": "C1",
+      "text": "setahu saya vektor adalah besaran yang mempunyai besar dan arah. jika barisan tak hingga vektor, bagaimana menggambarnya? saya tidak paham. minta bantuan teman-teman.",
+      "rationale": "Mengenali masalah + kebingungan + bertanya = triggering."
+    },
+    {
+      "label": "C1",
+      "_source": "training_dataset.csv | 'bagaimana menurut teman-teman yang lain?' (genre: short trigger)",
+      "rationale": "Pertanyaan singkat pengundang pandangan teman = memantik wacana (triggering), bukan kosong."
+    },
+    {
+      "label": "C2",
+      "text": "saya setuju pendapat a bahwa a dan b bebas linear karena a tidak dapat diperoleh dari b. kita lihat bahwa a bukan kelipatan skalar dari b.",
+      "rationale": "Setuju + alasan sederhana, bertukar opini tanpa sintesis."
+    },
+    {
+      "label": "C2",
+      "_source": "training_dataset.csv idx 688 (genre: definisi + contoh, transmisi)",
+      "text": "polinomial adalah sebuah fungsi yang melibatkan jumlahan perkalian pangkat dalam satu atau lebih variabel dengan koefisien. dan untuk menjadikan polinomial ke dalam sebuah vektor, dimisalkan setiap variabel dengan pangkatnya menjadi vektor elemen dalam vektor.",
+      "rationale": "Menyebut definisi + cara + contoh = sekadar menyiarkan informasi, BUKAN sintesis (counter contoh agar tak over-shoot ke C3)."
+    },
+    {
+      "label": "C3",
+      "_source": "training_dataset.csv idx 803 (genre: refleksi perubahan pemahaman)",
+      "text": "saya akan menceritakan proses belajar saya untuk materi vektor. sejauh ini saya hanya mengetahui vektor merupakan besaran yang memiliki besar dan arah. namun, sekarang saya mendapat pemahaman lain terkait vektor. ruang vektor merupakan himpunan tidak kosong ... sedangkan vektor itu ternyata adalah elemen himpunan dari ruang vektor.",
+      "rationale": "Merefleksikan perubahan pengertian (lama vs baru) + menyintesis pemahaman baru = konstruksi makna = integrasi (counter contoh agar refleksi tak di-CEK ke C2)."
+    },
+    {
+      "label": "C3",
+      "text": "kemudian, perlu juga dibuktikan sifat yang kedua yaitu perkalian skalar yang tertutup. pembuktiannya adalah ka = k*a1 k*a2 k*a3 dan seterusnya. jika syarat-syarat tersebut terpenuhi, maka matriks 2x3 tersebut dapat dianggap sebagai suatu vektor.",
+      "rationale": "Menyusun pembuktian aksioma = integrasi."
+    },
+    {
+      "label": "C4",
+      "text": "berdasarkan pembuktian-pembuktian yang telah dilakukan mulai dari aksioma 1 sampai dengan aksioma 10 di atas, maka kelompok kami dapat menyimpulkan bahwa 1, -1, 1, -1, ... adalah sebuah vektor.",
+      "rationale": "Kesimpulan final atas seluruh pembuktian = resolusi."
+    }
+  ],
+  "_v3_contrastive_additions": {
+    "_comment": "4 contoh kontras baru (skema 2-arah) — semua dari training_dataset.csv/validation_dataset.csv (BUKAN test), verified zero-leakage.",
+    "teaching_point": "Contoh perangkap: label benar tapi mudah disangka kelas tetangga. Alasan fokus membedakan dari tetangga itu.",
+    "examples": [
+      {"role": "C0 yang mirip C1", "gold": "C0", "source": "training_dataset.csv | 'terima kasih bu kasiyah atas pemicunya... berusaha mempelajari vektor'", "why": "Sosial/trimakasih yg nyentuh kata konsep, tapi tanpa pertanyaan/ide nyata = C0 bukan C1."},
+      {"role": "C1 yang mirip C2", "gold": "C1", "source": "training_dataset.csv | 'apakah saya harus memisalkan x di interval'", "why": "Pertanyaan klarifikasi metode, belum menyumbang jawaban/isi = C1 bukan C2."},
+      {"role": "C2 yang mirip C1", "gold": "C2", "source": "training_dataset.csv | 'tepat sekali kamila! ... ada yang bisa membantu menjawab aksioma'", "why": "Validasi/persetujuan pendapat teman = kontribusi isi, walau diakhiri tanda tanya = C2 bukan C1."},
+      {"role": "C4 yang mirip C3", "gold": "C4", "source": "validation_dataset.csv | 'setiap subruang adalah ruang vektor karena 10 aksioma'", "why": "Penegasan properti tuntas dgn menerapkan hasil terbukti = resolusi = C4 bukan C3."}
+    ]
+  },
+  "_few_shot_curated_additions": {
+    "_comment": "4 contoh tambahan untuk system_few_shot.md, fokus kontras batas C3 (integrasi) vs C4 (resolusi). Semua dari training_dataset.csv (BUKAN test) — no leakage.",
+    "teaching_point": "C3 = bukti aksioma TUNGGAL/parsial; C4 = simpulan FINAL atas KESELURUHAN pembuktian.",
+    "examples": [
+      {"label": "C3", "text_source": "training_dataset.csv | 'izinkan saya untuk membuktikan aksioma ke 10'", "rationale": "Membuktikan 1 aksioma (ke-10); 'terpenuhi' lokal, bukan resolusi."},
+      {"label": "C3", "text_source": "training_dataset.csv | 'berikut ini adalah pembuktian untuk aksioma keenam'", "rationale": "Bukti aksioma ke-6 terpisah; langkah parsial."},
+      {"label": "C4", "text_source": "training_dataset.csv | 'setelah kita dapat membuktikan 10 aksioma'", "rationale": "Simpulan final atas 10 aksioma; tuntas."},
+      {"label": "C4", "text_source": "training_dataset.csv | 'dari hasil pembuktian-pembuktian yang telah disampaikan'", "rationale": "Sepakat memenuhi 10 aksioma; resolusi tuntas."}
+    ]
+  }
+}

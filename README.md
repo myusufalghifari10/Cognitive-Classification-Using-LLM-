@@ -31,7 +31,7 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 | **Qwen3.5-9B-Fable** | 9B | 0.7583 | 0.6794 | 0.7638 | 37.5s |
 | **KAT-Coder2.5** | 35B A3B | 0.7417 | 0.6788 | 0.7521 | 10.0s |
 
-> Lihat `REPORT.md` untuk analisis lengkap. Semua run pakai `seed=42`, prompt v8 decontaminated (tidak ada teks test-set di prompt).
+> Semua run pakai `seed=42`, prompt v8 decontaminated (tidak ada teks test-set di prompt).
 
 ---
 
@@ -52,16 +52,27 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 ```
 Cognitive-Classification-Using-LLM/
 ├── data/
-│   └── test_dataset.csv           # 120 sampel test set
+│   ├── training_dataset.csv             # train set (960)
+│   ├── validation_dataset.csv           # val set (120)
+│   ├── test_dataset.csv                 # test set (120)
+│   ├── trainval_dataset.csv             # train+val gabungan (1080)
+│   ├── teacher_reasoning.jsonl          # reasoning train+val (1080, Mode Guru)
+│   ├── teacher_reasoning_validation.jsonl
+│   └── dataset_sft_sharegpt.jsonl       # dataset SFT ShareGPT (1080) siap fine-tune
 ├── prompts/
-│   ├── system_few_shot.md         # prompt few-shot (definisi + aturan + 13 contoh)
-│   ├── system_zero_shot.md        # prompt zero-shot (hanya definisi kelas)
-│   ├── user.md                    # template user prompt ({text} placeholder)
-│   └── fewshot_examples.json      # sumber 13 contoh few-shot (dari train set)
-├── results/                       # output evaluasi per model per prompt
-├── eval.py                        # script evaluasi utama
-├── requirements.txt               # dependensi Python
-└── REPORT.md                      # ringkasan benchmark 9 model
+│   ├── system_few_shot.md / system_zero_shot.md   # prompt benchmark
+│   ├── guru_system.txt                  # rubrik + Mode Guru (distilasi reasoning)
+│   ├── test_system.txt                  # system prompt target SFT
+│   ├── user.md
+│   └── fewshot_examples.json
+├── results/                             # output evaluasi per model (report dilacak; png/jsonl di-ignore)
+├── eval.py                              # evaluasi benchmark
+├── generate_reasoning.py                # distilasi reasoning train (guru)
+├── generate_reasoning_validation.py     # distilasi reasoning val (guru)
+├── build_sft.py                         # bangun dataset SFT dari CSV + reasoning
+├── merge_trainval.py                    # gabung train+val (val reindex 960–1079)
+├── requirements.txt                     # dependensi langsung (versi longgar >=)
+└── requirements.lock.txt                # full pin (==) utk reproducibility
 ```
 
 ---
@@ -165,3 +176,21 @@ Progress disimpan per-sampel di `_ckpt_{variant}.jsonl`. Gunakan **tanpa `--fres
 - **Class imbalance**: C4 cuma 5 sampel — Macro-F1 lebih meaningful dari akurasi mentah.
 - **Parse failure**: dilaporkan `PARSE_FAIL` dan dihitung dalam `acc_strict` (parse-fail = salah).
 - **Seed 42 deterministik**: `seed=42` di setiap request, sampling tidak di-override dari server.
+
+---
+
+## Persiapan Fine-tuning
+
+**Distilasi reasoning** (teacher = Qwen3.6-35B-A3B, Mode Guru). Guru menulis alasan klasifikasi konsisten dengan label emas mengikuti rubrik `prompts/guru_system.txt`:
+- `generate_reasoning.py` / `generate_reasoning_validation.py` → reasoning train (960) + val (120)
+- `merge_trainval.py` → gabungkan (val direindex 960–1079) → 1080 sampel
+- `build_sft.py` → `data/dataset_sft_sharegpt.jsonl` (format ShareGPT, siap fine-tune)
+
+Distribusi label gabungan: **C0=246 · C1=197 · C2=168 · C3=413 · C4=56**.
+
+**Perbaikan label emas (25 entri).** Sebelum distilasi, label diaudit ulang vs rubrik:
+- Train (12): 2 bug sinkronisasi reasoning↔gold, 5 proof-of-axiom C2→C3, 1 C4→C3, 4 borderline.
+- Val (13): 10 C3→C2 (rencana/asersi/daftar over-C3), 1 C3→C1, 2 C0→C2 (koreksi konseptual).
+- Catatan: bias C2/C3 **berlawanan** antar split (train under-C3, val over-C3).
+
+Rincian per-entry: `NOTE.md` (lokal, tidak dipush).

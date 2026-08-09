@@ -1,35 +1,42 @@
-# ── Keep ──
-# code (*.py), results/, requirements*.txt, README.md, REPORT.md, prompts/, data/
-
-# ── Ignore everything else ──
+# ── Default: abaikan semua, allow-list di bawah ──
 *
 
-# ── Un-ignore allowed paths ──
+# ── Code & config (root) ──
 !*.py
-!results/
-!requirements*.txt
-!README.md
-!REPORT.md
-!prompts/
-!data/
 !.gitignore
+!README.md
+!requirements*.txt
 
-# ── Python artifacts (inside kept dirs) ──
+# ── Direktori konten ──
+# PENTING: !dir/ cuma membuka folder-nya; file di dalamnya tetap kena rule '*'
+# di atas. Harus pakai !dir/** untuk membuka isinya juga.
+!/data/
+!/data/**
+!/prompts/
+!/prompts/**
+!/results/
+!/results/**
+
+# ── Catatan internal (jangan dipush) ──
+NOTE.md
+
+# ── Backup / file antara (jangan dipush) ──
+*.bak
+*.premerge
+
+# ── Python artifacts ──
 __pycache__/
 *.pyc
 *.pyo
 
-# ── OS / editor junk (inside kept dirs) ──
+# ── OS / editor junk ──
 .DS_Store
 Thumbs.db
 
-# ── Large generated assets (still ignore inside results/) ──
-results/*.png
-results/*.jsonl
-results/*.txt
-
-# ── Keep report files (inside results/) ──
-!results/*report*.txt
-!results/*report*.md
+# ── Filter hasil benchmark: simpan laporan, abaikan aset besar ──
+/results/**/*.png
+/results/**/*.jsonl
+!/results/**/*report*.txt
+!/results/**/*report*.md
 
 Report.pdf

@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /home/yusuf/Yusuf/Model/Qwen/Qwen3.5-9B-The-Defiant-Fable-Uncnr-Heretic-NEO-MAX-MTP-IQ4_XS.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 32000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 4407.0s (36.7s/sampel)
+Accuracy (valid):   0.8833
+Accuracy (strict):  0.8833  [parse-fail=salah]
+Macro-F1:           0.8288
+Weighted-F1:        0.8843
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.8276    0.9057        29
+        Pemantik Diskusi     1.0000    1.0000    1.0000        18
+              Eksplorasi     0.6429    0.9000    0.7500        20
+               Integrasi     0.9167    0.9167    0.9167        48
+                Resolusi     1.0000    0.4000    0.5714         5
+
+                accuracy                         0.8833       120
+               macro avg     0.9119    0.8089    0.8288       120
+            weighted avg     0.9071    0.8833    0.8843       120
