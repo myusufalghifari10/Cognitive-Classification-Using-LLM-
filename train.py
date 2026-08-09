@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
-"""Fine-tune Qwen3.5-9B-Defiant (Unsloth LoRA/QLoRA) untuk klasifikasi Cognitive Presence.
+"""Fine-tune Qwen3.5-9B-Defiant (Unsloth FastVisionModel, LoRA) untuk klasifikasi Cognitive Presence.
 
-Dataset : data/dataset_sft_sharegpt.jsonl (1080 sampel, format {messages:[...]})
-System  : prompts/test_system.txt (rubrik penuh ~22KB) — sudah dibaked di dataset.
+Qwen3.5 = VLM unified (Causal LM + Vision Encoder). Meski dataset kita TEXT-ONLY,
+WAJIB pakai FastVisionModel (bukan FastLanguageModel): tokenizernya adalah VL
+processor, jadi tokenizer(text) di FastLanguageModel error (routes ke image processor).
+Vision encoder TIDAK di-train (finetune_vision_layers=False) — hanya LM yang di-train.
+
+Method (per doc resmi Unsloth Qwen3.5):
+  --lora  (DEFAULT) base 16-bit + adapter LoRA   ← RECOMMENDED (QLoRA NOT recommended utk Qwen3.5)
+  --qlora           base 4-bit + adapter LoRA    ← flag disediakan buat model lain; di-avoid utk Qwen3.5
+
+Dataset : data/dataset_sft_sharegpt.jsonl (1080 sampel, format {messages:[role/content]})
 Output  : LoRA adapter + merged 16-bit + GGUF Q8_0 (otomatis) untuk eval.py.
 
 Pakai:
-  venv/bin/python3 train.py --probe                 # load + ukur token + cetak marker, TANPA train
+  venv/bin/python3 train.py --probe                 # load + ukur token + test collator, TANPA train
   venv/bin/python3 train.py                          # LoRA 16-bit (DEFAULT) + auto Q8_0 GGUF
-  venv/bin/python3 train.py --qlora                  # QLoRA 4-bit (hemat VRAM, GPU kecil)
+  venv/bin/python3 train.py --qlora                  # QLoRA 4-bit (hemat VRAM; bukan utk Qwen3.5)
   venv/bin/python3 train.py --skip-gguf              # training saja (skip export GGUF yang lambat)
   venv/bin/python3 train.py --max-seq 12288 --epochs 3 --lora-r 16
 """
@@ -18,8 +26,6 @@ import statistics
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj",
-                  "gate_proj", "up_proj", "down_proj"]
 
 
 def main():
@@ -35,102 +41,68 @@ def main():
     ap.add_argument("--grad-accum", type=int, default=8)
     ap.add_argument("--lora-r", type=int, default=16)
     ap.add_argument("--response-template", default="<|im_start|>assistant\n",
-                    help="penanda mulai jawaban assistant (completion-only loss). "
-                         "Jalankan --probe dulu untuk lihat marker exact lalu override bila perlu.")
-    ap.add_argument("--probe", action="store_true",
-                    help="load model + format dataset + cetak diagnostik, lalu KELUAR (tanpa train).")
-    ap.add_argument("--skip-gguf", action="store_true",
-                    help="lewati export GGUF Q8_0 (DEFAULT: otomatis setelah training). "
-                         "Pakai ini kalau lagi iterasi params & mau skip step lambat.")
+                    help="penanda mulai jawaban assistant (completion-only loss via "
+                         "UnslothVisionDataCollator train_on_responses_only).")
     method = ap.add_mutually_exclusive_group()
     method.add_argument("--lora", action="store_true",
                         help="(DEFAULT) base 16-bit full + adapter LoRA. Buat GPU besar (mis. A100 80GB).")
     method.add_argument("--qlora", action="store_true",
-                        help="base 4-bit terkuantisasi + adapter LoRA. Hemat VRAM buat GPU kecil.")
+                        help="base 4-bit + adapter LoRA. Hemat VRAM. "
+                             "[Catatan: QLoRA NOT recommended utk Qwen3.5 per doc resmi Unsloth.]")
+    ap.add_argument("--probe", action="store_true",
+                    help="load model + dataset + build trainer + test collator, lalu KELUAR (tanpa train).")
+    ap.add_argument("--skip-gguf", action="store_true",
+                    help="lewati export GGUF Q8_0 (DEFAULT: otomatis setelah training).")
     args = ap.parse_args()
-    load_4bit = args.qlora            # default: LoRA (16-bit); --qlora -> 4-bit
+    load_4bit = args.qlora                     # default LoRA (16-bit); --qlora -> 4-bit
     method_name = "QLoRA (4-bit)" if load_4bit else "LoRA (16-bit)"
 
     import torch
     from datasets import load_dataset
-    from unsloth import FastLanguageModel
+    from unsloth import FastVisionModel
+    from unsloth.trainer import UnslothVisionDataCollator
+    from trl import SFTTrainer, SFTConfig
 
     max_seq = args.max_seq
 
-    # ---- 1. Load model (16-bit LoRA default, atau 4-bit QLoRA via --qlora) ----
-    print(f"[*] Method: {method_name} | Loading: {args.model}  (max_seq={max_seq})")
-    model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name=args.model,
-        max_seq_length=max_seq,
-        dtype=None,           # auto: bf16 kalau GPU mendukung (A100 = bf16)
+    # ---- 1. Load VLM (FastVisionModel — bukan FastLanguageModel) ----
+    # Qwen3.5 = VLM: tokenizer returned = full VL processor.
+    print(f"[*] Method: {method_name} | Loading: {args.model}")
+    model, tokenizer = FastVisionModel.from_pretrained(
+        args.model,
+        dtype=None,                       # auto: bf16 di A100
         load_in_4bit=load_4bit,
+        use_gradient_checkpointing="unsloth",
     )
 
-    # ---- 2. LoRA adapters ----
-    model = FastLanguageModel.get_peft_model(
+    # ---- 2. LoRA — TEXT-ONLY: vision encoder OFF, language/attention/mlp ON ----
+    model = FastVisionModel.get_peft_model(
         model,
+        finetune_vision_layers=False,     # text-only: jangan train vision encoder
+        finetune_language_layers=True,
+        finetune_attention_modules=True,
+        finetune_mlp_modules=True,
         r=args.lora_r,
-        target_modules=TARGET_MODULES,
         lora_alpha=args.lora_r,
         lora_dropout=0,
         bias="none",
-        use_gradient_checkpointing="unsloth",
         random_state=42,
         use_rslora=False,
+        loftq_config=None,
     )
+    FastVisionModel.for_training(model)
 
-    # ---- 3. Dataset → format pakai CHAT TEMPLATE NATIF model (jangan override) ----
+    # ---- 3. Dataset: messages mentah (collator yang render+tokenize via processor) ----
     ds = load_dataset("json", data_files=str(args.data), split="train")
     print(f"[*] Dataset: {len(ds)} sampel")
 
-    def fmt(batch):
-        texts = [tokenizer.apply_chat_template(m, tokenize=False,
-                                               add_generation_prompt=False)
-                 for m in batch["messages"]]
-        return {"text": texts}
-
-    ds = ds.map(fmt, batched=True, num_proc=4)
-
-    # ---- PROBE: diagnostik lalu keluar ----
-    if args.probe:
-        print("\n" + "=" * 64)
-        print("PROBE — diagnostik (tanpa training)")
-        print("=" * 64)
-        try:
-            print("[*] " + model.get_nb_trainable_parameters())
-        except Exception:
-            tot = sum(p.numel() for p in model.parameters())
-            tr = sum(p.numel() for p in model.parameters() if p.requires_grad)
-            print(f"[*] params total={tot:,} trainable={tr:,} ({100*tr/tot:.3f}%)")
-        lens = sorted(len(tokenizer(t, add_special_tokens=False)["input_ids"])
-                      for t in ds["text"])
-        print(f"[*] token length: min={lens[0]} median={lens[len(lens)//2]} "
-              f"mean={int(statistics.mean(lens))} max={lens[-1]}")
-        n_over = sum(1 for L in lens if L > max_seq)
-        flag = "⚠ TRUNCATION — naikkan --max-seq" if n_over else "✓ aman"
-        print(f"[*] sampel > max_seq({max_seq}): {n_over}/{len(lens)}  {flag}")
-
-        # marker assistant yang EXACT (buat response_template completion-only loss)
-        s0 = ds["text"][0]
-        idx = s0.find("<|im_start|>assistant")
-        marker = s0[idx:idx + 80]
-        print("\n--- marker assistant (repr, 80 char) — pakai ini buat --response-template ---")
-        print(repr(marker))
-        print("\n--- formatted sample 0 head (300 char) ---")
-        print(s0[:300])
-        print("=" * 64)
-        print("Kirim output ini ke saya untuk konfirmasi max-seq + response-template,")
-        print("lalu jalankan training tanpa --probe.")
-        print("=" * 64)
-        return
-
-    # ---- 4. Trainer + completion-only loss ----
-    from trl import SFTTrainer, SFTConfig
-    from transformers import DataCollatorForCompletionOnlyLM
-
-    collator = DataCollatorForCompletionOnlyLM(
-        response_template=args.response_template, tokenizer=tokenizer)
-
+    # ---- 4. Collator (completion-only loss bawaan) + Trainer ----
+    collator = UnslothVisionDataCollator(
+        model, tokenizer,
+        train_on_responses_only=True,
+        instruction_part="<|im_start|>user\n",
+        response_part=args.response_template,
+    )
     cfg = SFTConfig(
         output_dir=str(args.out),
         per_device_train_batch_size=args.batch,
@@ -147,23 +119,72 @@ def main():
         seed=42,
         save_strategy="epoch",
         report_to="none",
-        max_seq_length=max_seq,
-        dataset_text_field="text",
-        packing=False,
+        # VLM-required: jangan tokenize text-column; collator yang handle messages.
+        remove_unused_columns=False,
+        dataset_text_field="",
+        dataset_kwargs={"skip_prepare_dataset": True},
+        max_length=max_seq,
     )
-
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,
+        tokenizer=tokenizer,        # full processor (Unsloth VLM butuh tokenizer=, bukan processing_class=)
         train_dataset=ds,
         data_collator=collator,
         args=cfg,
     )
 
+    # ---- PROBE ----
+    if args.probe:
+        print("\n" + "=" * 64)
+        print("PROBE — diagnostik (tanpa training)")
+        print("=" * 64)
+        try:
+            print("[*] " + model.get_nb_trainable_parameters())
+        except Exception:
+            tot = sum(p.numel() for p in model.parameters())
+            tr = sum(p.numel() for p in model.parameters() if p.requires_grad)
+            print(f"[*] params total={tot:,} trainable={tr:,} ({100*tr/tot:.3f}%)")
+
+        # token length via chat template. Robust: kalau VL processor ngambek di tokenize=True,
+        # fallback ke estimasi char-based (tokenize=False udah terbukti jalan).
+        def n_tokens(msgs):
+            try:
+                enc = tokenizer.apply_chat_template(
+                    msgs, tokenize=True, add_generation_prompt=False, return_dict=False)
+                ids = enc["input_ids"] if isinstance(enc, dict) else enc
+                return len(ids)
+            except Exception:
+                return len(tokenizer.apply_chat_template(
+                    msgs, tokenize=False, add_generation_prompt=False)) // 3
+
+        lens = sorted(n_tokens(m) for m in ds["messages"])
+        print(f"[*] token length: min={lens[0]} median={lens[len(lens)//2]} "
+              f"mean={int(statistics.mean(lens))} max={lens[-1]}")
+        n_over = sum(1 for L in lens if L > max_seq)
+        flag = "⚠ TRUNCATION — naikkan --max-seq" if n_over else "✓ aman"
+        print(f"[*] sampel > max_seq({max_seq}): {n_over}/{len(lens)}  {flag}")
+
+        s0 = tokenizer.apply_chat_template(
+            ds["messages"][0], tokenize=False, add_generation_prompt=False)
+        idx = s0.find("<|im_start|>assistant")
+        print("\n--- marker assistant (repr, 80 char) ---")
+        print(repr(s0[idx:idx + 80]))
+
+        # test collator di data text-only (validasi path data beneran jalan sebelum training mahal)
+        try:
+            batch = collator([ds[i] for i in range(min(2, len(ds)))])
+            print(f"\n[*] collator test OK: input_ids shape = {batch['input_ids'].shape}")
+        except Exception as e:
+            print(f"\n[!] collator test GAGAL: {e}")
+            print("[!] Collator mungkin butuh key 'images' — kirim output ini ke saya.")
+        print("=" * 64)
+        return
+
+    # ---- 5. Train ----
     print("[*] Mulai training...")
     trainer.train()
 
-    # ---- 5. Save ----
+    # ---- 6. Save: LoRA + merged 16-bit + GGUF Q8_0 (otomatis) ----
     os.makedirs(args.out, exist_ok=True)
     adapter_dir = str(Path(args.out) / "lora")
     model.save_pretrained(adapter_dir)
@@ -172,16 +193,14 @@ def main():
 
     merged_dir = str(Path(args.out) / "merged_16bit")
     model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
-    print(f"[+] Merged 16-bit: {merged_dir}")
+    print(f"[+] Merged 16-bit (sumber konversi GGUF): {merged_dir}")
 
     if not args.skip_gguf:
         gguf_dir = str(Path(args.out) / "gguf")
         print("[*] Export GGUF Q8_0 (otomatis, ~10-30 menit)...")
         try:
             # API terverifikasi (unsloth.ai/docs saving-to-gguf):
-            # quantization_method="q8_0" = fast conversion, kualitas mendekati fp16.
-            model.save_pretrained_gguf(gguf_dir, tokenizer,
-                                       quantization_method="q8_0")
+            model.save_pretrained_gguf(gguf_dir, tokenizer, quantization_method="q8_0")
             print(f"[+] GGUF Q8_0: {gguf_dir}")
         except Exception as e:
             # ponytail: save_pretrained_gguf paling sering gagal di "llama.cpp not found";
