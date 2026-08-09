@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Fine-tune Qwen3.5-9B-Defiant (Unsloth QLoRA) untuk klasifikasi Cognitive Presence.
+"""Fine-tune Qwen3.5-9B-Defiant (Unsloth LoRA/QLoRA) untuk klasifikasi Cognitive Presence.
 
 Dataset : data/dataset_sft_sharegpt.jsonl (1080 sampel, format {messages:[...]})
 System  : prompts/test_system.txt (rubrik penuh ~22KB) — sudah dibaked di dataset.
-Output  : LoRA adapter + merged 16-bit + (opsional) GGUF Q8_0 untuk eval.py.
+Output  : LoRA adapter + merged 16-bit + GGUF Q8_0 (otomatis) untuk eval.py.
 
 Pakai:
   venv/bin/python3 train.py --probe                 # load + ukur token + cetak marker, TANPA train
-  venv/bin/python3 train.py                          # training penuh
-  venv/bin/python3 train.py --gguf                   # training + export GGUF (lama)
+  venv/bin/python3 train.py                          # LoRA 16-bit (DEFAULT) + auto Q8_0 GGUF
+  venv/bin/python3 train.py --qlora                  # QLoRA 4-bit (hemat VRAM, GPU kecil)
+  venv/bin/python3 train.py --skip-gguf              # training saja (skip export GGUF yang lambat)
   venv/bin/python3 train.py --max-seq 12288 --epochs 3 --lora-r 16
 """
 import argparse
@@ -38,9 +39,17 @@ def main():
                          "Jalankan --probe dulu untuk lihat marker exact lalu override bila perlu.")
     ap.add_argument("--probe", action="store_true",
                     help="load model + format dataset + cetak diagnostik, lalu KELUAR (tanpa train).")
-    ap.add_argument("--gguf", action="store_true",
-                    help="setelah training, export GGUF Q8_0 (butuh llama.cpp build; bisa lambat).")
+    ap.add_argument("--skip-gguf", action="store_true",
+                    help="lewati export GGUF Q8_0 (DEFAULT: otomatis setelah training). "
+                         "Pakai ini kalau lagi iterasi params & mau skip step lambat.")
+    method = ap.add_mutually_exclusive_group()
+    method.add_argument("--lora", action="store_true",
+                        help="(DEFAULT) base 16-bit full + adapter LoRA. Buat GPU besar (mis. A100 80GB).")
+    method.add_argument("--qlora", action="store_true",
+                        help="base 4-bit terkuantisasi + adapter LoRA. Hemat VRAM buat GPU kecil.")
     args = ap.parse_args()
+    load_4bit = args.qlora            # default: LoRA (16-bit); --qlora -> 4-bit
+    method_name = "QLoRA (4-bit)" if load_4bit else "LoRA (16-bit)"
 
     import torch
     from datasets import load_dataset
@@ -48,13 +57,13 @@ def main():
 
     max_seq = args.max_seq
 
-    # ---- 1. Load model 4-bit ----
-    print(f"[*] Loading model: {args.model}  (4-bit, max_seq={max_seq})")
+    # ---- 1. Load model (16-bit LoRA default, atau 4-bit QLoRA via --qlora) ----
+    print(f"[*] Method: {method_name} | Loading: {args.model}  (max_seq={max_seq})")
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=args.model,
         max_seq_length=max_seq,
-        dtype=None,           # auto: bf16 kalau GPU mendukung
-        load_in_4bit=True,
+        dtype=None,           # auto: bf16 kalau GPU mendukung (A100 = bf16)
+        load_in_4bit=load_4bit,
     )
 
     # ---- 2. LoRA adapters ----
@@ -165,12 +174,26 @@ def main():
     model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
     print(f"[+] Merged 16-bit: {merged_dir}")
 
-    if args.gguf:
+    if not args.skip_gguf:
         gguf_dir = str(Path(args.out) / "gguf")
-        model.save_pretrained_gguf(gguf_dir, tokenizer, quantization_method="q8_0")
-        print(f"[+] GGUF Q8_0: {gguf_dir}")
+        print("[*] Export GGUF Q8_0 (otomatis, ~10-30 menit)...")
+        try:
+            # API terverifikasi (unsloth.ai/docs saving-to-gguf):
+            # quantization_method="q8_0" = fast conversion, kualitas mendekati fp16.
+            model.save_pretrained_gguf(gguf_dir, tokenizer,
+                                       quantization_method="q8_0")
+            print(f"[+] GGUF Q8_0: {gguf_dir}")
+        except Exception as e:
+            # ponytail: save_pretrained_gguf paling sering gagal di "llama.cpp not found";
+            # fallback manual pakai build llama.cpp yang sudah ada di repo pod.
+            print(f"[!] Export otomatis GAGAL: {e}")
+            print("[!] Fallback manual (jalankan sendiri, sesuaikan path build bila beda):")
+            print(f"      python {HERE}/llama.cpp/convert_hf_to_gguf.py "
+                  f"{merged_dir} --outfile {merged_dir}/model.f16.gguf --outtype f16")
+            print(f"      {HERE}/llama.cpp/build/bin/llama-quantize "
+                  f"{merged_dir}/model.f16.gguf {merged_dir}/model-q8_0.gguf q8_0")
 
-    print("\n[+] SELESAI. Untuk evaluasi: load GGUF via llama-server → jalankan eval.py.")
+    print("\n[+] SELESAI. Untuk evaluasi: load GGUF Q8_0 via llama-server → jalankan eval.py.")
 
 
 if __name__ == "__main__":
