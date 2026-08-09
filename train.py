@@ -99,6 +99,7 @@ def main():
     # ---- 4. Collator (completion-only loss bawaan) + Trainer ----
     collator = UnslothVisionDataCollator(
         model, tokenizer,
+        max_seq_length=max_seq,        # WAJIB: tanpa ini default ke model.max_seq_length (2048) -> TRUNCATE rubrik!
         train_on_responses_only=True,
         instruction_part="<|im_start|>user\n",
         response_part=args.response_template,
@@ -173,7 +174,8 @@ def main():
         # test collator di data text-only (validasi path data beneran jalan sebelum training mahal)
         try:
             batch = collator([ds[i] for i in range(min(2, len(ds)))])
-            print(f"\n[*] collator test OK: input_ids shape = {batch['input_ids'].shape}")
+            print(f"\n[*] collator max_seq_length={collator.max_seq_length} | "
+                  f"input_ids shape={batch['input_ids'].shape}")
         except Exception as e:
             print(f"\n[!] collator test GAGAL: {e}")
             print("[!] Collator mungkin butuh key 'images' — kirim output ini ke saya.")
