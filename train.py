@@ -72,7 +72,7 @@ def main():
         args.model,
         dtype=None,                       # auto: bf16 di A100
         load_in_4bit=load_4bit,
-        use_gradient_checkpointing=True,   # standard checkpointing (no CPU offload) — VRAM longgar di A100-80GB; "unsloth" mode bikin lambat krn transfer CPU↔GPU tiap step
+        use_gradient_checkpointing="unsloth",   # JANGAN ganti ke True! Mode "unsloth" = smart offload (recompute aktivasi LEBIH SEDIKIT) -> 3x lebih cepat dari mode True (full recompute). Offload CPU↔GPU di-double-buffer, parallel dgn compute -> bukan bottleneck.
     )
 
     # ---- 2. LoRA — TEXT-ONLY: vision encoder OFF, language/attention/mlp ON ----
