@@ -53,7 +53,11 @@ def main():
                     help="load model + dataset + build trainer + test collator, lalu KELUAR (tanpa train).")
     ap.add_argument("--skip-gguf", action="store_true",
                     help="lewati export GGUF Q8_0 (DEFAULT: otomatis setelah training).")
+    ap.add_argument("--scratch", default=None,
+                    help="dir cepat (mis. /dev/shm) buat merged_16bit + gguf. Default = --out. "
+                         "Model besar (35B): route merge 66GB ke RAM (hindari mfs lambat/ENOSPC).")
     args = ap.parse_args()
+    scratch_dir = args.scratch or args.out
     load_4bit = args.qlora                     # default LoRA (16-bit); --qlora -> 4-bit
     method_name = "QLoRA (4-bit)" if load_4bit else "LoRA (16-bit)"
 
@@ -193,12 +197,12 @@ def main():
     tokenizer.save_pretrained(adapter_dir)
     print(f"[+] LoRA adapter: {adapter_dir}")
 
-    merged_dir = str(Path(args.out) / "merged_16bit")
+    merged_dir = str(Path(scratch_dir) / "merged_16bit")
     model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
     print(f"[+] Merged 16-bit (sumber konversi GGUF): {merged_dir}")
 
     if not args.skip_gguf:
-        gguf_dir = str(Path(args.out) / "gguf")
+        gguf_dir = str(Path(scratch_dir) / "gguf")
         print("[*] Export GGUF Q8_0 (otomatis, ~10-30 menit)...")
         try:
             # API terverifikasi (unsloth.ai/docs saving-to-gguf):

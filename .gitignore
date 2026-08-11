@@ -17,6 +17,10 @@
 !/results/
 !/results/**
 
+# ── Skrip deploy pod (RunPod) ──
+!/pod/
+!/pod/**
+
 # ── Catatan internal (jangan dipush) ──
 NOTE.md
 
