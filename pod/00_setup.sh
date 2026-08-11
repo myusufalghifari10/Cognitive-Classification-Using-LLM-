@@ -7,7 +7,7 @@ set -euo pipefail
 WORK=/workspace
 VENV="$WORK/venv"
 LLAMA="$WORK/llama.cpp"
-PROJ="$WORK/Cognitive-Classification-Using-LLM"
+PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 export UV_CONCURRENT_DOWNLOADS=4          # cegah stall (RunPod throttle >4 parallel)
 
 echo "════════════════════════════════════════════"

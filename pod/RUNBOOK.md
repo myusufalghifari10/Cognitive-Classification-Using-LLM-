@@ -27,14 +27,14 @@ Total ~4-5 jam (dominan training). Setup data < 20 menit.
 # [0] INSTALL semua — ~10-15 menit (apt + build llama.cpp + pip unsloth)
 cd /workspace
 git clone https://github.com/myusufalghifari10/Cognitive-Classification-Using-LLM-.git
-cd Cognitive-Classification-Using-LLM
+cd Cognitive-Classification-Using-LLM-   # repo name ada trailing dash "-"
 bash pod/00_setup.sh
 
 # [1] DATA — clone (lagi biar idempotent) + download model — ~3 menit
 bash pod/01_data.sh
 
 # (opsional) PROBE dulu — cek VRAM/token sebelum training mahal:
-cd /workspace/Cognitive-Classification-Using-LLM
+cd /workspace/Cognitive-Classification-Using-LLM-
 /workspace/venv/bin/python3 train.py --probe --model /workspace/models/Qwen3.6-35B-A3B --qlora
 
 # [2] FINE-TUNE + Q8 — ~3-4 jam train + ~15 menit convert (SATU PERINTAH)
@@ -58,7 +58,7 @@ bash pod/03_eval.sh
 
 ```
 /workspace/                                    # mfs — PERSIST antar pod
-├── Cognitive-Classification-Using-LLM/        # repo (kode + data + prompt)
+├── Cognitive-Classification-Using-LLM-/       # repo (kode + data + prompt) ⚠ trailing dash
 ├── venv/                                      # python env (recreate kalau symlink break)
 ├── llama.cpp/                                 # + build/ (persist, skip rebuild)
 ├── models/Qwen3.6-35B-A3B/                    # base model BF16 (~66GB)

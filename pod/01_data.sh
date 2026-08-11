@@ -4,7 +4,7 @@
 set -euo pipefail
 
 WORK=/workspace
-PROJ="$WORK/Cognitive-Classification-Using-LLM"
+PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 MODELS="$WORK/models"
 
 # ════════════════════════════════════════════════════════════════

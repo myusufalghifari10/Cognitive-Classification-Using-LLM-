@@ -7,7 +7,7 @@ set -euo pipefail
 
 WORK=/workspace
 VENV="$WORK/venv"
-PROJ="$WORK/Cognitive-Classification-Using-LLM"
+PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 LLAMA="$WORK/llama.cpp"
 OUT="$WORK/outputs/qwen36-35b"
 GGUF="$OUT/model-q8_0.gguf"
