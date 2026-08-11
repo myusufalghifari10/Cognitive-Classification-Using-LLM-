@@ -124,4 +124,6 @@ bash pod/03_eval.sh           # serve GGUF + eval
 | llama-server OOM saat serve | turunin `-c` ke 16384 |
 | Banyak `PARSE_FAIL` di eval | naikin `--max-tokens` ke 24576 (+ `-c 32768` di serve) |
 | venv broken setelah migrate | `bash pod/00_setup.sh` (auto-detect & recreate) |
+| training LAMBAT (>200 s/it) | fast path OFF → `python -c "import causal_conv1d"`. Kalau gagal: `uv pip install causal-conv1d --no-build-isolation && uv pip install flash-linear-attention`. **Akar: torch CPU** (JANGAN `--torch-backend=auto`; no-backend = cu13) |
+| `torch==X+cpu` / CUDA False | `uv pip install --force-reinstall torch torchvision torchaudio` (default PyPI = cu13 CUDA build) |
 | `llama-server: command not found` | build belum selesai/ambil target salah → `cmake --build $LLAMA/build --target llama-server` |
