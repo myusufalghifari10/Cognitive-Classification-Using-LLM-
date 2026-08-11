@@ -14,7 +14,10 @@ GGUF="$OUT/model-q8_0.gguf"
 PORT=8889
 RES="$PROJ/results/qwen36-35b-a3b-post"
 
-[ -f "$GGUF" ] || { echo "✗ GGUF gak ada: $GGUF — run 02_finetune.sh dulu"; exit 1; }
+[ -f "$GGUF" ] || {
+  echo "✗ GGUF gak ada: $GGUF — run 02_finetune.sh dulu"
+  exit 1
+}
 
 cd "$PROJ"
 # shellcheck disable=SC1091
@@ -30,8 +33,8 @@ SERVER_LOG="/root/llama-server.log"
 "$LLAMA/build/bin/llama-server" \
   -m "$GGUF" \
   --host 127.0.0.1 --port "$PORT" \
-  -ngl 99 -c 24576 -t 32 \
-  --jinja > "$SERVER_LOG" 2>&1 &
+  -ngl 99 -c 32000 -t 32 \
+  --jinja >"$SERVER_LOG" 2>&1 &
 SRV_PID=$!
 trap 'echo "  cleanup: kill server $SRV_PID"; kill $SRV_PID 2>/dev/null || true' EXIT
 
@@ -39,10 +42,13 @@ echo "  server PID $SRV_PID (log: $SERVER_LOG)"
 echo "  tunggu /props siap ..."
 for i in $(seq 1 120); do
   if curl -sf "http://127.0.0.1:$PORT/props" >/dev/null 2>&1; then
-    echo "  ✓ server siap (${i}s)"; break
+    echo "  ✓ server siap (${i}s)"
+    break
   fi
   if ! kill -0 "$SRV_PID" 2>/dev/null; then
-    echo "✗ server mati — log:"; tail -20 "$SERVER_LOG"; exit 1
+    echo "✗ server mati — log:"
+    tail -20 "$SERVER_LOG"
+    exit 1
   fi
   sleep 2
 done
@@ -54,14 +60,14 @@ echo " [2/3] EVAL few-shot"
 echo "═══════════════════════════════════════════════════════"
 # --max-tokens 16384: budget reasoning (5-klasifikasi gak butuh 32k). -c 24576 cukup.
 python eval.py --prompt few --host 127.0.0.1 --port "$PORT" \
-  --out "$RES" --max-tokens 16384 --max-budget 16384
+  --out "$RES" --max-tokens 32000
 
 echo ""
 echo "═══════════════════════════════════════════════════════"
 echo " [3/3] EVAL zero-shot"
 echo "═══════════════════════════════════════════════════════"
 python eval.py --prompt zero --host 127.0.0.1 --port "$PORT" \
-  --out "$RES" --max-tokens 16384 --max-budget 16384
+  --out "$RES" --max-tokens 32000
 
 echo ""
 echo "═══════════════════════════════════════════════════════"

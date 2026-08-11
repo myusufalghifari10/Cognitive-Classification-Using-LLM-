@@ -35,10 +35,16 @@ echo "════════════════════════�
 free -g | awk '/Mem:/{print "  RAM total: "$2" GB"}'
 nvidia-smi --query-gpu=memory.total --format=csv,noheader | sed 's/^/  GPU VRAM: /'
 
-# Besarin /dev/shm (default 64GB) biar muat merge 66GB + F16 66GB
-echo "  remount /dev/shm → 192G ..."
-mount -o remount,size=192G /dev/shm 2>/dev/null || echo "  ⚠ remount gagal (RAM kurang?) — convert mungkin lambat/OOM"
-df -h /dev/shm | awk 'NR==2{print "  /dev/shm: "$2" available"}'
+# Besarin RAM disk buat merge 66GB + F16 66GB (butuh ~140GB).
+# Coba 1: remount /dev/shm gede. Coba 2: mount tmpfs fresh (kalau remount ditolak).
+if mount -o remount,size=192G /dev/shm 2>/dev/null; then
+  echo "  ✓ /dev/shm remount 192G"
+elif mkdir -p /mnt/ft_ram && mount -t tmpfs -o size=200G tmpfs /mnt/ft_ram 2>/dev/null; then
+  SCRATCH="/mnt/ft_ram/ft"; echo "  ✓ tmpfs 200G @ /mnt/ft_ram (fallback: remount /dev/shm gagal)"
+else
+  echo "  ⚠ GAGAL besarin RAM disk — convert bakal lambat/OOM (butuh ~140GB free)"
+fi
+df -h "$(dirname "$SCRATCH")" 2>/dev/null | awk 'NR==2{print "  scratch: "$2" total, "$4" free"}'
 
 echo ""
 echo "═══════════════════════════════════════════════════════"

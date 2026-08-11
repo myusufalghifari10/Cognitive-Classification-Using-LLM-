@@ -1,24 +1,34 @@
 #!/usr/bin/env bash
 # 00_setup.sh — INSTALL SEMUA di fresh pod. Run SEKALI per pod start.
-# Output: /workspace/venv (unsloth + eval deps) + /workspace/llama.cpp (build CUDA)
-# Estimasi: ~10-15 menit (apt + build llama.cpp + pip unsloth)
+# Output: /workspace/venv (unsloth + fast-path libs) + /workspace/llama.cpp (CUDA build)
+# Estimasi: ~10-15 menit
+#
+# RESEP TERVERIFIKASI (pod 3aa922cc1fbf, RTX A6000, 2026-08):
+#   • torch 2.11.0+cu13 (CUDA build) — via unsloth tanpa --torch-backend
+#   • causal-conv1d (precompiled wheel cu13+torch2.11) → fast path GDN aktif
+#   • flash-linear-attention (fla) → fast path linear-attn aktif
+#   • llama.cpp build arch 86 (Ampere)
 set -euo pipefail
 
 WORK=/workspace
 VENV="$WORK/venv"
 LLAMA="$WORK/llama.cpp"
 PROJ="$WORK/Cognitive-Classification-Using-LLM-"
-export UV_CONCURRENT_DOWNLOADS=4          # cegah stall (RunPod throttle >4 parallel)
+export UV_CONCURRENT_DOWNLOADS=4
+
+# nvcc di PATH + CUDA_HOME (buat causal-conv1d/fla source-build fallback kalau precompiled wheel gak ada)
+export CUDA_HOME=/usr/local/cuda
+export PATH="$CUDA_HOME/bin:$PATH"
 
 echo "════════════════════════════════════════════"
-echo " [0/5] apt deps (cmake, git, build-tools)"
+echo " [0/5] apt deps"
 echo "════════════════════════════════════════════"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
 apt-get install -y -qq git cmake build-essential python3-venv python3-pip python3-dev curl > /dev/null
 
 echo "════════════════════════════════════════════"
-echo " [1/5] llama.cpp (CUDA build) → /workspace/llama.cpp"
+echo " [1/5] llama.cpp (CUDA build, arch 86 = Ampere A6000)"
 echo "════════════════════════════════════════════"
 # persist di mfs biar gak rebuild tiap pod migration
 if [ ! -d "$LLAMA/.git" ]; then
@@ -26,21 +36,17 @@ if [ ! -d "$LLAMA/.git" ]; then
   git clone --depth 1 https://github.com/ggml-org/llama.cpp.git "$LLAMA"
 fi
 if [ ! -x "$LLAMA/build/bin/llama-quantize" ]; then
-  # GGML_CUDA=ON: butuh nvcc. RunPod PyTorch image biasanya udah ada.
-  # CMAKE_CUDA_ARCHITECTURES=86 = Ampere (RTX A6000/A40/A4000). Pin 1 arch = build cepat.
-  #   A100=80, H100=90, L40=89, RTX 4090=89, RTX 3090=86. Ganti sesuai GPU kamu.
+  # arch: A6000/A40/3090=86, A100=80, L40/4090=89, H100=90. Ganti sesuai GPU.
   cmake -S "$LLAMA" -B "$LLAMA/build" -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86 -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
     cmake -S "$LLAMA" -B "$LLAMA/build" -DCMAKE_BUILD_TYPE=Release > /dev/null
   cmake --build "$LLAMA/build" --config Release -j --target llama-server llama-quantize 2>&1 | tail -2
 fi
-echo "  ✓ llama-server:  $LLAMA/build/bin/llama-server"
-echo "  ✓ llama-quantize: $LLAMA/build/bin/llama-quantize"
 
 echo "════════════════════════════════════════════"
 echo " [2/5] uv venv → /workspace/venv"
 echo "════════════════════════════════════════════"
 pip install -q uv
-# cek: venv masih sehat (mfs kadang break symlink)? kalau rusak → recreate
+# venv sehat? (mfs kadang break symlink) → kalau rusak recreate
 if [ ! -x "$VENV/bin/python" ] || ! "$VENV/bin/python" -c "import unsloth" 2>/dev/null; then
   rm -rf "$VENV"
   uv venv --python 3.12 "$VENV"
@@ -50,14 +56,20 @@ source "$VENV/bin/activate"
 uv pip install -q --upgrade pip
 
 echo "════════════════════════════════════════════"
-echo " [3/5] Unsloth (--torch-backend=auto)"
+echo " [3/5] Unsloth  ⚠ TANPA --torch-backend"
 echo "════════════════════════════════════════════"
-uv pip install -q "unsloth" --torch-backend=auto
+# ⚠ CRITICAL: JANGAN pakai --torch-backend=auto (pernah kasih CPU torch!).
+#   No-backend → uv ambil torch default PyPI = cu13 CUDA build (2.11.0).
+#   torch 2.11 (BUKAN 2.13) penting: causal-conv1d punya precompiled wheel buat cu13+2.11.
+uv pip install unsloth
 
 echo "════════════════════════════════════════════"
-echo " [4/5] causal-conv1d (--no-build-isolation)"
+echo " [4/5] Fast-path libs: causal-conv1d + flash-linear-attention"
 echo "════════════════════════════════════════════"
-uv pip install -q causal-conv1d --no-build-isolation || echo "  ⚠ causal-conv1d gagal (OK kalau arch gak butuh)"
+# Qwen3.6 GDN/linear-attn butuh ini buat fast path. Tanpa → fallback torch = 3-4x lebih lambat.
+# causal-conv1d: precompiled wheel (cu13+torch2.11) → no build. Fallback source (nvcc via CUDA_HOME).
+uv pip install causal-conv1d --no-build-isolation || echo "  ⚠ causal-conv1d gagal — training bakal slow-path"
+uv pip install flash-linear-attention            || echo "  ⚠ fla gagal — training bakal slow-path"
 
 echo "════════════════════════════════════════════"
 echo " [5/5] eval.py + convert deps"
@@ -66,10 +78,16 @@ uv pip install -q requests scikit-learn matplotlib seaborn gguf sentencepiece
 
 echo ""
 echo "════════════════════════════════════════════"
-echo " ✅ SETUP SELESAI — verifikasi:"
+echo " ✅ VERIFY — semua harus ✓"
 echo "════════════════════════════════════════════"
-"$LLAMA/build/bin/llama-server" --version 2>&1 | head -1 || true
-python -c "import unsloth, transformers, gguf; print(f'unsloth {unsloth.__version__} | transformers {transformers.__version__}')"
-nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
+ok=1
+python -c "import torch; assert torch.cuda.is_available()" 2>/dev/null && \
+  python -c "import torch; print(f'  ✓ torch {torch.__version__} | CUDA=True | {torch.cuda.get_device_name(0)}')" \
+  || { echo "  ✗ torch CUDA=False (CPU build!) — fix: uv pip install --force-reinstall torch torchvision torchaudio"; ok=0; }
+python -c "import causal_conv1d" 2>/dev/null && echo "  ✓ causal-conv1d (fast path GDN)" || { echo "  ✗ causal-conv1d missing → training LAMBAT"; ok=0; }
+python -c "import fla" 2>/dev/null && echo "  ✓ flash-linear-attention (fast path)" || { echo "  ✗ fla missing → training LAMBAT"; ok=0; }
+python -c "import unsloth; print(f'  ✓ unsloth {unsloth.__version__}')" 2>/dev/null || { echo "  ✗ unsloth missing"; ok=0; }
+[ -x "$LLAMA/build/bin/llama-server" ] && echo "  ✓ llama-server + llama-quantize" || { echo "  ✗ llama.cpp build"; ok=0; }
+nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | sed 's/^/  GPU: /'
 echo ""
-echo "→ Lanjut: bash pod/01_data.sh"
+[ $ok -eq 1 ] && echo "  → Semua ✓. Lanjut: bash pod/01_data.sh" || echo "  → Ada ✗ di atas. Fix dulu sebelum lanjut (training/probe bakal error)."
