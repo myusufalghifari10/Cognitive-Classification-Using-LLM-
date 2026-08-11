@@ -27,7 +27,9 @@ if [ ! -d "$LLAMA/.git" ]; then
 fi
 if [ ! -x "$LLAMA/build/bin/llama-quantize" ]; then
   # GGML_CUDA=ON: butuh nvcc. RunPod PyTorch image biasanya udah ada.
-  cmake -S "$LLAMA" -B "$LLAMA/build" -DGGML_CUDA=ON -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
+  # CMAKE_CUDA_ARCHITECTURES=86 = Ampere (RTX A6000/A40/A4000). Pin 1 arch = build cepat.
+  #   A100=80, H100=90, L40=89, RTX 4090=89, RTX 3090=86. Ganti sesuai GPU kamu.
+  cmake -S "$LLAMA" -B "$LLAMA/build" -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86 -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
     cmake -S "$LLAMA" -B "$LLAMA/build" -DCMAKE_BUILD_TYPE=Release > /dev/null
   cmake --build "$LLAMA/build" --config Release -j --target llama-server llama-quantize 2>&1 | tail -2
 fi
