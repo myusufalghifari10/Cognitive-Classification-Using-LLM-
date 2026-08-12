@@ -9,11 +9,12 @@ MODELS="$WORK/models"
 
 # ════════════════════════════════════════════════════════════════
 # PILIH BASE MODEL (edit kalau mau ganti):
-#   BF16 (PROVEN — kamu udah train 35B di ini sebelumnya):     Qwen/Qwen3.6-35B-A3B
-#   FP8  (download 37.5GB lebih kecil, TAPI Unsloth FP8+QLoRA UNTESTED):
-#                                                                Qwen/Qwen3.6-35B-A3B-FP8
+#   FP8 (DEFAULT — butuh GPU FP8: Ada sm_89+, Hopper, Blackwell):
+#     Qwen/Qwen3.6-35B-A3B-FP8         ~36GB, langsung finetunable di RTX PRO 6000
+#   BF16 (fallback Ampere A100/A6000 yg gak support FP8):
+#     Qwen/Qwen3.6-35B-A3B             ~36GB (config bfloat16 tapi bobot sama)
 # ════════════════════════════════════════════════════════════════
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B"        # ← ganti ke -FP8 kalau mau coba FP8
+MODEL_REPO="Qwen/Qwen3.6-35B-A3B-FP8"   # RTX PRO 6000 Blackwell = support FP8
 MODEL_NAME="$(basename "$MODEL_REPO")"
 MODEL_PATH="$MODELS/$MODEL_NAME"
 
@@ -43,7 +44,9 @@ if [ -f "$MODEL_PATH/config.json" ]; then
   echo "  ✓ udah ada → skip (hapus $MODEL_PATH buat re-download)"
 else
   echo "  downloading ke $MODEL_PATH ..."
-  huggingface-cli download "$MODEL_REPO" --local-dir "$MODEL_PATH"
+  # `hf download` = command baru (ganti huggingface-cli yg deprecated).
+  #   [verified: github.com/huggingface/huggingface_hub docs/en/guides/cli.md]
+  hf download "$MODEL_REPO" --local-dir "$MODEL_PATH"
 fi
 SIZE=$(du -sh "$MODEL_PATH" 2>/dev/null | cut -f1)
 echo "  → model: $MODEL_PATH ($SIZE)"

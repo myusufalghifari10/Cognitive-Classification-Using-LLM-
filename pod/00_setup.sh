@@ -20,6 +20,26 @@ export UV_CONCURRENT_DOWNLOADS=4
 export CUDA_HOME=/usr/local/cuda
 export PATH="$CUDA_HOME/bin:$PATH"
 
+# ── Deteksi GPU arch buat llama.cpp build (sm_XX) ──
+#   Ampere:  A100=80, A6000/A40/3090=86
+#   Ada:     L4/L40/4090=89
+#   Hopper:  H100=90
+#   Blackwell: RTX 5090/5080/PRO 6000=120, B100/B200=100
+GPU_ARCH="${GPU_ARCH:-}"
+if [ -z "$GPU_ARCH" ]; then
+  CC=$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null | head -1 | tr -d ' ')
+  case "$CC" in
+    8.0)  GPU_ARCH=80 ;;
+    8.6)  GPU_ARCH=86 ;;
+    8.9)  GPU_ARCH=89 ;;
+    9.0)  GPU_ARCH=90 ;;
+    10.0) GPU_ARCH=100 ;;
+    12.0) GPU_ARCH=120 ;;   # Blackwell RTX 50/PRO 6000
+    *)    GPU_ARCH=86; echo "  ⚠ compute_cap '$CC' gak dikenal → default arch 86" ;;
+  esac
+fi
+echo "  GPU arch terdeteksi: sm_$GPU_ARCH (compute_cap=$CC)"
+
 echo "════════════════════════════════════════════"
 echo " [0/5] apt deps"
 echo "════════════════════════════════════════════"
@@ -36,15 +56,14 @@ if [ ! -d "$LLAMA/.git" ]; then
   git clone --depth 1 https://github.com/ggml-org/llama.cpp.git "$LLAMA"
 fi
 if [ ! -x "$LLAMA/build/bin/llama-quantize" ]; then
-  # RTX A6000 = Ampere sm_86 (compute capability 8.6). arch 86 = binary optimal + build cepet (1 target).
-  #   [verified: github.com/ggml-org/llama.cpp docs/build.md — CMAKE_CUDA_ARCHITECTURES="86" example]
+  # arch auto-detect (sm_XX). Blackwell RTX PRO 6000=120, A6000=86, A100=80, H100=90.
   # GGML_CUDA_FA_ALL_QUANTS=ON: FlashAttention CUDA kernel dukung SEMUA KV cache quant (q8_0/q4_0 dll).
   #   TANPA ini: --flash-attn + KV quant → SILENT fallback ke CPU attention = "extremely slow".
   #   [verified: llama.cpp#24485 + build.md GGML_CUDA_FA_ALL_QUANTS table]
   # Cost: build ~2x lebih lama (~8 min), one-time.
   cmake -S "$LLAMA" -B "$LLAMA/build" \
     -DGGML_CUDA=ON \
-    -DCMAKE_CUDA_ARCHITECTURES=86 \
+    -DCMAKE_CUDA_ARCHITECTURES="$GPU_ARCH" \
     -DGGML_CUDA_FA_ALL_QUANTS=ON \
     -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
       cmake -S "$LLAMA" -B "$LLAMA/build" -DCMAKE_BUILD_TYPE=Release > /dev/null
