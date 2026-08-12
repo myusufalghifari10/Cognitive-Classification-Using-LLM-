@@ -84,20 +84,22 @@ source "$VENV/bin/activate"
 uv pip install -q --upgrade pip
 
 echo "════════════════════════════════════════════"
-echo " [3/5] Unsloth  ⚠ TANPA --torch-backend"
+echo " [3/5] Unsloth + torch cu128 (PINNED — match driver 12.8)"
 echo "════════════════════════════════════════════"
-# ⚠ CRITICAL: JANGAN pakai --torch-backend=auto (pernah kasih CPU torch!).
-#   No-backend → uv ambil torch default PyPI = cu13 CUDA build (2.11.0).
-#   torch 2.11 (BUKAN 2.13) penting: causal-conv1d punya precompiled wheel buat cu13+2.11.
-uv pip install unsloth
+# ⚠ CRITICAL: --torch-backend=cu128 di SETIAP command.
+#   Alasan: nvcc 12.8 (pod) = driver 12.8. torch cu128 match → causal-conv1d/fla source-build OK.
+#   Kalau tanpa pin → uv balikin torch cu13/2.13 → ABI mismatch di causal-conv1d build.
+#   Blackwell sm_120 support penuh di cu128 wheels (uv issue #14742).
+#   [verified: pod sebelumnya, --torch-backend=cu128 = working recipe]
+uv pip install --torch-backend=cu128 unsloth
 
 echo "════════════════════════════════════════════"
 echo " [4/5] Fast-path libs: causal-conv1d + flash-linear-attention"
 echo "════════════════════════════════════════════"
 # Qwen3.6 GDN/linear-attn butuh ini buat fast path. Tanpa → fallback torch = 3-4x lebih lambat.
-# causal-conv1d: precompiled wheel (cu13+torch2.11) → no build. Fallback source (nvcc via CUDA_HOME).
-uv pip install causal-conv1d --no-build-isolation || echo "  ⚠ causal-conv1d gagal — training bakal slow-path"
-uv pip install flash-linear-attention            || echo "  ⚠ fla gagal — training bakal slow-path"
+# causal-conv1d: source build (nvcc 12.8 = torch cu128 → ABI match). Pin cu128 biar gak thrash.
+uv pip install --torch-backend=cu128 causal-conv1d --no-build-isolation || echo "  ⚠ causal-conv1d gagal — training bakal slow-path"
+uv pip install --torch-backend=cu128 flash-linear-attention            || echo "  ⚠ fla gagal — training bakal slow-path"
 
 echo "════════════════════════════════════════════"
 echo " [5/5] eval.py + convert deps"
