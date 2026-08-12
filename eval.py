@@ -207,11 +207,14 @@ def main():
     tag = f"{args.prompt}shot"
     ckpt = out / f"_ckpt_{tag}.jsonl"
     # --- resume: muat hasil yang sudah selesai dari checkpoint ---
+    # PARSE_FAIL TIDAK di-load (biar di-reevaluate di run ini — fix parser bisa nyelamatin).
     done = {}
     if ckpt.exists() and not args.fresh:
         for line in ckpt.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 rec = json.loads(line)
+                if rec["pred"] == "PARSE_FAIL":
+                    continue
                 done[rec["idx"]] = rec
         print(f"[*] RESUME: {len(done)} sampel sudah ada, lanjut sisanya")
     elif args.fresh and ckpt.exists():
