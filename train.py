@@ -63,51 +63,53 @@ def main():
 
     import torch
     from datasets import load_dataset
-    from unsloth import FastVisionModel
-    from unsloth.trainer import UnslothVisionDataCollator
+    from unsloth import FastLanguageModel
     from trl import SFTTrainer, SFTConfig
 
     max_seq = args.max_seq
 
-    # ---- 1. Load VLM (FastVisionModel — bukan FastLanguageModel) ----
-    # Qwen3.5 = VLM: tokenizer returned = full VL processor.
+    # ---- 1. Load model (FastLanguageModel — TEXT-ONLY, bukan VLM) ----
+    # Qwen3.6 35B-A3B di notebook official Unsloth (Qwen3_5_MoE.ipynb) pakai FastLanguageModel.
+    # FastVisionModel load vision encoder (mubazir + overhead utk text-only MoE).
+    #   [verified: github.com/unslothai/notebooks nb/Qwen3_5_MoE.ipynb]
     print(f"[*] Method: {method_name} | Loading: {args.model}")
-    model, tokenizer = FastVisionModel.from_pretrained(
+    model, tokenizer = FastLanguageModel.from_pretrained(
         args.model,
-        dtype=None,                       # auto: bf16 di A100
+        max_seq_length=max_seq,
+        dtype=None,                       # auto: bf16/fp8 detect
         load_in_4bit=load_4bit,
-        use_gradient_checkpointing="unsloth",   # JANGAN ganti ke True! Mode "unsloth" = smart offload (recompute aktivasi LEBIH SEDIKIT) -> 3x lebih cepat dari mode True (full recompute). Offload CPU↔GPU di-double-buffer, parallel dgn compute -> bukan bottleneck.
+        full_finetuning=False,
     )
 
-    # ---- 2. LoRA — TEXT-ONLY: vision encoder OFF, language/attention/mlp ON ----
-    model = FastVisionModel.get_peft_model(
+    # ---- 2. LoRA (target MoE experts explicit, alpha=r*2 utk faster convergence) ----
+    #   [verified: notebook MoE — target_modules include gate_up_proj, lora_alpha=r*2]
+    model = FastLanguageModel.get_peft_model(
         model,
-        finetune_vision_layers=False,     # text-only: jangan train vision encoder
-        finetune_language_layers=True,
-        finetune_attention_modules=True,
-        finetune_mlp_modules=True,
         r=args.lora_r,
-        lora_alpha=args.lora_r,
+        lora_alpha=args.lora_r * 2,      # *2 speeds up training (notebook official)
         lora_dropout=0,
         bias="none",
         random_state=42,
         use_rslora=False,
         loftq_config=None,
+        target_modules=[
+            "q_proj", "k_proj", "v_proj", "o_proj",
+            "gate_proj", "up_proj", "down_proj", "gate_up_proj",  # MoE experts
+        ],
+        use_gradient_checkpointing=True,  # MoE: True (bukan "unsloth" mode). [issue unsloth#1418]
     )
-    FastVisionModel.for_training(model)
+    FastLanguageModel.for_training(model)
 
-    # ---- 3. Dataset: messages mentah (collator yang render+tokenize via processor) ----
+    # ---- 3. Dataset (sharegpt messages — SFTTrainer native handle, gak butuh VLM collator) ----
     ds = load_dataset("json", data_files=str(args.data), split="train")
     print(f"[*] Dataset: {len(ds)} sampel")
 
-    # ---- 4. Collator (completion-only loss bawaan) + Trainer ----
-    collator = UnslothVisionDataCollator(
-        model, tokenizer,
-        max_seq_length=max_seq,        # WAJIB: tanpa ini default ke model.max_seq_length (2048) -> TRUNCATE rubrik!
-        train_on_responses_only=True,
-        instruction_part="<|im_start|>user\n",
-        response_part=args.response_template,
-    )
+    # ---- 4. Trainer (standard TRL — completion-only via DataCollatorForCompletionOnlyLM) ----
+    from transformers import DataCollatorForCompletionOnlyLM
+    response_template_ids = tokenizer(
+        args.response_template, add_special_tokens=False)["input_ids"]
+    collator = DataCollatorForCompletionOnlyLM(
+        response_template_ids, tokenizer=tokenizer)
     cfg = SFTConfig(
         output_dir=str(args.out),
         per_device_train_batch_size=args.batch,
@@ -124,15 +126,13 @@ def main():
         seed=42,
         save_strategy="epoch",
         report_to="none",
-        # VLM-required: jangan tokenize text-column; collator yang handle messages.
-        remove_unused_columns=False,
-        dataset_text_field="",
-        dataset_kwargs={"skip_prepare_dataset": True},
         max_length=max_seq,
+        completion_only_loss=True,         # TRL native: loss pada response doang
+        response_template=args.response_template,
     )
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,        # full processor (Unsloth VLM butuh tokenizer=, bukan processing_class=)
+        tokenizer=tokenizer,
         train_dataset=ds,
         data_collator=collator,
         args=cfg,
@@ -178,11 +178,10 @@ def main():
         # test collator di data text-only (validasi path data beneran jalan sebelum training mahal)
         try:
             batch = collator([ds[i] for i in range(min(2, len(ds)))])
-            print(f"\n[*] collator max_seq_length={collator.max_seq_length} | "
-                  f"input_ids shape={batch['input_ids'].shape}")
+            print(f"\n[*] collator OK | input_ids shape={batch['input_ids'].shape}")
         except Exception as e:
             print(f"\n[!] collator test GAGAL: {e}")
-            print("[!] Collator mungkin butuh key 'images' — kirim output ini ke saya.")
+            print("[!] Kirim output ini ke saya.")
         print("=" * 64)
         return
 
