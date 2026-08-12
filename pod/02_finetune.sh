@@ -65,7 +65,7 @@ python train.py \
   --batch 1 --grad-accum 16 \
   --max-seq 8192 \
   --epochs 3 \
-  --lora-r 8 \
+  --lora-r 4 \
   --skip-gguf
 # → LoRA: $OUT/lora (persist)   merged: $SCRATCH/merged_16bit (RAM)
 

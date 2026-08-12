@@ -96,7 +96,7 @@ def main():
             "q_proj", "k_proj", "v_proj", "o_proj",
             "gate_proj", "up_proj", "down_proj", "gate_up_proj",  # MoE experts
         ],
-        use_gradient_checkpointing=True,  # MoE: True (bukan "unsloth" mode). [issue unsloth#1418]
+        use_gradient_checkpointing=True,  # fast recompute mode (lora-r=4 buat hemat VRAM)
     )
     FastLanguageModel.for_training(model)
 
