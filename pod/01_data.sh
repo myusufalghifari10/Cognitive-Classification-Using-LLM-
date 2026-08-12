@@ -8,13 +8,13 @@ PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 MODELS="$WORK/models"
 
 # ════════════════════════════════════════════════════════════════
-# PILIH BASE MODEL (edit kalau mau ganti):
-#   FP8 (DEFAULT — butuh GPU FP8: Ada sm_89+, Hopper, Blackwell):
-#     Qwen/Qwen3.6-35B-A3B-FP8         ~36GB, langsung finetunable di RTX PRO 6000
-#   BF16 (fallback Ampere A100/A6000 yg gak support FP8):
-#     Qwen/Qwen3.6-35B-A3B             ~36GB (config bfloat16 tapi bobot sama)
+# PILIH BASE MODEL:
+#   BF16 FULL PRECISION (DEFAULT — 72GB disk, QLoRA 4-bit → ~18GB VRAM, CEPAT):
+#     Qwen/Qwen3.6-35B-A3B
+#   FP8 (36GB, TAPI Unsloth DISABLE 4-bit → 16bit LoRA → OOM di seq 8192):
+#     Qwen/Qwen3.6-35B-A3B-FP8
 # ════════════════════════════════════════════════════════════════
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B-FP8"   # RTX PRO 6000 Blackwell = support FP8
+MODEL_REPO="Qwen/Qwen3.6-35B-A3B"        # BF16 full precision (72GB) → QLoRA 4-bit
 MODEL_NAME="$(basename "$MODEL_REPO")"
 MODEL_PATH="$MODELS/$MODEL_NAME"
 

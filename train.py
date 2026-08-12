@@ -96,7 +96,7 @@ def main():
             "q_proj", "k_proj", "v_proj", "o_proj",
             "gate_proj", "up_proj", "down_proj", "gate_up_proj",  # MoE experts
         ],
-        use_gradient_checkpointing="unsloth",  # CPU-offload aktivasi → SATU-SATUNYA cara fit seq 8192 di 96GB (rubrik 5661tok). Trade-off: lebih lambat.
+        use_gradient_checkpointing=True,  # QLoRA 4-bit base ~18GB → True mode muat (fast, no offload)
     )
     FastLanguageModel.for_training(model)
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 02_finetune.sh — FINE-TUNE (FP8 LoRA) + MERGE + CONVERT GGUF Q8. SATU PASANG.
+# 02_finetune.sh — FINE-TUNE (QLoRA 4-bit BF16) + MERGE + CONVERT GGUF Q8. SATU PASANG.
 #
 # Flow:  train.py --skip-gguf  →  LoRA (/workspace, persist)
 #                                       →  merged_16bit (/dev/shm, RAM cepat)
@@ -20,7 +20,7 @@ OUT="$WORK/outputs/qwen36-35b"
 SCRATCH="/dev/shm/ft"
 
 # ── samakan dengan 01_data.sh ──
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B-FP8"
+MODEL_REPO="Qwen/Qwen3.6-35B-A3B"      # BF16 full precision (72GB)
 MODEL_PATH="$MODELS/$(basename "$MODEL_REPO")"
 
 cd "$PROJ"
@@ -51,21 +51,21 @@ df -h "$(dirname "$SCRATCH")" 2>/dev/null | awk 'NR==2{print "  scratch: "$2" to
 
 echo ""
 echo "═══════════════════════════════════════════════════════"
-echo " [1/4] TRAIN (FP8 LoRA, batch=1 grad-accum=16, seq=8192)"
+echo " [1/4] TRAIN (QLoRA 4-bit BF16, batch=1 grad-accum=16, seq=8192)"
 echo "═══════════════════════════════════════════════════════"
 rm -rf "$SCRATCH"; mkdir -p "$SCRATCH"
-# Model FP8: Unsloth auto-detect → load_in_4bit di-disable, pakai LoRA di atas bobot FP8.
-#   RTX PRO 6000 Blackwell (96GB) support FP8 native → 36GB model muat gampang.
-#   TANPA --qlora (biarkan Unsloth pake 16bit LoRA path untuk bobot FP8).
+# BF16 base (72GB) + QLoRA 4-bit → Unsloth quantize ke ~18GB VRAM. MUAT CEPAT di 96GB, seq 8192 utuh.
+#   [verified: NVIDIA forum resep 'train BF16 QLoRA' + unsloth MoE 4-bit = 19GB]
 python train.py \
   --model "$MODEL_PATH" \
   --data data/dataset_sft_sharegpt.jsonl \
   --out "$OUT" \
   --scratch "$SCRATCH" \
+  --qlora \
   --batch 1 --grad-accum 16 \
   --max-seq 8192 \
   --epochs 1 \
-  --lora-r 4 \
+  --lora-r 8 \
   --skip-gguf
 # → LoRA: $OUT/lora (persist)   merged: $SCRATCH/merged_16bit (RAM)
 
