@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 02_finetune.sh — FINE-TUNE (FP8 LoRA) + MERGE + CONVERT GGUF Q8. SATU PASANG.
 #
-# Flow:  train.py --qlora --skip-gguf  →  LoRA (/workspace, persist)
+# Flow:  train.py --skip-gguf  →  LoRA (/workspace, persist)
 #                                       →  merged_16bit (/dev/shm, RAM cepat)
 #        convert_hf_to_gguf.py → F16     (cepat: cuma copy weight)
 #        llama-quantize F16 → Q8         (C++ multi-thread, GB/s — BUKAN numpy 9MB/s!)
@@ -20,7 +20,7 @@ OUT="$WORK/outputs/qwen36-35b"
 SCRATCH="/dev/shm/ft"
 
 # ── samakan dengan 01_data.sh ──
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B"
+MODEL_REPO="Qwen/Qwen3.6-35B-A3B-FP8"
 MODEL_PATH="$MODELS/$(basename "$MODEL_REPO")"
 
 cd "$PROJ"
