@@ -104,12 +104,9 @@ def main():
     ds = load_dataset("json", data_files=str(args.data), split="train")
     print(f"[*] Dataset: {len(ds)} sampel")
 
-    # ---- 4. Trainer (standard TRL — completion-only via DataCollatorForCompletionOnlyLM) ----
-    from transformers import DataCollatorForCompletionOnlyLM
-    response_template_ids = tokenizer(
-        args.response_template, add_special_tokens=False)["input_ids"]
-    collator = DataCollatorForCompletionOnlyLM(
-        response_template_ids, tokenizer=tokenizer)
+    # ---- 4. Trainer (TRL native — completion_only_loss mask non-assistant tokens) ----
+    # [trl 0.24: DataCollatorForCompletionOnlyLM dihapus; completion_only_loss=True native]
+    # Dataset format {"messages": [...]} → TRL auto-detect & apply chat template + masking.
     cfg = SFTConfig(
         output_dir=str(args.out),
         per_device_train_batch_size=args.batch,
@@ -127,14 +124,12 @@ def main():
         save_strategy="epoch",
         report_to="none",
         max_length=max_seq,
-        completion_only_loss=True,         # TRL native: loss pada response doang
-        response_template=args.response_template,
+        completion_only_loss=True,         # TRL native: loss pada assistant response doang
     )
     trainer = SFTTrainer(
         model=model,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,        # trl 0.24: processing_class (bukan tokenizer=)
         train_dataset=ds,
-        data_collator=collator,
         args=cfg,
     )
 
@@ -175,12 +170,13 @@ def main():
         print("\n--- marker assistant (repr, 80 char) ---")
         print(repr(s0[idx:idx + 80]))
 
-        # test collator di data text-only (validasi path data beneran jalan sebelum training mahal)
+        # test tokenisasi via chat template (validasi data path sebelum training mahal)
         try:
-            batch = collator([ds[i] for i in range(min(2, len(ds)))])
-            print(f"\n[*] collator OK | input_ids shape={batch['input_ids'].shape}")
+            enc = tokenizer.apply_chat_template(
+                ds["messages"][0], tokenize=True, add_generation_prompt=False, return_dict=True)
+            print(f"\n[*] tokenize OK | input_ids shape={enc['input_ids'].shape}")
         except Exception as e:
-            print(f"\n[!] collator test GAGAL: {e}")
+            print(f"\n[!] tokenize test GAGAL: {e}")
             print("[!] Kirim output ini ke saya.")
         print("=" * 64)
         return
