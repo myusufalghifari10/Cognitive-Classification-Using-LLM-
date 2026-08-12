@@ -100,13 +100,21 @@ def main():
     )
     FastLanguageModel.for_training(model)
 
-    # ---- 3. Dataset (sharegpt messages — SFTTrainer native handle, gak butuh VLM collator) ----
+    # ---- 3. Dataset: map messages → text (pola terbukti notebook Qwen3_5_MoE) ----
+    # [verified: github.com/unslothai/notebooks nb/Qwen3_5_MoE.ipynb]
+    # Unsloth patched SFTTrainer BUTUH dataset_text_field atau formatting_func;
+    # pattern notebook: map apply_chat_template → column "text", lalu dataset_text_field="text".
     ds = load_dataset("json", data_files=str(args.data), split="train")
     print(f"[*] Dataset: {len(ds)} sampel")
 
-    # ---- 4. Trainer (TRL native — completion_only_loss mask non-assistant tokens) ----
-    # [trl 0.24: DataCollatorForCompletionOnlyLM dihapus; completion_only_loss=True native]
-    # Dataset format {"messages": [...]} → TRL auto-detect & apply chat template + masking.
+    def formatting_prompts_func(examples):
+        convos = examples["messages"]
+        texts = [tokenizer.apply_chat_template(
+            c, tokenize=False, add_generation_prompt=False) for c in convos]
+        return {"text": texts}
+    ds = ds.map(formatting_prompts_func, batched=True)
+
+    # ---- 4. Trainer (mirror notebook Qwen3_5_MoE — dataset_text_field, bukan completion_only) ----
     cfg = SFTConfig(
         output_dir=str(args.out),
         per_device_train_batch_size=args.batch,
@@ -124,11 +132,11 @@ def main():
         save_strategy="epoch",
         report_to="none",
         max_length=max_seq,
-        completion_only_loss=True,         # TRL native: loss pada assistant response doang
+        dataset_text_field="text",       # kolom hasil map → SFTTrainer tokenisasi dari sini
     )
     trainer = SFTTrainer(
         model=model,
-        processing_class=tokenizer,        # trl 0.24: processing_class (bukan tokenizer=)
+        tokenizer=tokenizer,              # Unsloth patch terima tokenizer= (notebook pattern)
         train_dataset=ds,
         args=cfg,
     )
