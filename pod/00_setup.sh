@@ -36,9 +36,18 @@ if [ ! -d "$LLAMA/.git" ]; then
   git clone --depth 1 https://github.com/ggml-org/llama.cpp.git "$LLAMA"
 fi
 if [ ! -x "$LLAMA/build/bin/llama-quantize" ]; then
-  # arch: A6000/A40/3090=86, A100=80, L40/4090=89, H100=90. Ganti sesuai GPU.
-  cmake -S "$LLAMA" -B "$LLAMA/build" -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86 -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
-    cmake -S "$LLAMA" -B "$LLAMA/build" -DCMAKE_BUILD_TYPE=Release > /dev/null
+  # RTX A6000 = Ampere sm_86 (compute capability 8.6). arch 86 = binary optimal + build cepet (1 target).
+  #   [verified: github.com/ggml-org/llama.cpp docs/build.md — CMAKE_CUDA_ARCHITECTURES="86" example]
+  # GGML_CUDA_FA_ALL_QUANTS=ON: FlashAttention CUDA kernel dukung SEMUA KV cache quant (q8_0/q4_0 dll).
+  #   TANPA ini: --flash-attn + KV quant → SILENT fallback ke CPU attention = "extremely slow".
+  #   [verified: llama.cpp#24485 + build.md GGML_CUDA_FA_ALL_QUANTS table]
+  # Cost: build ~2x lebih lama (~8 min), one-time.
+  cmake -S "$LLAMA" -B "$LLAMA/build" \
+    -DGGML_CUDA=ON \
+    -DCMAKE_CUDA_ARCHITECTURES=86 \
+    -DGGML_CUDA_FA_ALL_QUANTS=ON \
+    -DCMAKE_BUILD_TYPE=Release > /dev/null 2>&1 || \
+      cmake -S "$LLAMA" -B "$LLAMA/build" -DCMAKE_BUILD_TYPE=Release > /dev/null
   cmake --build "$LLAMA/build" --config Release -j --target llama-server llama-quantize 2>&1 | tail -2
 fi
 

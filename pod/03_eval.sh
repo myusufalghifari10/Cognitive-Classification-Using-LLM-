@@ -30,10 +30,15 @@ echo "════════════════════════�
 # -c 24576: context input(~7k) + gen(~16k). Kurangi ke 16384 kalau OOM.
 # --jinja: aktifin chat template (eval.py pakai /v1/chat/completions)
 SERVER_LOG="/root/llama-server.log"
+# --flash-attn on: paksa FA (hemat VRAM KV cache, lebih cepat). Ampere A6000 support penuh.
+#   Aman krn 00_setup build pakai GGML_CUDA_FA_ALL_QUANTS=ON → FA jalan utk SEMUA KV type.
+# KV cache default FP16 (paling akurat). Kalau OOM di -c 32000 (48GB ketat):
+#   tambah  -ctk q8_0 -ctv q8_0  (hemat ~½ KV memory, FA tetap jalan krn FA_ALL_QUANTS).
 "$LLAMA/build/bin/llama-server" \
   -m "$GGUF" \
   --host 127.0.0.1 --port "$PORT" \
   -ngl 99 -c 32000 -t 32 \
+  --flash-attn on \
   --jinja >"$SERVER_LOG" 2>&1 &
 SRV_PID=$!
 trap 'echo "  cleanup: kill server $SRV_PID"; kill $SRV_PID 2>/dev/null || true' EXIT
