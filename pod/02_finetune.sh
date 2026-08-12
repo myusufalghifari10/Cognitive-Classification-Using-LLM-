@@ -27,6 +27,9 @@ cd "$PROJ"
 # shellcheck disable=SC1091
 source "$VENV/bin/activate"
 
+# OOM fix: expandable_segments kurangi fragmentasi VRAM (OOM margin cuma ~100MB).
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
 echo "═══════════════════════════════════════════════════════"
 echo " [0/4] Pre-flight checks"
 echo "═══════════════════════════════════════════════════════"
@@ -62,7 +65,7 @@ python train.py \
   --batch 1 --grad-accum 16 \
   --max-seq 8192 \
   --epochs 3 \
-  --lora-r 16 \
+  --lora-r 8 \
   --skip-gguf
 # → LoRA: $OUT/lora (persist)   merged: $SCRATCH/merged_16bit (RAM)
 

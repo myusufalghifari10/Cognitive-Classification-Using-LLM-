@@ -125,7 +125,7 @@ def main():
         fp16=not torch.cuda.is_bf16_supported(),
         bf16=torch.cuda.is_bf16_supported(),
         logging_steps=5,
-        optim="adamw_8bit",
+        optim="paged_adamw_8bit",    # paged: offload optimizer ke CPU saat VRAM peak (OOM fix)
         weight_decay=0.01,
         lr_scheduler_type="cosine",
         seed=42,
