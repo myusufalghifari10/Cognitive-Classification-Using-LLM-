@@ -8,15 +8,20 @@ PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 MODELS="$WORK/models"
 
 # ════════════════════════════════════════════════════════════════
-# PILIH BASE MODEL:
-#   BF16 FULL PRECISION (DEFAULT — 72GB disk, QLoRA 4-bit → ~18GB VRAM, CEPAT):
-#     Qwen/Qwen3.6-35B-A3B
-#   FP8 (36GB, TAPI Unsloth DISABLE 4-bit → 16bit LoRA → OOM di seq 8192):
-#     Qwen/Qwen3.6-35B-A3B-FP8
+# PILIH BASE MODEL (arg $1, default qwen36):
+#   qwen36 → Qwen/Qwen3.6-35B-A3B          (BF16 72GB, base asli)
+#   kat    → Kwaipilot/KAT-Coder-V2.5-Dev  (BF16 69GB, finetune coding dr Qwen3.6)
+# Keduanya BF16 full precision → QLoRA 4-bit ~18GB VRAM. Arsitektur sama (Qwen3_5Moe).
 # ════════════════════════════════════════════════════════════════
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B"        # BF16 full precision (72GB) → QLoRA 4-bit
+MODEL_ALIAS="${1:-qwen36}"
+case "$MODEL_ALIAS" in
+  qwen36) MODEL_REPO="Qwen/Qwen3.6-35B-A3B" ;;
+  kat)    MODEL_REPO="Kwaipilot/KAT-Coder-V2.5-Dev" ;;
+  *)      echo "✗ alias gak dikenal: $MODEL_ALIAS (pakai: qwen36 | kat)"; exit 1 ;;
+esac
 MODEL_NAME="$(basename "$MODEL_REPO")"
 MODEL_PATH="$MODELS/$MODEL_NAME"
+echo "  model: $MODEL_ALIAS → $MODEL_REPO"
 
 echo "════════════════════════════════════════════"
 echo " [1/2] Clone repo"

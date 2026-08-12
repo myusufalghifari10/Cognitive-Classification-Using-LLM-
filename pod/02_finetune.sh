@@ -16,12 +16,18 @@ VENV="$WORK/venv"
 PROJ="$WORK/Cognitive-Classification-Using-LLM-"
 LLAMA="$WORK/llama.cpp"
 MODELS="$WORK/models"
-OUT="$WORK/outputs/qwen36-35b"
+# OUT di-set di case bawah (parametrik)
 SCRATCH="/dev/shm/ft"
 
-# ── samakan dengan 01_data.sh ──
-MODEL_REPO="Qwen/Qwen3.6-35B-A3B"      # BF16 full precision (72GB)
+# ── samakan dengan 01_data.sh (arg $1, default qwen36) ──
+MODEL_ALIAS="${1:-qwen36}"
+case "$MODEL_ALIAS" in
+  qwen36) MODEL_REPO="Qwen/Qwen3.6-35B-A3B";        OUT="$WORK/outputs/qwen36-35b" ;;
+  kat)    MODEL_REPO="Kwaipilot/KAT-Coder-V2.5-Dev"; OUT="$WORK/outputs/kat-coder"  ;;
+  *)      echo "✗ alias gak dikenal: $MODEL_ALIAS (pakai: qwen36 | kat)"; exit 1 ;;
+esac
 MODEL_PATH="$MODELS/$(basename "$MODEL_REPO")"
+echo "  finetune target: $MODEL_ALIAS → $MODEL_REPO"
 
 cd "$PROJ"
 # shellcheck disable=SC1091
@@ -73,30 +79,34 @@ MERGED="$SCRATCH/merged_16bit"
 [ -f "$MERGED/config.json" ] || { echo "✗ merge gagal — cek log train.py"; exit 1; }
 echo "  ✓ LoRA: $OUT/lora   |   merged: $(du -sh "$MERGED" | cut -f1)"
 
-echo ""
-echo "═══════════════════════════════════════════════════════"
-echo " [2/4] CONVERT → F16 GGUF (cepat: copy weight, ~5 menit)"
-echo "═══════════════════════════════════════════════════════"
-F16="$SCRATCH/model.f16.gguf"
-python "$LLAMA/convert_hf_to_gguf.py" "$MERGED" --outfile "$F16" --outtype f16
-echo "  ✓ F16: $(du -sh "$F16" | cut -f1)"
-rm -rf "$MERGED"          # free 66GB RAM sebelum quantize
+# f16+q8 LANGSUNG ke /workspace/$OUT (bukan $SCRATCH).
+# /dev/shm cuma 88GB → gak muat merged (67) + f16 (71) sekaligus = 138GB.
+# /workspace 250GB cukup (merged di RAM, f16+q8 di disk).
+mkdir -p "$OUT"
 
 echo ""
 echo "═══════════════════════════════════════════════════════"
-echo " [3/4] QUANTIZE F16 → Q8_0 (C++ multi-thread, ~5-10 menit)"
+echo " [2/4] CONVERT → F16 GGUF (copy weight, ~12 menit ke mfs)"
 echo "═══════════════════════════════════════════════════════"
-Q8="$SCRATCH/model.q8_0.gguf"
+F16="$OUT/model.f16.gguf"
+python "$LLAMA/convert_hf_to_gguf.py" "$MERGED" --outfile "$F16" --outtype f16
+echo "  ✓ F16: $(du -sh "$F16" | cut -f1)"
+rm -rf "$MERGED"          # free 67GB RAM sebelum quantize
+
+echo ""
+echo "═══════════════════════════════════════════════════════"
+echo " [3/4] QUANTIZE F16 → Q8_0 (C++ multi-thread, ~10 menit)"
+echo "═══════════════════════════════════════════════════════"
+Q8="$OUT/model-q8_0.gguf"
 "$LLAMA/build/bin/llama-quantize" "$F16" "$Q8" q8_0
 rm -f "$F16"
 echo "  ✓ Q8_0: $(du -sh "$Q8" | cut -f1)"
 
 echo ""
 echo "═══════════════════════════════════════════════════════"
-echo " [4/4] PERSIST → /workspace (tahan pod restart)"
+echo " [4/4] OUTPUT PERSIST (tahan pod restart)"
 echo "═══════════════════════════════════════════════════════"
-cp "$Q8" "$OUT/model-q8_0.gguf"
-echo "  ✓ $OUT/model-q8_0.gguf  ($(du -sh "$OUT/model-q8_0.gguf" | cut -f1))"
+echo "  ✓ $Q8  ($(du -sh "$Q8" | cut -f1))"
 echo "  ✓ $OUT/lora/  (adapter, persist)"
 
 echo ""
