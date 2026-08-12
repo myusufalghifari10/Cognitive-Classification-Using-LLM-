@@ -240,6 +240,12 @@ def main():
                 err = str(e); time.sleep(2 ** attempt); continue
             answer, thinking = split_think_answer(raw, reasoning)
             pred, reason = parse_label(answer)
+            if not pred and thinking:
+                # ponytail: model kadang taruh JSON final di reasoning_content,
+                # content kosong. Fallback parse dari thinking biar gak PARSE_FAIL.
+                pred, reason = parse_label(thinking)
+                if pred:
+                    answer = thinking   # simpan sumber label utk answer_head
             if pred:
                 break
             # terpotong di tengah thinking? beri ruang lebih lalu ulang
