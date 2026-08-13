@@ -1,6 +1,6 @@
 # Cognitive Classification Using LLM
 
-Benchmark 13 model LLM untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot). 2 model di antaranya di-*fine-tune* via **Unsloth** (Qwen3.5-9B-Fable: LoRA 16-bit; Qwen3.6-35B-A3B: QLoRA 4-bit).
+Benchmark 14 model LLM untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot). 2 model di antaranya di-*fine-tune* via **Unsloth** (Qwen3.5-9B-Fable: LoRA 16-bit; Qwen3.6-35B-A3B: QLoRA 4-bit).
 
 Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM generik sebagai baseline**, dan menjadi fondasi untuk *Prescriptive Learning Analytics dengan Agentic AI*.
 
@@ -8,7 +8,7 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 
 ## Benchmark Results
 
-> Semua run pakai `seed=42`, prompt decontaminated (tidak ada teks test-set di prompt). 120 sampel test. Diurutkan by **Accuracy**. Kolom **Acc** & **Weighted-F1** di-*highlight*. Nemotron masih dalam proses (belum termasuk).
+> Semua run pakai `seed=42`, prompt decontaminated (tidak ada teks test-set di prompt). 120 sampel test. Diurutkan by **Accuracy**. Kolom **Acc** & **Weighted-F1** di-*highlight*.
 
 ### Pre-Finetune — Few-Shot (definisi + contoh + aturan, `system_few_shot.md`)
 
@@ -25,6 +25,7 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 | Qwen3.6-35B-A3B-DSV4Pro | 35B A3B | **0.8750** | 0.8434 | **0.8804** | 33.2s |
 | Muse-Glimmer | 30B dense | **0.8583** | 0.8294 | **0.8625** | 9.5s |
 | Nanbeige4.2-3B | 4B | **0.8000** | 0.7577 | **0.8108** | 62.6s |
+| Nemotron | 30B A3B | **0.7881** | 0.7026 | **0.7858** | 136.0s |
 | Qwythos | 9B | **0.7863** | 0.7458 | **0.7896** | 68.2s |
 | GLM-4.7-Flash | 30B A3B | **0.7750** | 0.7154 | **0.7870** | 91.4s |
 
