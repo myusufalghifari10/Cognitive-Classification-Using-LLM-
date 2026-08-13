@@ -1,6 +1,6 @@
 # Cognitive Classification Using LLM
 
-Benchmark 9 model LLM (Qwen, KAT-Coder, Gemma, GLM, Nanbeige, Qwythos, Fable) untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot).
+Benchmark 13 model LLM untuk klasifikasi **Cognitive Presence** 5-kelas pada 120 postingan forum diskusi mahasiswa. Model dijalankan via **llama.cpp (`llama-server`)** dengan prompt decontaminated (few-shot & zero-shot). 2 model di antaranya di-*fine-tune* via **Unsloth** (Qwen3.5-9B-Fable: LoRA 16-bit; Qwen3.6-35B-A3B: QLoRA 4-bit).
 
 Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM generik sebagai baseline**, dan menjadi fondasi untuk *Prescriptive Learning Analytics dengan Agentic AI*.
 
@@ -8,30 +8,55 @@ Repo ini melanjutkan riset `cognitive-classification` (IndoBERT) dengan **LLM ge
 
 ## Benchmark Results
 
-### Few-Shot (definisi + contoh + aturan, `system_few_shot.md`)
+> Semua run pakai `seed=42`, prompt decontaminated (tidak ada teks test-set di prompt). 120 sampel test. Diurutkan by **Accuracy**. Kolom **Acc** & **Weighted-F1** di-*highlight*. Nemotron masih dalam proses (belum termasuk).
 
-| Model | Size | Acc | Macro-F1 | Weighted-F1 | t/sampel |
+### Pre-Finetune — Few-Shot (definisi + contoh + aturan, `system_few_shot.md`)
+
+| Model | Size | **Acc** | Macro-F1 | **Weighted-F1** | t/sampel |
 |---|---|---|---|---|---|
-| **Qwen3.6-35B-A3B** | 35B A3B | **0.9417** | **0.9290** | 0.9417 | 45.4s |
-| **KAT-Coder2.5** | 35B A3B | 0.9250 | **0.9332** | 0.9262 | 21.4s |
-| **Qwen3.6-35B-A3B-Fable** | 35B A3B | 0.9250 | 0.9063 | 0.9233 | 65.9s |
-| **Gemma4-26B-A4B-IT** | 26B A4B | 0.9000 | 0.8557 | 0.9036 | 54.0s |
-| **Qwen3.6-35B-A3B-DSV4Pro** | 35B A3B | 0.8750 | 0.8434 | 0.8804 | 33.2s |
-| **Qwen3.5-9B-Fable** | 9B | 0.8833 | 0.8288 | 0.8843 | 36.7s |
-| **Nanbeige4.2** | 4B | 0.8000 | 0.7577 | 0.8108 | 62.6s |
-| **Qwythos** | 9B | 0.7667 | 0.7458 | 0.7896 | 68.2s |
-| **GLM-4.7-Flash** | 30B A3B | 0.7750 | 0.7154 | 0.7870 | 91.4s |
+| BigBang | 35B A3B | **0.9500** | 0.9594 | **0.9520** | 30.0s |
+| Qwen3.6-35B-A3B | 35B A3B | **0.9417** | 0.9290 | **0.9417** | 45.4s |
+| Qwen3.6-27B-Fable | 27B dense | **0.9333** | 0.9085 | **0.9336** | 11.6s |
+| KAT-Coder2.5 | 35B A3B | **0.9250** | 0.9332 | **0.9262** | 21.4s |
+| Qwen3.6-35B-A3B-Fable | 35B A3B | **0.9250** | 0.9063 | **0.9233** | 65.9s |
+| Gemma4-26B-A4B-IT | 26B A4B | **0.9000** | 0.8557 | **0.9036** | 54.0s |
+| Qwen3.6-40B | 40B dense | **0.8917** | 0.8604 | **0.8905** | 20.0s |
+| Qwen3.5-9B-Fable | 9B | **0.8833** | 0.8288 | **0.8843** | 36.7s |
+| Qwen3.6-35B-A3B-DSV4Pro | 35B A3B | **0.8750** | 0.8434 | **0.8804** | 33.2s |
+| Muse-Glimmer | 30B dense | **0.8583** | 0.8294 | **0.8625** | 9.5s |
+| Nanbeige4.2-3B | 4B | **0.8000** | 0.7577 | **0.8108** | 62.6s |
+| Qwythos | 9B | **0.7863** | 0.7458 | **0.7896** | 68.2s |
+| GLM-4.7-Flash | 30B A3B | **0.7750** | 0.7154 | **0.7870** | 91.4s |
 
-### Zero-Shot (hanya definisi kelas, `system_zero_shot.md`)
+### Pre-Finetune — Zero-Shot (hanya definisi kelas, `system_zero_shot.md`)
 
-| Model | Size | Acc | Macro-F1 | Weighted-F1 | t/sampel |
+| Model | Size | **Acc** | Macro-F1 | **Weighted-F1** | t/sampel |
 |---|---|---|---|---|---|
-| **Qwen3.6-35B-A3B-Fable** | 35B A3B | **0.7750** | **0.7094** | 0.7784 | 25.6s |
-| **Qwen3.6-35B-A3B** | 35B A3B | 0.7667 | 0.7062 | 0.7684 | 41.3s |
-| **Qwen3.5-9B-Fable** | 9B | 0.7583 | 0.6794 | 0.7638 | 37.5s |
-| **KAT-Coder2.5** | 35B A3B | 0.7417 | 0.6788 | 0.7521 | 10.0s |
+| Qwen3.6-35B-A3B-Fable | 35B A3B | **0.7750** | 0.7094 | **0.7784** | 25.6s |
+| Qwen3.6-35B-A3B | 35B A3B | **0.7667** | 0.7062 | **0.7684** | 41.3s |
+| Qwen3.5-9B-Fable | 9B | **0.7583** | 0.6794 | **0.7638** | 37.5s |
+| KAT-Coder2.5 | 35B A3B | **0.7479** | 0.6788 | **0.7521** | 10.0s |
+| BigBang | 35B A3B | **0.7059** | 0.6549 | **0.7162** | 36.7s |
 
-> Semua run pakai `seed=42`, prompt v8 decontaminated (tidak ada teks test-set di prompt).
+### Post-Finetune — Few-Shot
+
+Fine-tune 3 epoch di Unsloth pada dataset SFT (1080 sampel). Lihat detail metode per model.
+
+| Model | Size | Method | **Acc** | Macro-F1 | **Weighted-F1** | t/sampel |
+|---|---|---|---|---|---|---|
+| Qwen3.5-9B-Fable | 9B | LoRA 16-bit | **0.9250** | 0.9165 | **0.9260** | 3.3s |
+| Qwen3.6-35B-A3B | 35B A3B | QLoRA 4-bit | **0.9250** | 0.9123 | **0.9244** | 5.0s |
+
+### Post-Finetune — Zero-Shot
+
+| Model | Size | Method | **Acc** | Macro-F1 | **Weighted-F1** | t/sampel |
+|---|---|---|---|---|---|---|
+| Qwen3.6-35B-A3B | 35B A3B | QLoRA 4-bit | **0.7917** | 0.7722 | **0.7877** | 8.5s |
+| Qwen3.5-9B-Fable | 9B | LoRA 16-bit | _pending_ | — | — | — |
+
+**Temuan kunci (Pre vs Post):**
+- **9B-Fable (LoRA 16-bit)** — Few-Shot 0.8833 → **0.9250** (↑3.7 pp). Headroom + gradien bersih = naik.
+- **35B-A3B (QLoRA 4-bit)** — Few-Shot 0.9417 → **0.9250** (↓1.7 pp); Zero-Shot 0.7667 → **0.7917** (↑2.5 pp). Base udah di langit-langit + noise QLoRA → few-shot turun, tapi zero-shot naik (prompt minim paling diuntungkan).
 
 ---
 

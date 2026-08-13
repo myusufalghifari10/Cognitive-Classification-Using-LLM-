@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /home/yusuf/Yusuf/Model/BigBang/endless-frontier_BigBang-v1-Q4_K_L.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 32000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 3600.5s (30.0s/sampel)
+Accuracy (valid):   0.9500
+Accuracy (strict):  0.9500  [parse-fail=salah]
+Macro-F1:           0.9594
+Weighted-F1:        0.9520
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.9655    0.9825        29
+        Pemantik Diskusi     1.0000    1.0000    1.0000        18
+              Eksplorasi     0.7692    1.0000    0.8696        20
+               Integrasi     1.0000    0.8958    0.9451        48
+                Resolusi     1.0000    1.0000    1.0000         5
+
+                accuracy                         0.9500       120
+               macro avg     0.9538    0.9723    0.9594       120
+            weighted avg     0.9615    0.9500    0.9520       120

@@ -17,9 +17,7 @@
 !/results/
 !/results/**
 
-# ── Skrip deploy pod (RunPod) ──
-!/pod/
-!/pod/**
+# pod/ = skrip deploy RunPod (lokal, tidak dipush)
 
 # ── Catatan internal (jangan dipush) ──
 NOTE.md
@@ -40,6 +38,8 @@ Thumbs.db
 # ── Filter hasil benchmark: simpan laporan, abaikan aset besar ──
 /results/**/*.png
 /results/**/*.jsonl
+/results/**/_ckpt_*
+/results/**/_progress_*
 !/results/**/*report*.txt
 !/results/**/*report*.md
 

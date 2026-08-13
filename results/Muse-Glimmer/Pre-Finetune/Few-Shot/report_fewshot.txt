@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /workspace/models/Muse-Glimmer/Muse-Glimmer-30B-Q8_0.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 32000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 1138.2s (9.5s/sampel)
+Accuracy (valid):   0.8583
+Accuracy (strict):  0.8583  [parse-fail=salah]
+Macro-F1:           0.8294
+Weighted-F1:        0.8625
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     0.9615    0.8621    0.9091        29
+        Pemantik Diskusi     0.9444    0.9444    0.9444        18
+              Eksplorasi     0.6333    0.9500    0.7600        20
+               Integrasi     0.9286    0.8125    0.8667        48
+                Resolusi     0.7500    0.6000    0.6667         5
+
+                accuracy                         0.8583       120
+               macro avg     0.8436    0.8338    0.8294       120
+            weighted avg     0.8823    0.8583    0.8625       120
