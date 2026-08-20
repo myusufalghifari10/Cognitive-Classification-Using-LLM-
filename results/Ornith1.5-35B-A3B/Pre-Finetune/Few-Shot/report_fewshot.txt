@@ -1,0 +1,25 @@
+Prompt variant : few-shot
+Model          : /home/yusuf/Yusuf/Model/Ornith/Ornith-1.5-35B-A3B-Q4_K_L.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+Thinking        : default server
+max_tokens     : 32000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 3138.9s (26.2s/sampel)
+Accuracy (valid):   0.9250
+Accuracy (strict):  0.9250  [parse-fail=salah]
+Macro-F1:           0.9066
+Weighted-F1:        0.9265
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.8276    0.9057        29
+        Pemantik Diskusi     0.9474    1.0000    0.9730        18
+              Eksplorasi     0.7917    0.9500    0.8636        20
+               Integrasi     0.9783    0.9375    0.9574        48
+                Resolusi     0.7143    1.0000    0.8333         5
+
+                accuracy                         0.9250       120
+               macro avg     0.8863    0.9430    0.9066       120
+            weighted avg     0.9368    0.9250    0.9265       120

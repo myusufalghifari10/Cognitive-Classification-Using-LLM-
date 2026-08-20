@@ -9,6 +9,7 @@ Pakai: venv/bin/python3 eval.py --prompt few --host 127.0.0.1 --port 8889
 import argparse
 import csv
 import json
+import os
 import re
 import sys
 import time
@@ -41,6 +42,13 @@ FORMAT_OPTIONS = [
     ("json_object", {"type": "json_object"}),
     ("none", None),
 ]
+# API OpenAI-compatible (mis. opencode zen): schema nested di bawah "json_schema"
+FORMAT_OPTIONS_OPENAI = [
+    ("json_schema", {"type": "json_schema", "json_schema": {
+        "name": "answer", "strict": True, "schema": SCHEMA}}),
+    ("json_object", {"type": "json_object"}),
+    ("none", None),
+]
 # ponytail: sampling (temp/top_p/top_k) tidak di-override di sini — pakai default server.
 
 
@@ -57,46 +65,62 @@ def build_messages(system, user_tpl, text):
     ]
 
 
+def chat_url(base):
+    """base sudah mengandung /v1 (mis. opencode zen) -> jangan dobel."""
+    suffix = "/chat/completions" if base.endswith("/v1") else "/v1/chat/completions"
+    return base + suffix
+
+
 def server_props(base):
     r = requests.get(f"{base}/props", timeout=10)
     r.raise_for_status()
     return r.json()
 
 
-def probe_format(base, system, user_tpl):
+def probe_format(base, system, user_tpl, fmt_opts=FORMAT_OPTIONS, headers=None, model="local", extra=None):
     """Cari mode response_format tertinggi yang menghasilkan jawaban TERPARSE.
     Memverifikasi output benar-benar punya label valid — bukan cuma HTTP 200 —
     karena reasoning model bisa terpotong di tengah blok <think> sehingga tak ada jawaban."""
     msgs = build_messages(system, user_tpl, "halo")
-    for name, rf in FORMAT_OPTIONS:
-        body = {"model": "local", "messages": msgs, "seed": 42,
-                "max_tokens": 1024, "stream": False}
+    for name, rf in fmt_opts:
+        body = {"model": model, "messages": msgs, "seed": 42,
+                "max_tokens": 1024, "stream": False, **(extra or {})}
         if rf:
             body["response_format"] = rf
         try:
-            r = requests.post(f"{base}/v1/chat/completions", json=body, timeout=120)
+            r = requests.post(chat_url(base), json=body,
+                              timeout=120, headers=headers)
         except requests.RequestException:
             continue
         if not r.ok:
             continue
-        msg = r.json()["choices"][0]["message"]
+        choices = r.json().get("choices")
+        if not choices:   # 200-dengan-body-error (mis. RegionError opencode)
+            continue
+        msg = choices[0]["message"]
         answer, _ = split_think_answer(msg.get("content"), msg.get("reasoning_content"))
         if parse_label(answer)[0]:
             return name
     return "none"
 
 
-def call_llm(base, messages, fmt, max_tokens, timeout):
-    rf = dict(FORMAT_OPTIONS).get(fmt)
-    body = {"model": "local", "messages": messages, "seed": 42,
-            "max_tokens": max_tokens, "stream": False}
+def call_llm(base, messages, fmt, max_tokens, timeout,
+             fmt_opts=FORMAT_OPTIONS, headers=None, model="local", extra=None):
+    rf = dict(fmt_opts).get(fmt)
+    body = {"model": model, "messages": messages, "seed": 42,
+            "max_tokens": max_tokens, "stream": False, **(extra or {})}
     if rf:
         body["response_format"] = rf
     t0 = time.time()
-    r = requests.post(f"{base}/v1/chat/completions", json=body, timeout=timeout)
+    r = requests.post(chat_url(base), json=body, timeout=timeout,
+                      headers=headers)
     latency = (time.time() - t0) * 1000
     r.raise_for_status()
-    choice = r.json()["choices"][0]
+    data = r.json()
+    if not data.get("choices"):   # 200-dengan-body-error -> biar masuk jalur retry
+        raise requests.RequestException(
+            f"API error: {json.dumps(data.get('error', data), ensure_ascii=False)[:200]}")
+    choice = data["choices"][0]
     msg = choice["message"]
     content = msg.get("content") or ""
     reasoning = msg.get("reasoning_content") or ""
@@ -161,6 +185,22 @@ def main():
                          "zero = zero-shot (definisi kelas saja, tanpa contoh/penjelasan tambahan)")
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8889)
+    ap.add_argument("--api", choices=["llama", "openai"], default="llama",
+                    help="llama = llama-server lokal (default); openai = API "
+                         "OpenAI-compatible remote (mis. opencode zen)")
+    ap.add_argument("--base-url", default=None,
+                    help="URL base penuh, mis. https://opencode.ai/zen/go/v1 "
+                         "(override --host/--port)")
+    ap.add_argument("--model", default="local",
+                    help="nama model utk --api openai (llama-server mengabaikan)")
+    ap.add_argument("--api-key", default=os.environ.get("OPENCODE_API_KEY"),
+                    help="bearer token utk --api openai (default: env OPENCODE_API_KEY)")
+    ap.add_argument("--timeout", type=int, default=300,
+                    help="timeout HTTP per request dalam detik (default: 300)")
+    ap.add_argument("--thinking", choices=["off", "low", "high", "max"], default=None,
+                    help="level thinking utk --api openai (deepseek v4): off = matikan "
+                         "({thinking:{type:disabled}}); low/high/max = reasoning_effort. "
+                         "Default: kosong = tidak dikirim (default server = high)")
     ap.add_argument("--data", default=str(HERE / "data" / "test_dataset.csv"))
     ap.add_argument("--out", default=str(HERE / "results"))
     ap.add_argument("--max-tokens", type=int, default=4096,
@@ -187,19 +227,36 @@ def main():
         print("\n=== USER (sampel 0) ===\n", build_messages(system, user_tpl, rows[0]["text"])[1]["content"])
         return
 
-    base = f"http://{args.host}:{args.port}"
+    if args.base_url:
+        base = args.base_url.rstrip("/")
+    else:
+        base = f"http://{args.host}:{args.port}"
+    hdrs = {"Authorization": f"Bearer {args.api_key}"} if args.api_key else {}
+    fmt_opts = FORMAT_OPTIONS_OPENAI if args.api == "openai" else FORMAT_OPTIONS
+    extra = ({"thinking": {"type": "disabled"}} if args.thinking == "off"
+             else ({"reasoning_effort": args.thinking} if args.thinking else {}))
     print(f"[*] Server: {base}")
-    try:
-        props = server_props(base)
-    except requests.RequestException as e:
-        sys.exit(f"[!] Tidak bisa hubungi {base}/props: {e}\n    "
-                 f"Mulai server: llama-server -m <model.gguf> --host 0.0.0.0 --port {args.port} "
-                 f"-c 4096 -ngl 99")
-    model = props.get("model_path", "?")
-    n_ctx = props.get("default_generation_settings", {}).get("n_ctx", "?")
-    print(f"[*] Model: {model}  |  n_ctx: {n_ctx}  |  slots: {props.get('total_slots')}")
+    if args.api == "openai":
+        model, n_ctx = args.model, "?"
+        try:  # guard auth/akses lebih awal — bukan 120x PARSE_FAIL belakangan
+            rm = requests.get(f"{base}/models", headers=hdrs, timeout=30)
+            rm.raise_for_status()
+        except requests.RequestException as e:
+            sys.exit(f"[!] API {base} /models gagal: {e} — cek --api-key / akses model")
+        print(f"[*] API: openai-compatible | model: {model} | "
+              f"auth: {'bearer' if args.api_key else 'TANPA key'}")
+    else:
+        try:
+            props = server_props(base)
+        except requests.RequestException as e:
+            sys.exit(f"[!] Tidak bisa hubungi {base}/props: {e}\n    "
+                         f"Mulai server: llama-server -m <model.gguf> --host 0.0.0.0 --port {args.port} "
+                         f"-c 4096 -ngl 99")
+        model = props.get("model_path", "?")
+        n_ctx = props.get("default_generation_settings", {}).get("n_ctx", "?")
+        print(f"[*] Model: {model}  |  n_ctx: {n_ctx}  |  slots: {props.get('total_slots')}")
 
-    fmt = probe_format(base, system, user_tpl)
+    fmt = probe_format(base, system, user_tpl, fmt_opts, hdrs, model, extra)
     print(f"[*] response_format terbaik: {fmt}")
 
     out = Path(args.out)
@@ -238,7 +295,8 @@ def main():
         for attempt in range(4):
             try:
                 raw, reasoning, finish, latency = call_llm(
-                    base, msgs, fmt, budget, timeout=300)
+                    base, msgs, fmt, budget, timeout=args.timeout,
+                    fmt_opts=fmt_opts, headers=hdrs, model=model, extra=extra)
             except requests.RequestException as e:
                 err = str(e); time.sleep(2 ** attempt); continue
             answer, thinking = split_think_answer(raw, reasoning)
@@ -309,10 +367,10 @@ def main():
     # strict: parse-fail dihitung salah
     acc_strict = sum(1 for p, g in zip(preds, golds) if p == g) / len(golds)
 
-    report = classification_report(v_golds, v_preds, labels=LABELS,
-                                   target_names=CLASS_NAMES, digits=4,
-                                   zero_division=0)
-    cm = confusion_matrix(v_golds, v_preds, labels=LABELS)
+    report = (classification_report(v_golds, v_preds, labels=LABELS,
+                                    target_names=CLASS_NAMES, digits=4,
+                                    zero_division=0) if valid else "— (0 prediksi valid) —")
+    cm = confusion_matrix(v_golds, v_preds, labels=LABELS) if valid else None
 
     with open(out / f"report_{tag}.txt", "w", encoding="utf-8") as fh:
         fh.write(f"Prompt variant : {args.prompt}-shot\n")
@@ -320,6 +378,7 @@ def main():
         fh.write(f"n_ctx          : {n_ctx}\n")
         fh.write(f"response_format: {fmt}\n")
         fh.write(f"Sampling       : default server (tidak di-override), seed=42\n")
+        fh.write(f"Thinking        : {args.thinking or 'default server'}\n")
         fh.write(f"max_tokens     : {args.max_tokens} (budget cap {args.max_budget})\n")
         fh.write(f"Sampel         : {len(rows)} (parse_fail={n_fail}, truncated_retry={n_trunc})\n")
         fh.write(f"Total waktu    : {elapsed:.1f}s ({elapsed/len(rows):.1f}s/sampel)\n")
@@ -340,18 +399,19 @@ def main():
         prog.unlink()
 
     # confusion matrix heatmap
-    fig, ax = plt.subplots(figsize=(6, 5))
-    im = ax.imshow(cm, cmap="Blues")
-    ax.set_xticks(range(5)); ax.set_yticks(range(5))
-    ax.set_xticklabels(LABELS); ax.set_yticklabels(LABELS)
-    ax.set_xlabel("Prediksi"); ax.set_ylabel("Label Emas")
-    ax.set_title(f"Confusion Matrix — {tag} (acc={acc:.3f})")
-    for yi in range(5):
-        for xi in range(5):
-            ax.text(xi, yi, cm[yi, xi], ha="center", va="center",
-                    color="white" if cm[yi, xi] > cm.max() / 2 else "black")
-    fig.colorbar(im); fig.tight_layout()
-    fig.savefig(out / f"confusion_matrix_{tag}.png", dpi=120)
+    if cm is not None:
+        fig, ax = plt.subplots(figsize=(6, 5))
+        im = ax.imshow(cm, cmap="Blues")
+        ax.set_xticks(range(5)); ax.set_yticks(range(5))
+        ax.set_xticklabels(LABELS); ax.set_yticklabels(LABELS)
+        ax.set_xlabel("Prediksi"); ax.set_ylabel("Label Emas")
+        ax.set_title(f"Confusion Matrix — {tag} (acc={acc:.3f})")
+        for yi in range(5):
+            for xi in range(5):
+                ax.text(xi, yi, cm[yi, xi], ha="center", va="center",
+                        color="white" if cm[yi, xi] > cm.max() / 2 else "black")
+        fig.colorbar(im); fig.tight_layout()
+        fig.savefig(out / f"confusion_matrix_{tag}.png", dpi=120)
     print(f"\n[+] Selesai. Accuracy={acc:.4f} | Macro-F1={macro_f1:.4f} | "
           f"strict={acc_strict:.4f} | fail={n_fail}/{len(rows)} | {elapsed:.0f}s")
     print(f"[+] Output: {out}/  (report_{tag}.txt, predictions_{tag}.jsonl, "

@@ -1,0 +1,25 @@
+Prompt variant : few-shot
+Model          : deepseek-v4-flash
+n_ctx          : ?
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+Thinking        : default server
+max_tokens     : 64000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 319.8s (2.7s/sampel)
+Accuracy (valid):   0.9500
+Accuracy (strict):  0.9500  [parse-fail=salah]
+Macro-F1:           0.9172
+Weighted-F1:        0.9513
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.9655    0.9825        29
+        Pemantik Diskusi     1.0000    1.0000    1.0000        18
+              Eksplorasi     0.8696    1.0000    0.9302        20
+               Integrasi     0.9778    0.9167    0.9462        48
+                Resolusi     0.6667    0.8000    0.7273         5
+
+                accuracy                         0.9500       120
+               macro avg     0.9028    0.9364    0.9172       120
+            weighted avg     0.9555    0.9500    0.9513       120

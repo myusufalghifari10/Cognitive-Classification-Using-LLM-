@@ -1,0 +1,24 @@
+Prompt variant : few-shot
+Model          : /models/Qwen3.8-27B-Cold-Fusion-GAIN-V1.1-NM-DAU-NEO-MAX-NEO-MTP-Q4_K_M.gguf
+n_ctx          : 32000
+response_format: json_schema
+Sampling       : default server (tidak di-override), seed=42
+max_tokens     : 32000 (budget cap 8192)
+Sampel         : 120 (parse_fail=0, truncated_retry=0)
+Total waktu    : 1637.2s (13.6s/sampel)
+Accuracy (valid):   0.9083
+Accuracy (strict):  0.9083  [parse-fail=salah]
+Macro-F1:           0.9029
+Weighted-F1:        0.9084
+
+                          precision    recall  f1-score   support
+
+Bukan Kehadiran Kognitif     1.0000    0.8621    0.9259        29
+        Pemantik Diskusi     1.0000    1.0000    1.0000        18
+              Eksplorasi     0.7500    0.7500    0.7500        20
+               Integrasi     0.9020    0.9583    0.9293        48
+                Resolusi     0.8333    1.0000    0.9091         5
+
+                accuracy                         0.9083       120
+               macro avg     0.8971    0.9141    0.9029       120
+            weighted avg     0.9122    0.9083    0.9084       120
