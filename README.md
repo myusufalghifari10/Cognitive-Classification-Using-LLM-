@@ -18,9 +18,9 @@ Latensi sengaja tidak dilaporkan — campuran llama-server lokal (hardware berbe
 |---|---|---|---|---|
 | BigBang | 35B A3B | **0.9500** | 0.9594 | **0.9520** |
 | Qwen3.8-27B-Fable | 27B dense | **0.9500** | 0.9225 | **0.9500** |
-| DeepSeek-V4-Flash ¹ | API | **0.9500** | 0.9172 | **0.9513** |
+| DeepSeek-V4-Flash ¹ | 284B A13B(API) | **0.9500** | 0.9172 | **0.9513** |
 | Qwen3.6-35B-A3B | 35B A3B | **0.9417** | 0.9290 | **0.9417** |
-| DeepSeek-V4-Flash ¹ ² | API | **0.9417** | 0.9080 | **0.9427** |
+| DeepSeek-V4-Flash ¹ ² | 284B A13B(API) | **0.9417** | 0.9080 | **0.9427** |
 | Qwen3.6-27B-Fable | 27B dense | **0.9333** | 0.9085 | **0.9336** |
 | KAT-Coder2.5 | 35B A3B | **0.9250** | 0.9332 | **0.9262** |
 | Ornith1.5-35B-A3B | 35B A3B | **0.9250** | 0.9066 | **0.9265** |
@@ -38,7 +38,7 @@ Latensi sengaja tidak dilaporkan — campuran llama-server lokal (hardware berbe
 | GLM-4.7-Flash | 30B A3B | **0.7750** | 0.7154 | **0.7870** |
 
 ¹ DeepSeek-V4-Flash dijalankan via API OpenCode Zen (`opencode.ai/zen/go/v1`), bukan llama-server lokal; thinking default (effort `high` per dok DeepSeek).
-² Thinking `max` (`reasoning_effort=max`): akurasi turun 0.9500 → 0.9417 — overthinking; analisis biaya-latensi lengkap di bagian Cost & Speed.
+² Thinking `max` (`reasoning_effort=max`): few-shot 0.9500 → 0.9417 (overthinking), zero-shot 0.6833 → 0.7333 (membantu).
 
 ### Pre-Finetune — Zero-Shot (hanya definisi kelas, `system_zero_shot.md`)
 
@@ -48,7 +48,11 @@ Latensi sengaja tidak dilaporkan — campuran llama-server lokal (hardware berbe
 | Qwen3.6-35B-A3B | 35B A3B | **0.7667** | 0.7062 | **0.7684** |
 | Qwen3.5-9B-Fable | 9B | **0.7583** | 0.6794 | **0.7638** |
 | KAT-Coder2.5 | 35B A3B | **0.7479** | 0.6788 | **0.7521** |
+| DeepSeek-V4-Flash ¹ ² | API | **0.7333** | 0.6396 | **0.7386** |
 | BigBang | 35B A3B | **0.7059** | 0.6549 | **0.7162** |
+| DeepSeek-V4-Flash ¹ | API | **0.6833** | 0.6072 | **0.6991** |
+
+Thinking `max` di zero-shot justru menaikkan akurasi (+5.0 pp) — berkebalikan dengan few-shot (turun 0.8 pp).
 
 ### Post-Finetune — Few-Shot
 
@@ -64,7 +68,7 @@ Fine-tune 3 epoch di Unsloth pada dataset SFT (1080 sampel). Lihat detail metode
 | Model | Size | Method | **Acc** | Macro-F1 | **Weighted-F1** |
 |---|---|---|---|---|---|
 | Qwen3.6-35B-A3B | 35B A3B | QLoRA 4-bit | **0.7917** | 0.7722 | **0.7877** |
-| Qwen3.5-9B-Fable | 9B | LoRA 16-bit | _pending_ | — | — |
+| Qwen3.5-9B-Fable | 9B | LoRA 16-bit | **0.7917** | 0.7596 | **0.8007** |
 
 **Temuan kunci (Pre vs Post):**
 - **9B-Fable (LoRA 16-bit)** — Few-Shot 0.8833 → **0.9250** (↑3.7 pp). Headroom + gradien bersih = naik.

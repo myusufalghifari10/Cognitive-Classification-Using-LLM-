@@ -22,6 +22,10 @@
 # ── Catatan internal (jangan dipush) ──
 NOTE.md
 
+# ── Laporan riset (dipush) ──
+!CostReport.md
+!ProgressReport.md
+
 # ── Backup / file antara (jangan dipush) ──
 *.bak
 *.premerge
